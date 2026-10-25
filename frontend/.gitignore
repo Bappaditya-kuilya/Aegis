@@ -5,4 +5,5 @@ playwright-report/
 test-results/
 # Build-time assets copied from docs/ by the deploy workflow.
 public/sample-snapshot.json
+public/sample-overview.json
 public/images/
