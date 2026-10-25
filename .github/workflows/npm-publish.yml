@@ -46,21 +46,21 @@ jobs:
       - name: Prepare package
         run: |
           node script/npm/sync-version.mjs
-          node script/npm/prepare-agentsight.mjs
+          node script/npm/prepare-aegis.mjs
 
       - name: Validate package
         run: |
-          cd package/npm/agentsight
+          cd package/npm/aegis
           npm test
           npm pack --dry-run
 
       - name: Publish package
         run: |
           set -euo pipefail
-          VERSION="$(node -p "require('./package/npm/agentsight/package.json').version")"
+          VERSION="$(node -p "require('./package/npm/aegis/package.json').version")"
           if npm view "@aegis-oss/agentsight@${VERSION}" version >/dev/null 2>&1; then
             echo "@aegis-oss/agentsight@${VERSION} already exists; skipping."
           else
-            cd package/npm/agentsight
+            cd package/npm/aegis
             npm publish --access public
           fi

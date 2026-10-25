@@ -102,8 +102,8 @@ jobs:
         run: |
           node script/npm/sync-version.mjs
           node script/npm/prepare-agentsight.mjs
-          npm --prefix package/npm/agentsight test
-          (cd package/npm/agentsight && npm pack --dry-run)
+          npm --prefix package/npm/aegis test
+          (cd package/npm/aegis && npm pack --dry-run)
 
       - name: E2E latest agent CLI canary
         run: script/e2e/latest_agent_cli_canary.sh
@@ -257,7 +257,7 @@ jobs:
             ext/pprof/Cargo.toml ext/pprof/Cargo.lock \
             collector/Cargo.toml collector/Cargo.lock collector/vendor
           if ! git diff --cached --quiet; then
-            git commit -m "chore: release agentsight ${VERSION} [skip ci]"
+            git commit -m "chore: release aegis ${VERSION} [skip ci]"
             git push --force-with-lease="refs/heads/${BRANCH}:${GITHUB_SHA}" origin "HEAD:${BRANCH}"
           fi
           PUBLISH_SHA="$(git rev-parse HEAD)"
@@ -306,17 +306,17 @@ jobs:
         run: |
           make build
           cargo build --release --manifest-path ext/pprof/Cargo.toml
-          collector/target/release/agentsight --version
-          collector/target/release/agentsight --help | grep -Eq '^[[:space:]]+record[[:space:]]'
+          collector/target/release/aegis --version
+          collector/target/release/aegis --help | grep -Eq '^[[:space:]]+record[[:space:]]'
           ext/pprof/target/release/agentpprof --version
           ext/pprof/target/release/agentpprof --help | grep -F -- '--session-file'
 
       - name: Prepare assets
         run: |
           mkdir -p release-assets docker-assets
-          install -m 0755 collector/target/release/agentsight "release-assets/aegis-${{ matrix.arch }}"
+          install -m 0755 collector/target/release/aegis "release-assets/aegis-${{ matrix.arch }}"
           install -m 0755 ext/pprof/target/release/agentpprof "release-assets/agentpprof-${{ matrix.arch }}"
-          install -m 0755 collector/target/release/agentsight docker-assets/agentsight
+          install -m 0755 collector/target/release/aegis docker-assets/aegis
           if [[ "${{ matrix.legacy_assets }}" == true ]]; then
             cp release-assets/aegis-x86_64 release-assets/agentsight
             cp release-assets/agentpprof-x86_64 release-assets/agentpprof
@@ -332,7 +332,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: docker-linux-${{ matrix.docker_arch }}
-          path: docker-assets/agentsight
+          path: docker-assets/aegis
           if-no-files-found: error
           retention-days: 1
 
@@ -372,7 +372,7 @@ jobs:
           set -euo pipefail
           root="$(mktemp -d)"
           for attempt in 1 2 3 4 5 6; do
-            cargo install agentsight --version "$VERSION" --locked --root "$root" && break
+            cargo install aegis --version "$VERSION" --locked --root "$root" && break
             [[ "$attempt" -eq 6 ]] && exit 1
             sleep $((attempt * 10))
           done
@@ -399,7 +399,7 @@ jobs:
         run: |
           file release-assets/aegis-x86_64 | grep -F "x86-64"
           file release-assets/aegis-aarch64 | grep -F "ARM aarch64"
-          cmp release-assets/agentsight release-assets/aegis-x86_64
+          cmp release-assets/aegis release-assets/aegis-x86_64
           cmp release-assets/agentpprof release-assets/agentpprof-x86_64
 
       - uses: softprops/action-gh-release@v2
@@ -419,7 +419,7 @@ jobs:
         run: |
           dir="$(mktemp -d)"
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
-            --pattern agentsight --pattern agentpprof --dir "$dir"
+            --pattern aegis --pattern agentpprof --dir "$dir"
           chmod +x "$dir/agentsight" "$dir/agentpprof"
           "$dir/agentsight" --version
           "$dir/agentsight" --help | grep -Eq '^[[:space:]]+record[[:space:]]'
