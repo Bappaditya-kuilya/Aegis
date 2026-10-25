@@ -4,15 +4,6 @@ eBPF-based kernel-level behavioral tracing for AI agent workloads.
 
 Aegis attaches to AI agent processes (Claude Code, Gemini CLI, Ollama, OpenCode, Cursor) and observes syscalls at the Linux kernel boundary via eBPF LSM hooks (`file_open`, `socket_connect`, `bprm_check`). It correlates LLM traffic with process execution, file access, network connections, and subprocess spawning without requiring SDK integration or proxy configuration.
 
-## What Aegis does
-
-- **Block unexpected file / network / exec** via kernel LSM before it completes
-- **Track process trees** (claude → node → git → sh) by PID across forks/execs
-- **Correlate prompts to effects** — see which command caused which file change or network call
-- **Enforce per-framework profiles** (claude-code, gemini-cli, ollama, openclaw)
-- **Audit every decision** — JSON line per ALLOW/BLOCK with reason, no SDK needed
-- **Live web UI** at `:7395` — real-time BLOCK/ALLOW feed via SSE
-
 ## How it works
 
 ```mermaid
