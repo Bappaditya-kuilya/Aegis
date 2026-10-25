@@ -13,6 +13,29 @@ Aegis attaches to AI agent processes (Claude Code, Gemini CLI, Ollama, OpenCode,
 - **Audit every decision** — JSON line per ALLOW/BLOCK with reason, no SDK needed
 - **Live web UI** at `:7395` — real-time BLOCK/ALLOW feed via SSE
 
+## The problem it solves
+
+AI agents (Claude Code, Gemini CLI, Ollama, Cursor) can execute arbitrary commands, open files, open network connections, and spawn child processes — often without the user knowing which prompt caused which effect. Existing observability requires SDK integration, proxy routing, or agent-native logging that can be disabled, incomplete, or unavailable for closed-source CLI tools.
+
+Aegis solves this at the kernel boundary instead of inside the agent:
+
+**Invisible child processes.** Agents spawn `node`, `python3`, `git`, `sh`, and other descendants that share process names with unrelated system processes. Without PID lineage tracking (`sched_process_exec`/`fork`/`exit` tracepoints), an enforcer either misses agent children or flags unrelated system daemons. Aegis follows the agent process tree so every child is correctly attributed.
+
+**Opaque TLS traffic.** LLM traffic is encrypted end-to-end. Gateway/proxy tools only see it if you route through them; SDK-based tools only see it if the agent uses them. Aegis hooks `SSL_read`/`SSL_write` via uprobes and captures plaintext at the syscall boundary without proxy or SDK changes, even for statically-linked binaries (BoringSSL / OpenSSL).
+
+**No per-framework policy.** A `claude-code` session, `gemini-cli` run, and `ollama` inference have different allowed paths, network targets, and command patterns. One static profile either over-permits (unsafe) or over-restricts (breaks functionality). Aegis loads YAML profiles per framework (`entry_comm`, allowed networks, denied paths, command allowlists) and evaluates against them inline.
+
+**Audit without correlation.** When a run fails, stalls, or behaves unexpectedly, logs rarely link the failing prompt to the file that changed, the subprocess that spawned, or the network connection that exfiltrated data. Aegis correlates LLM traffic with system events through the process-tree + syscall sequence, producing a trace from prompt → tool call → subprocess → file/network effect.
+
+**Reactive vs. preventive enforcement.** Most tools observe after the fact. Aegis uses eBPF LSM hooks (`file_open`, `socket_connect`, `bprm_check`) to evaluate against the loaded profile before the syscall completes, returning `ALLOW`/`BLOCK` at kernel level. Fail-closed (enforcement continues until daemon exits with pinned links) is documented; unpinned links after `kill -9` remain an open gap tracked in rollback docs.
+
+**Use cases:**
+- Secure CI/CD runners that run AI agent commands — enforce allowed paths and deny unexpected network to a CI node
+- Developer workstation audit — trace which prompt caused a `git clone` or file write to `~/.ssh`
+- Agent marketplace / sandbox testing — validate that an agent binary only touches allowed directories and connects only to expected endpoints
+- Incident response — export `aegis-*.db` SQLite session with full syscall audit for forensic review
+- Safety research — observe how agents behave with untrusted prompts (prompt injection detection) without relying on agent self-reporting
+
 ## How it works
 
 ```mermaid
