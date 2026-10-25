@@ -1,0 +1,4 @@
+interface:
+  display_name: "Aegis Testing"
+  short_description: "Run Aegis release validation"
+  default_prompt: "Use $aegis-testing to validate Aegis changes with automated tests, TUI/UI checks, and real supported agent CLIs."

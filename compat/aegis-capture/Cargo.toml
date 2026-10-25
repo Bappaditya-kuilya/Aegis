@@ -1,0 +1,25 @@
+[package]
+name = "aegis-capture"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.87"
+description = "Compatibility facade for the Aegis capture and analysis pipeline."
+license = "MIT"
+repository = "https://github.com/aegis-oss/agentsight"
+homepage = "https://github.com/aegis-oss/agentsight"
+readme = "README.md"
+keywords = ["ebpf", "ai-agent", "observability", "tracing", "linux"]
+categories = ["development-tools::debugging", "os::linux-apis"]
+include = ["Cargo.toml", "README.md", "src/**", "tests/**"]
+
+[features]
+test-support = ["aegis-analysis/test-support"]
+
+[dependencies]
+aegis-analysis = { version = "1.0.0", path = "../../ext/analysis" }
+
+[dev-dependencies]
+async-trait = "0.1"
+futures = "0.3"
+serde_json = "1.0.140"
+tokio = { version = "1.0", features = ["full"] }

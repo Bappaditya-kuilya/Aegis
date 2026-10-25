@@ -1,0 +1,14 @@
+/.output
+/bootstrap
+/sslsniff
+/browsertrace
+/stdiocap
+/process
+/test_process_utils
+/test_process_filter
+/test_process_ext_map_flush
+/test_process_ext_mem_info
+/test_process_ext_types
+/test_sslsniff_transport_identity
+/test_sslsniff_transport_identity_boringssl
+/test_sslsniff_output

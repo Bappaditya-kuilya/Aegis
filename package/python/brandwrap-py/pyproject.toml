@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aegis-py"
+version = "0.2.51"
+description = "Official Python helper for Eunomia Aegis snapshot inspection."
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+  { name = "Eunomia", email = "contact@aegis-oss.dev" }
+]
+keywords = ["ebpf", "ai-agent", "observability", "llm", "agentops", "trace"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Intended Audience :: Developers",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: System :: Monitoring",
+  "Topic :: Utilities"
+]
+
+[project.urls]
+Homepage = "https://github.com/aegis-oss/aegis"
+Repository = "https://github.com/aegis-oss/aegis"
+Issues = "https://github.com/aegis-oss/aegis/issues"
+Documentation = "https://github.com/aegis-oss/aegis#usage"
+
+[project.scripts]
+aegis-py = "aegis_py.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,12 @@
+[package]
+name = "aegis-ext-runtime"
+version = "1.0.0"
+edition = "2024"
+rust-version = "1.87"
+description = "Bounded in-process WebAssembly Component runtime for Aegis extensions."
+license = "MIT"
+repository = "https://github.com/aegis-oss/agentsight"
+
+[dependencies]
+wasmtime = { version = "37.0.2", default-features = false, features = ["component-model", "cranelift", "runtime"] }
+wasmtime-wasi = { version = "37.0.2", default-features = false, features = ["p2"] }

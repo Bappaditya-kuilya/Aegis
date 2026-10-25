@@ -1,0 +1,11 @@
+[ext]
+name = "analysis"
+version = "1.0.0"
+description = "Built-in Aegis analysis and materialization extension."
+
+[backend]
+crate = "aegis-analysis"
+
+[imports]
+capture = "aegis-capture-core"
+session = "agent-session"
