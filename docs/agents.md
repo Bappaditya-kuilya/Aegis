@@ -2,7 +2,7 @@
 
 Aegis works with any process that makes TLS-encrypted API calls. This page covers agent-specific setup and quirks.
 
-For general usage and the `record` command, see the [README](https://github.com/aegis-oss/aegis#quick-start).
+For general usage and the `record` command, see the [README](https://github.com/Bappaditya-kuilya/Aegis#quick-start).
 
 ## Zero-Config: `record`
 
@@ -215,7 +215,7 @@ sudo ./aegis debug trace --binary-path docker://openclaw --server
 `docker inspect` reports the container's *init* process (often `tini`), which
 has no SSL code. Aegis walks the descendant process tree and attaches to the
 first process whose binary actually embeds SSL (the `node` process). See
-[docs/openclaw.md](https://github.com/aegis-oss/aegis/blob/master/docs/experiment/openclaw.md) for the full walkthrough.
+[docs/openclaw.md](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/experiment/openclaw.md) for the full walkthrough.
 
 For a Kubernetes Pod, run Aegis on the node that hosts the Pod and pass a
 `k8s://` reference. Aegis uses `kubectl` to read the Pod's `containerID`,
@@ -271,7 +271,7 @@ sudo ./bpf/stdiocap -p <mcp_server_pid>
 ```
 
 Aegis also includes a minimal MCP fixture for local testing under
-[`docs/mcp-test/README.md`](https://github.com/aegis-oss/aegis/blob/master/docs/experiment/mcp-test/README.md). It provides both `stdio`
+[`docs/mcp-test/README.md`](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/experiment/mcp-test/README.md). It provides both `stdio`
 and HTTP test modes so you can generate predictable MCP traffic before wiring
 it into the Rust collector.
 

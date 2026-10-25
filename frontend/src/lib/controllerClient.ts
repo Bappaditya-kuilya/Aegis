@@ -4,8 +4,8 @@
 import type { LocalConnection } from '@/lib/nodeClient';
 import { resolveControllerUrl } from '@/lib/controllerOrigin.mjs';
 
-const CLOUD_SESSION_KEY = 'agentsight.cloud-session.v1';
-const OAUTH_VERIFIER_KEY = 'agentsight.oauth-verifier.v1';
+const CLOUD_SESSION_KEY = 'aegis.cloud-session.v1';
+const OAUTH_VERIFIER_KEY = 'aegis.oauth-verifier.v1';
 const REQUEST_TIMEOUT_MS = 8_000;
 let cloudCodeExchange: Promise<string> | null = null;
 

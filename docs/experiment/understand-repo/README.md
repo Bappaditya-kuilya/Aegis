@@ -9,7 +9,7 @@
 
 on https://github.com/aegis-oss/bpf-developer-tutorial
 
-## No agentsight
+## No aegis
 
 try 1
 
@@ -44,7 +44,7 @@ user    0m5.500s
 sys     0m1.557s
 ```
 
-## With agentsight
+## With aegis
 
 ```
 # time claude --permission-mode acceptEdits -p /init

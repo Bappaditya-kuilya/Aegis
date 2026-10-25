@@ -45,7 +45,7 @@ mod tests {
     use std::fs::File;
 
     #[test]
-    fn session_db_listing_uses_agentsight_dbs_in_given_directory() {
+    fn session_db_listing_uses_aegis_dbs_in_given_directory() {
         let temp = tempfile::tempdir().unwrap();
         File::create(temp.path().join("aegis-20260616-120000.db")).unwrap();
         File::create(temp.path().join("other.db")).unwrap();

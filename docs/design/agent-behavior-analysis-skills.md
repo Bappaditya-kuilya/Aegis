@@ -81,7 +81,7 @@ facts -> diagnosis -> expression
 
 - Aegis report exports
 - saved SQLite sessions
-- monitor DBs under `~/.agentsight/monitor`
+- monitor DBs under `~/.aegis/monitor`
 - process tree, command, file, network, resource rows
 - session/process/timestamp join keys
 - 已经摘要过的 interaction findings（可选）

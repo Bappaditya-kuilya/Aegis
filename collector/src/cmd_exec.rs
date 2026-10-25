@@ -6,7 +6,7 @@ use futures::stream::StreamExt;
 use crate::analyzers::{print_global_http_filter_metrics, print_global_ssl_filter_metrics};
 use crate::binary_extractor::BinaryExtractor;
 use crate::binary_resolver::{resolve_binary_path, resolve_binary_path_for_ssl};
-use crate::cli_db::load_agentsight_view;
+use crate::cli_db::load_aegis_view;
 use crate::cmd_trace::{
     TraceConfig, build_trace_agent_with_view, drain_stream_for, prepare_process_seeds,
     start_web_server_if_enabled,
@@ -75,7 +75,7 @@ fn session_db_path_for_dir(
 }
 
 pub(crate) fn print_session_summary(db_path: &str) {
-    let Ok(view) = load_agentsight_view(Some(db_path)) else {
+    let Ok(view) = load_aegis_view(Some(db_path)) else {
         return;
     };
     if let Ok(summary) = SessionSummary::from_view(&view) {
@@ -94,7 +94,7 @@ pub(crate) async fn run_exec(
     print_summary: bool,
 ) -> Result<Option<String>, RunnerError> {
     let program = command.first().ok_or_else(|| {
-        RunnerError::from("record requires a command to run, e.g. `agentsight record -- claude`")
+        RunnerError::from("record requires a command to run, e.g. `aegis record -- claude`")
     })?;
     let prog_args = &command[1..];
 
@@ -149,7 +149,7 @@ pub(crate) async fn run_exec(
             .unwrap_or(false);
         if !ok {
             return Err(RunnerError::from(
-                "sudo authentication failed. Either run as root (`sudo -E agentsight record -- ...`) \
+                "sudo authentication failed. Either run as root (`sudo -E aegis record -- ...`) \
                  or grant your user passwordless sudo for the eBPF binaries.",
             ));
         }

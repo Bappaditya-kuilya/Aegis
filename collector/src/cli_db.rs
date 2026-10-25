@@ -24,7 +24,7 @@ pub(crate) fn configured_db_path(cli_value: &Option<String>) -> Option<String> {
         .or_else(|| std::env::var("AEGIS_DB_PATH").ok())
 }
 
-pub(crate) fn load_agentsight_view(
+pub(crate) fn load_aegis_view(
     db: Option<&str>,
 ) -> Result<MaterializedView, Box<dyn std::error::Error + Send + Sync>> {
     match db {
@@ -43,7 +43,7 @@ pub(crate) fn run_token_query(
     group_by: &str,
     json: bool,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let view = load_agentsight_view(db)?;
+    let view = load_aegis_view(db)?;
     let rows = view.token_summary(group_by);
     if json {
         print_json(&rows)?;
@@ -59,7 +59,7 @@ pub(crate) fn run_audit_query(
     limit: usize,
     json: bool,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let view = load_agentsight_view(db)?;
+    let view = load_aegis_view(db)?;
     let rows = view.audit_rows(audit_type, limit);
     if json {
         print_json(&rows)?;
@@ -74,7 +74,7 @@ pub(crate) fn run_prompts_query(
     limit: usize,
     json: bool,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let view = load_agentsight_view(db)?;
+    let view = load_aegis_view(db)?;
     let rows = view.llm_call_rows(limit);
     if json {
         print_json(&rows)?;
@@ -89,7 +89,7 @@ pub(crate) fn run_export(
     output: &str,
     audit_limit: usize,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let view = load_agentsight_view(db)?;
+    let view = load_aegis_view(db)?;
     let snapshot = view.export_snapshot(SnapshotOptions { audit_limit });
     let json = serde_json::to_vec_pretty(&snapshot)?;
     if output == "-" {
@@ -269,7 +269,7 @@ fn file_directory(path: &str) -> String {
 pub(crate) fn run_db_summary(
     db: Option<&str>,
 ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
-    let view = load_agentsight_view(db)?;
+    let view = load_aegis_view(db)?;
     print_session_summary(&SessionSummary::from_view(&view)?);
     Ok(())
 }

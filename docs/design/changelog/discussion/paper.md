@@ -4,7 +4,7 @@
 
 AI agents introduce fundamental observability challenges through their autonomous decision-making, dynamic code generation, and cross-process interactions that escape traditional monitoring approaches. We present Aegis, a system-level observability framework that employs *boundary tracing*—monitoring at kernel and network interfaces rather than within application code. Using eBPF technology, Aegis captures both semantic information (LLM interactions via TLS interception) and system behavior (process lifecycle, file operations) with <3% overhead. Our implementation demonstrates framework-agnostic monitoring without code instrumentation, addressing the rapid evolution of agent frameworks. We evaluate Aegis across multiple agent systems, showing its effectiveness in detecting prompt injection attacks, reasoning loops, and coordination patterns. The open-source release aims to catalyze research on AI agent observability challenges.
 
-**Repository**: [https://github.com/aegis-oss/agentsight](https://github.com/aegis-oss/agentsight)
+**Repository**: [https://github.com/Bappaditya-kuilya/Aegis](https://github.com/Bappaditya-kuilya/Aegis)
 
 ---
 
@@ -525,7 +525,7 @@ We invite the community—researchers, practitioners, and organizations deployin
 
 The future of software is autonomous, adaptive, and intelligent. Ensuring this future is also safe, transparent, and trustworthy requires foundational advances in how we observe and understand AI agent behavior. Aegis contributes to this foundation, but the work has only begun.
 
-**Repository**: [https://github.com/aegis-oss/agentsight](https://github.com/aegis-oss/agentsight)
+**Repository**: [https://github.com/Bappaditya-kuilya/Aegis](https://github.com/Bappaditya-kuilya/Aegis)
 
 
 ## References

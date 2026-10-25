@@ -22,11 +22,11 @@ Aegis should not automate the user's task. The user's agent does that.
 
 Aegis should observe, attribute, explain, and preserve evidence.
 
-Current CLI note: the implemented capture entrypoint is `agentsight record`,
-with `agentsight top` as the default live view and `agentsight report` for saved
+Current CLI note: the implemented capture entrypoint is `aegis record`,
+with `aegis top` as the default live view and `aegis report` for saved
 run inspection. Examples below use those command family names; options such as
 `--policy` or `--label` are future product proposals unless they appear in
-`agentsight --help`.
+`aegis --help`.
 
 Use this rule when deciding whether to write code:
 
@@ -99,8 +99,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight report --autonomy
-agentsight policy suggest
+aegis report --autonomy
+aegis policy suggest
 ```
 
 This turns evidence into a practical decision: what can be auto-approved, what
@@ -134,8 +134,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight policy suggest --from last-20-runs
-agentsight record --policy suggested.yaml -- claude
+aegis policy suggest --from last-20-runs
+aegis record --policy suggested.yaml -- claude
 ```
 
 This is not just audit. It is a feedback loop that makes agent autonomy more
@@ -180,8 +180,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight record -- claude
-agentsight report
+aegis record -- claude
+aegis report
 ```
 
 This is the smallest useful product. It should work even if the user never
@@ -223,8 +223,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight report --recovery
-agentsight report export -o recovery.json
+aegis report --recovery
+aegis report export -o recovery.json
 ```
 
 This makes agent side effects recoverable, not merely auditable.
@@ -265,8 +265,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight verify -- claude
-agentsight report --format html
+aegis verify -- claude
+aegis report --format html
 ```
 
 This is a strong scenario for the cleanup skill example. The value is not that
@@ -315,8 +315,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight report --incident
-agentsight report export -o incident.json
+aegis report --incident
+aegis report export -o incident.json
 ```
 
 This scenario is not about preventing all failures. It is about making failures
@@ -359,8 +359,8 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight record -- codex
-agentsight report --for-pr
+aegis record -- codex
+aegis report --for-pr
 ```
 
 This is a social trust scenario. The person who needs Aegis may not be the
@@ -402,9 +402,9 @@ Aegis output:
 Product shape:
 
 ```bash
-agentsight record --label old -- ./agent-task.sh
-agentsight record --label new -- ./agent-task.sh
-agentsight diff old new
+aegis record --label old -- ./agent-task.sh
+aegis record --label new -- ./agent-task.sh
+aegis diff old new
 ```
 
 This may become valuable for CI because it catches changes that ordinary output
@@ -446,7 +446,7 @@ Where it could be valuable:
 Product shape:
 
 ```bash
-agentsight record --policy workspace-only -- claude
+aegis record --policy workspace-only -- claude
 ```
 
 This is a later-stage scenario. It has real value, but only if the policy

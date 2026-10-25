@@ -1459,7 +1459,7 @@ mod tests {
             agent_session::AGENT_CODEX,
             &path,
             UNIX_EPOCH,
-            "{\"type\":\"message\",\"content\":\"agentsight local codex prompt\"}\n",
+            "{\"type\":\"message\",\"content\":\"aegis local codex prompt\"}\n",
         )
         .unwrap();
 
@@ -1470,7 +1470,7 @@ mod tests {
         assert_eq!(rows[0].comm.as_deref(), Some(agent_session::AGENT_CODEX));
         assert_eq!(
             rows[0].request.get("prompt").and_then(Value::as_str),
-            Some("agentsight local codex prompt")
+            Some("aegis local codex prompt")
         );
     }
 
@@ -2121,8 +2121,8 @@ mod tests {
                 "unrelated historical prompt",
                 "unrelated historical prompt",
                 "unrelated historical prompt",
-                "agentsight current run prompt",
-                "agentsight current run historical prompt",
+                "aegis current run prompt",
+                "aegis current run historical prompt",
                 "unrelated historical prompt",
                 "unrelated historical prompt",
                 "unrelated historical prompt",
@@ -2135,13 +2135,13 @@ mod tests {
                 "audit-exec",
                 now,
                 "codex",
-                &format!("{CODEX}agentsight current run prompt"),
+                &format!("{CODEX}aegis current run prompt"),
             ),
             exec_row(
                 "audit-exec-truncated",
                 now + 1,
                 "node",
-                &format!("{CODEX}agentsight current run"),
+                &format!("{CODEX}aegis current run"),
             ),
             file_row("audit-file", now + 100, &state_path),
         ];
@@ -2151,14 +2151,14 @@ mod tests {
         assert_eq!(sessions.len(), 1);
         assert_eq!(
             sessions[0].prompt_preview.as_deref(),
-            Some("agentsight current run prompt")
+            Some("aegis current run prompt")
         );
     }
 
     #[test]
     fn codex_home_fallback_accepts_time_window_when_exec_prompt_is_truncated() {
         let temp = tempfile::tempdir().unwrap();
-        let state_path = write_codex_home(temp.path(), &["agentsight truncated command prompt"]);
+        let state_path = write_codex_home(temp.path(), &["aegis truncated command prompt"]);
         let now = current_epoch_ms();
 
         let sessions = observed_sessions_from_audit_rows(&[
@@ -2174,22 +2174,22 @@ mod tests {
         assert_eq!(sessions.len(), 1);
         assert_eq!(
             sessions[0].prompt_preview.as_deref(),
-            Some("agentsight truncated command prompt")
+            Some("aegis truncated command prompt")
         );
     }
 
     #[test]
     fn codex_exec_prompt_rows_filter_only_wrapper_duplicates() {
         let rows = [
-            (1_000, "node", "/usr/bin/node /opt/codex/bin/codex exec --skip-git-repo-check agentsight dedupe prompt"),
-            (1_001, "codex", "/opt/codex/bin/codex exec --skip-git-repo-check agentsight dedupe prompt"),
-            (2_000, "codex", "/usr/bin/codex exec --skip-git-repo-check agentsight short prompt"),
-            (3_000, "codex", "/usr/bin/codex exec --skip-git-repo-check agentsight much longer unrelated prompt"),
-            (10_000, "codex", "/usr/bin/codex exec --skip-git-repo-check agentsight repeated prompt"),
-            (11_000, "codex", "/usr/bin/codex exec --skip-git-repo-check agentsight repeated prompt"),
-            (20_000, "codex", "/usr/bin/codex exec --skip-git-repo-check agentsight repeated prompt"),
-            (21_000, "docker", "docker exec codex exec agentsight should not parse"),
-            (22_000, "docker", "docker exec container /usr/local/bin/codex exec agentsight should parse once"),
+            (1_000, "node", "/usr/bin/node /opt/codex/bin/codex exec --skip-git-repo-check aegis dedupe prompt"),
+            (1_001, "codex", "/opt/codex/bin/codex exec --skip-git-repo-check aegis dedupe prompt"),
+            (2_000, "codex", "/usr/bin/codex exec --skip-git-repo-check aegis short prompt"),
+            (3_000, "codex", "/usr/bin/codex exec --skip-git-repo-check aegis much longer unrelated prompt"),
+            (10_000, "codex", "/usr/bin/codex exec --skip-git-repo-check aegis repeated prompt"),
+            (11_000, "codex", "/usr/bin/codex exec --skip-git-repo-check aegis repeated prompt"),
+            (20_000, "codex", "/usr/bin/codex exec --skip-git-repo-check aegis repeated prompt"),
+            (21_000, "docker", "docker exec codex exec aegis should not parse"),
+            (22_000, "docker", "docker exec container /usr/local/bin/codex exec aegis should parse once"),
         ]
         .into_iter()
         .enumerate()
@@ -2212,13 +2212,13 @@ mod tests {
         assert_eq!(
             prompts,
             vec![
-                Some("agentsight dedupe prompt".to_string()),
-                Some("agentsight short prompt".to_string()),
-                Some("agentsight much longer unrelated prompt".to_string()),
-                Some("agentsight repeated prompt".to_string()),
-                Some("agentsight repeated prompt".to_string()),
-                Some("agentsight repeated prompt".to_string()),
-                Some("agentsight should parse once".to_string()),
+                Some("aegis dedupe prompt".to_string()),
+                Some("aegis short prompt".to_string()),
+                Some("aegis much longer unrelated prompt".to_string()),
+                Some("aegis repeated prompt".to_string()),
+                Some("aegis repeated prompt".to_string()),
+                Some("aegis repeated prompt".to_string()),
+                Some("aegis should parse once".to_string()),
             ]
         );
     }
@@ -2229,7 +2229,7 @@ mod tests {
             "legacy-wrapper",
             1_000,
             "node",
-            "/usr/bin/node /opt/codex/bin/codex exec agentsight provenance prompt",
+            "/usr/bin/node /opt/codex/bin/codex exec aegis provenance prompt",
         );
         legacy_wrapper.view_source = "unknown".to_string();
         legacy_wrapper.confidence = None;
@@ -2237,13 +2237,13 @@ mod tests {
             "captured-native",
             1_001,
             "codex",
-            "/opt/codex/bin/codex exec agentsight provenance prompt",
+            "/opt/codex/bin/codex exec aegis provenance prompt",
         );
         let repeated_native = exec_row(
             "repeated-native",
             1_002,
             "codex",
-            "/opt/codex/bin/codex exec agentsight provenance prompt",
+            "/opt/codex/bin/codex exec aegis provenance prompt",
         );
 
         let projected =
@@ -2261,7 +2261,7 @@ mod tests {
             "legacy-wrapper",
             1_000,
             "node",
-            "/usr/bin/node /opt/codex/bin/codex exec agentsight provenance prompt",
+            "/usr/bin/node /opt/codex/bin/codex exec aegis provenance prompt",
         );
         legacy_wrapper.view_source = "unknown".to_string();
         legacy_wrapper.confidence = Some(0.01);
@@ -2269,7 +2269,7 @@ mod tests {
             "unrecognized-native",
             1_001,
             "codex",
-            "/opt/codex/bin/codex exec agentsight provenance prompt",
+            "/opt/codex/bin/codex exec aegis provenance prompt",
         );
         unrecognized_native.view_source = "vieww".to_string();
         unrecognized_native.confidence = Some(0.99);
@@ -2289,14 +2289,14 @@ mod tests {
             agent_session::AGENT_CODEX,
             &path,
             UNIX_EPOCH,
-            "{\"type\":\"message\",\"content\":\"agentsight repeated prompt\"}\n",
+            "{\"type\":\"message\",\"content\":\"aegis repeated prompt\"}\n",
         )
         .unwrap();
 
         assert!(session_matches_observed_prompt(
             &session,
             &[ObservedCodexPrompt {
-                prompt: "agentsight repeated prompt".to_string(),
+                prompt: "aegis repeated prompt".to_string(),
                 timestamp_ms: current_epoch_ms(),
                 pid: Some(42),
                 native_exec: true,

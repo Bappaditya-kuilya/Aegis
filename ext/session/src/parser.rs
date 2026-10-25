@@ -5720,12 +5720,12 @@ mod tests {
             "-c model_provider=\"aegis-mock\" ",
             "-c model_providers.aegis-mock.name=\"Aegis Mock\" ",
             "--sandbox read-only --model gpt-aegis-mock ",
-            "agentsight mock prompt collect this exact text"
+            "aegis mock prompt collect this exact text"
         );
 
         assert_eq!(
             codex_exec_prompt(command).as_deref(),
-            Some("agentsight mock prompt collect this exact text")
+            Some("aegis mock prompt collect this exact text")
         );
     }
 

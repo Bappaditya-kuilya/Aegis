@@ -82,20 +82,20 @@ cd ..
 
 ## Deployment
 
-Hosted deployment is automatic through Cloudflare Workers Builds. The repository is connected directly to the `agentsight` Worker; no Cloudflare API token is stored in GitHub.
+Hosted deployment is automatic through Cloudflare Workers Builds. The repository is connected directly to the `aegis` Worker; no Cloudflare API token is stored in GitHub.
 
 The OAuth runtime bindings such as `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` are only used when a person chooses **Sign in with GitHub**. Configure the client ID as a Worker variable or secret and the client secret as a Worker secret. They are not Git repository credentials, Cloudflare deployment credentials, or GitHub Actions secrets. Both Wrangler configs set `keep_vars` so an automatic code deployment preserves these Dashboard-managed bindings.
 
 One Worker deployment contains both surfaces from the same repository revision:
 
-- `app.agentsight.us` serves the frontend and static assets;
-- `control.agentsight.us` serves the Controller API and relay;
+- `app.aegis.us` serves the frontend and static assets;
+- `control.aegis.us` serves the Controller API and relay;
 - one D1 database stores Controller metadata;
 - one Durable Object namespace carries live relay traffic.
 
 Cloudflare Builds uses two Worker connections to the same repository. This is required because a Git-connected build always deploys the Worker it is connected to, even when a Wrangler environment specifies another name. Both connections use `/` as the root directory and `master` as the production branch.
 
-The production `agentsight` connection disables builds for non-production branches and uses `wrangler.jsonc`:
+The production `aegis` connection disables builds for non-production branches and uses `wrangler.jsonc`:
 
 Production deploy command:
 

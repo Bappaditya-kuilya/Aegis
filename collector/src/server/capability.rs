@@ -235,7 +235,7 @@ fn valid_session_id(value: &str) -> bool {
 }
 
 fn capability_path() -> Option<PathBuf> {
-    dirs::config_dir().map(|dir| dir.join("agentsight").join("capabilities.json"))
+    dirs::config_dir().map(|dir| dir.join("aegis").join("capabilities.json"))
 }
 
 fn default_ttl_seconds() -> u64 {

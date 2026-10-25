@@ -13,20 +13,20 @@ fn fixture_session_path(
         .with_file_name(file_name)
 }
 
-fn agentsight_output(args: &[&str]) -> Output {
-    agentsight_output_with_env(args, &[])
+fn aegis_output(args: &[&str]) -> Output {
+    aegis_output_with_env(args, &[])
 }
 
-fn agentsight_output_with_env(args: &[&str], envs: &[(&str, &std::ffi::OsStr)]) -> Output {
-    let output = Command::new(env!("CARGO_BIN_EXE_agentsight"))
+fn aegis_output_with_env(args: &[&str], envs: &[(&str, &std::ffi::OsStr)]) -> Output {
+    let output = Command::new(env!("CARGO_BIN_EXE_aegis"))
         .args(args)
         .env_remove("CODEX_HOME")
         .envs(envs.iter().copied())
         .output()
-        .expect("agentsight command should run");
+        .expect("aegis command should run");
     assert!(
         output.status.success(),
-        "agentsight {:?} failed\nstdout:\n{}\nstderr:\n{}",
+        "aegis {:?} failed\nstdout:\n{}\nstderr:\n{}",
         args,
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
@@ -34,18 +34,18 @@ fn agentsight_output_with_env(args: &[&str], envs: &[(&str, &std::ffi::OsStr)]) 
     output
 }
 
-fn agentsight_stdout(args: &[&str]) -> String {
-    String::from_utf8(agentsight_output(args).stdout).expect("stdout should be UTF-8")
+fn aegis_stdout(args: &[&str]) -> String {
+    String::from_utf8(aegis_output(args).stdout).expect("stdout should be UTF-8")
 }
 
-fn agentsight_stdout_with_env(args: &[&str], envs: &[(&str, &std::ffi::OsStr)]) -> String {
-    String::from_utf8(agentsight_output_with_env(args, envs).stdout)
+fn aegis_stdout_with_env(args: &[&str], envs: &[(&str, &std::ffi::OsStr)]) -> String {
+    String::from_utf8(aegis_output_with_env(args, envs).stdout)
         .expect("stdout should be UTF-8")
 }
 
 #[test]
 fn top_level_help_surfaces_perf_strace_flow() {
-    let help = agentsight_stdout(&["--help"]);
+    let help = aegis_stdout(&["--help"]);
     assert!(
         help.contains("top/record/report for AI agent runs"),
         "{help}"
@@ -74,7 +74,7 @@ fn agent_native_summary_reads_codex_session_jsonl() {
     .expect("codex session");
 
     let summary =
-        agentsight_stdout_with_env(&["report", "--local"], &[("HOME", temp.path().as_os_str())]);
+        aegis_stdout_with_env(&["report", "--local"], &[("HOME", temp.path().as_os_str())]);
     assert!(
         summary.contains("agent_native_session session"),
         "{summary}"
@@ -86,7 +86,7 @@ fn agent_native_summary_reads_codex_session_jsonl() {
 
 #[test]
 fn top_without_db_uses_live_process_view() {
-    let top = agentsight_stdout(&["top", "--once"]);
+    let top = aegis_stdout(&["top", "--once"]);
     assert!(top.contains("Aegis top -"), "{top}");
     assert!(top.contains("live sessions"), "{top}");
     assert!(top.contains("SESSION"), "{top}");
@@ -115,7 +115,7 @@ fn top_discovers_agent_native_sessions() {
     .expect("codex session");
 
     let tz = std::ffi::OsStr::new("UTC");
-    let top = agentsight_stdout_with_env(
+    let top = aegis_stdout_with_env(
         &["top", "--once", "--limit", "20"],
         &[("HOME", temp.path().as_os_str()), ("TZ", tz)],
     );
@@ -147,7 +147,7 @@ fn top_reads_active_claude_local_session_model_and_tokens() {
     )
     .expect("claude session");
 
-    let top = agentsight_stdout_with_env(
+    let top = aegis_stdout_with_env(
         &["top", "--once", "--limit", "20"],
         &[("HOME", temp.path().as_os_str())],
     );

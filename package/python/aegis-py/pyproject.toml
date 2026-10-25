@@ -10,7 +10,7 @@ readme = "README.md"
 requires-python = ">=3.9"
 license = "MIT"
 authors = [
-  { name = "Eunomia", email = "contact@aegis-oss.dev" }
+  { name = "Bappaditya-kuilya", email = "bappadityakuilya@gmail.com" }
 ]
 keywords = ["ebpf", "ai-agent", "observability", "llm", "agentops", "trace"]
 classifiers = [
@@ -29,10 +29,10 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/aegis-oss/aegis"
-Repository = "https://github.com/aegis-oss/aegis"
-Issues = "https://github.com/aegis-oss/aegis/issues"
-Documentation = "https://github.com/aegis-oss/aegis#usage"
+Homepage = "https://github.com/Bappaditya-kuilya/Aegis"
+Repository = "https://github.com/Bappaditya-kuilya/Aegis"
+Issues = "https://github.com/Bappaditya-kuilya/Aegis/issues"
+Documentation = "https://github.com/Bappaditya-kuilya/Aegis#usage"
 
 [project.scripts]
 aegis-py = "aegis_py.cli:main"

@@ -13,7 +13,7 @@ on https://github.com/aegis-oss/bpf-developer-tutorial
 
 time git submodule update --init --recursive && cd src && make -j8
 
-## Without agentsight
+## Without aegis
 
 ```
 (base) root@gpu01:~/yunwei37# python3 /root/yunwei37/build_benchmark.py
@@ -68,7 +68,7 @@ Phase 3 completed: All directories cleaned up.
 === Benchmark completed ===
 ```
 
-## With agentsight
+## With aegis
 
 ```
 (base) root@gpu01:~/yunwei37# python3 /root/yunwei37/build_benchmark.py

@@ -105,7 +105,7 @@ Paths end at different depths, producing an uneven outline.
 
 **Question:** Which activities consumed the most model budget?
 
-![Tokens flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-tokens.svg)
+![Tokens flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-tokens.svg)
 
 The token distribution aggregates by semantic stack frames (task, phase, action,
 and so on). Historical gallery SVGs may still show older `prompt:` / `call:llm/`
@@ -115,7 +115,7 @@ prefixes; current `agentpprof` defaults to the operation-stack frames above.
 
 **Question:** Where did wall-clock time go?
 
-![Time flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-time.svg)
+![Time flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-time.svg)
 
 Wall-clock time distribution follows a similar pattern to token consumption: review (`prompt:review`) leads, followed by git, edit, docs, and code prompts. Continuation prompts (`prompt:continue`) appear frequently, reflecting a workflow pattern where complex tasks required multiple follow-up exchanges. The `prompt:inspect` category captures quick look-at-this requests that are common in iterative development.
 
@@ -137,7 +137,7 @@ count; its frames end at different depths.
 
 **Question:** Which parts of the codebase were touched and how?
 
-![Files flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-files.svg)
+![Files flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-files.svg)
 
 File access patterns show heavy activity in `collector/src/` (the Rust codebase) and `collector/Cargo.toml`, consistent with development work. External paths (`external/tmp`, `external/home`, `external/codex`) appear frequently, reflecting tool invocations that touch temporary files, home directory configs, and Codex session data. The flamegraph distinguishes between read and write effects, revealing the balance of inspection versus modification across both project and external paths.
 
@@ -145,7 +145,7 @@ File access patterns show heavy activity in `collector/src/` (the Rust codebase)
 
 **Question:** Which external services were contacted?
 
-![Network flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-network.svg)
+![Network flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-network.svg)
 
 Network activity is sparse relative to file operations, confirming that most development work occurred locally. The contacted domains include `anthropic.com` for model inference, `crates.io` for Rust dependencies, `github.com` for version control, and various localhost ports for local development servers. Process chains visible in the upper frames show which tools initiated network requests, enabling attribution of network activity to specific agent actions.
 

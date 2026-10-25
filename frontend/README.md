@@ -59,8 +59,8 @@ The Aegis Frontend provides intuitive visualization of:
 
 ```bash
 # Clone repository
-git clone https://github.com/aegis-oss/aegis.git --recursive
-cd agentsight/frontend
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
+cd aegis/frontend
 
 # Install dependencies
 npm install
@@ -157,7 +157,7 @@ See `next.config.js` for:
 ### Project Structure
 
 ```
-agentsight/frontend/
+aegis/frontend/
 ├── src/
 │   ├── app/           # Next.js app directory
 │   │   ├── page.tsx   # Main application page

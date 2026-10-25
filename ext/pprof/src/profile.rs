@@ -1895,10 +1895,10 @@ mod tests {
         let mut stacks = Counter::new();
         folded_add(
             &mut stacks,
-            vec!["project:agentsight".to_string(), "path:/.git".to_string()],
+            vec!["project:aegis".to_string(), "path:/.git".to_string()],
             1,
         );
-        assert!(stacks.contains_key("project:agentsight;path:.git"));
+        assert!(stacks.contains_key("project:aegis;path:.git"));
     }
 
     #[test]
@@ -1929,7 +1929,7 @@ mod tests {
         );
         let options = OperationStackConfig::for_view(ProfileView::Time);
         let profile =
-            build_profile_with_options(&[session], "agentsight", ProfileView::Time, &options)
+            build_profile_with_options(&[session], "aegis", ProfileView::Time, &options)
                 .unwrap();
         let stacks = profile_to_stacks(&profile);
         // prompt at 1000ms, tool at 3000ms -> 2 seconds
@@ -1965,7 +1965,7 @@ mod tests {
         );
         let options = OperationStackConfig::for_view(ProfileView::Files);
         let profile =
-            build_profile_with_options(&[session], "agentsight", ProfileView::Files, &options)
+            build_profile_with_options(&[session], "aegis", ProfileView::Files, &options)
                 .unwrap();
         let stacks = profile_to_stacks(&profile);
 
@@ -1995,20 +1995,20 @@ mod tests {
         let stack = parse_stack_spec("project,agent,op,phase,status").unwrap();
         let options = OperationStackConfig::for_view(ProfileView::Operations).with_stack(stack);
         let profile =
-            build_profile_with_options(&[session], "agentsight", ProfileView::Operations, &options)
+            build_profile_with_options(&[session], "aegis", ProfileView::Operations, &options)
                 .unwrap();
         let stacks = profile_to_stacks(&profile);
 
         assert_eq!(
-            stacks.get("project:agentsight;agent:codex;op:prompt;phase:prompt;status:observed"),
+            stacks.get("project:aegis;agent:codex;op:prompt;phase:prompt;status:observed"),
             Some(&1)
         );
         assert_eq!(
-            stacks.get("project:agentsight;agent:codex;op:tool;phase:read;status:ok"),
+            stacks.get("project:aegis;agent:codex;op:tool;phase:read;status:ok"),
             Some(&1)
         );
         assert_eq!(
-            stacks.get("project:agentsight;agent:codex;op:llm;phase:answer;status:observed"),
+            stacks.get("project:aegis;agent:codex;op:llm;phase:answer;status:observed"),
             Some(&1)
         );
     }
@@ -2030,7 +2030,7 @@ mod tests {
 
         let options = OperationStackConfig::for_view(ProfileView::Operations);
         let profile =
-            build_profile_with_options(&[session], "agentsight", ProfileView::Operations, &options)
+            build_profile_with_options(&[session], "aegis", ProfileView::Operations, &options)
                 .unwrap();
         let stacks = profile_to_stacks(&profile);
 
@@ -2064,7 +2064,7 @@ mod tests {
 
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )
@@ -2102,7 +2102,7 @@ mod tests {
 
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )
@@ -2129,7 +2129,7 @@ mod tests {
         );
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )
@@ -2160,7 +2160,7 @@ mod tests {
         );
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )
@@ -2200,16 +2200,16 @@ mod tests {
             .with_stack(stack)
             .with_rules(rules);
         let profile =
-            build_profile_with_options(&[session], "agentsight", ProfileView::Files, &options)
+            build_profile_with_options(&[session], "aegis", ProfileView::Files, &options)
                 .unwrap();
         let stacks = profile_to_stacks(&profile);
 
         assert_eq!(
-            stacks.get("project:agentsight;agent:codex;task:explore;phase:inspect;op:tool;tool:read;path:src;status:ok"),
+            stacks.get("project:aegis;agent:codex;task:explore;phase:inspect;op:tool;tool:read;path:src;status:ok"),
             Some(&1)
         );
         assert_eq!(
-            stacks.get("project:agentsight;agent:codex;task:verify;phase:execute;op:tool;tool:exec_command;path:tests;status:ok"),
+            stacks.get("project:aegis;agent:codex;task:verify;phase:execute;op:tool;tool:exec_command;path:tests;status:ok"),
             Some(&1)
         );
     }
@@ -2440,7 +2440,7 @@ mod tests {
         );
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )
@@ -2477,7 +2477,7 @@ mod tests {
                 && labels.iter().any(|(key, _)| *key == "timestamp_ms")
         }));
         assert!(label_sets.iter().any(|labels| {
-            labels.contains(&("project", "agentsight"))
+            labels.contains(&("project", "aegis"))
                 && labels.contains(&("agent", "codex"))
                 && labels.contains(&("session", "evidence"))
         }));
@@ -2514,10 +2514,10 @@ mod tests {
                 parse_stack_spec("project,agent,task,skill,phase,op,tool,call,token").unwrap(),
             );
             let source_total =
-                source_sample_total(std::slice::from_ref(&session), "agentsight", view);
+                source_sample_total(std::slice::from_ref(&session), "aegis", view);
             let profile = build_profile_with_options(
                 std::slice::from_ref(&session),
-                "agentsight",
+                "aegis",
                 view,
                 &options,
             )
@@ -2526,7 +2526,7 @@ mod tests {
             assert_eq!(folded_total, source_total);
             assert!(profile_to_stacks(&profile).keys().any(|stack| {
                 stack.contains(
-                    "project:agentsight;agent:claude;task:check_citations;skill:check-paper-citations;phase:",
+                    "project:aegis;agent:claude;task:check_citations;skill:check-paper-citations;phase:",
                 )
             }));
             assert!(profile.pprof_samples.iter().any(|sample| {
@@ -2575,7 +2575,7 @@ mod tests {
         session.user_requests[0].task_path = vec!["fix the flaky parser test".to_string()];
         let profile = build_profile_with_options(
             &[session],
-            "agentsight",
+            "aegis",
             ProfileView::Operations,
             &OperationStackConfig::for_view(ProfileView::Operations),
         )

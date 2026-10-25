@@ -8,9 +8,9 @@ import { resolveControllerUrl } from './controllerOrigin.mjs';
 test('hosted production uses the production Controller', () => {
   assert.equal(
     resolveControllerUrl(undefined, undefined, {
-      hostname: 'app.agentsight.us', origin: 'https://app.agentsight.us',
+      hostname: 'app.aegis.us', origin: 'https://app.aegis.us',
     }),
-    'https://control.agentsight.us',
+    'https://control.aegis.us',
   );
 });
 

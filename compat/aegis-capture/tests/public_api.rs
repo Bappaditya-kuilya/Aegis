@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 aegis-oss org.
 
-use agentsight_capture::{
+use aegis_capture::{
     Event, MaterializedView,
     analyzers::{Analyzer, AnalyzerError},
     model::SessionRow,

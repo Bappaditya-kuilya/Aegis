@@ -30,7 +30,7 @@ fn sudo_available() -> bool {
         .unwrap_or(false)
 }
 
-fn run_agentsight(args: &[&str]) -> Output {
+fn run_aegis(args: &[&str]) -> Output {
     let path = std::env::var("PATH").unwrap_or_default();
     let home = std::env::var("HOME").unwrap_or_default();
     let manifest_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
@@ -53,24 +53,24 @@ fn run_agentsight(args: &[&str]) -> Output {
         }
     }
     command
-        .arg(env!("CARGO_BIN_EXE_agentsight"))
+        .arg(env!("CARGO_BIN_EXE_aegis"))
         .args(args)
         .current_dir(repo_root)
         .output()
-        .expect("agentsight command should run")
+        .expect("aegis command should run")
 }
 
-fn run_agentsight_user(args: &[&str]) -> Output {
+fn run_aegis_user(args: &[&str]) -> Output {
     let manifest_dir = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
     let repo_root = manifest_dir.parent().unwrap_or(manifest_dir);
-    Command::new(env!("CARGO_BIN_EXE_agentsight"))
+    Command::new(env!("CARGO_BIN_EXE_aegis"))
         .args(args)
         .current_dir(repo_root)
         .output()
-        .expect("agentsight command should run")
+        .expect("aegis command should run")
 }
 
-fn assert_agentsight_success(output: Output, label: &str) {
+fn assert_aegis_success(output: Output, label: &str) {
     assert!(
         output.status.success(),
         "{} failed\nstdout:\n{}\nstderr:\n{}",
@@ -94,10 +94,10 @@ fn gemini_token_total(db: &std::path::Path) -> i64 {
 
 fn report_total_tokens(db: &std::path::Path) -> i64 {
     let db = db.to_str().expect("db path");
-    let output = run_agentsight_user(&["report", "token", "--db", db, "--json"]);
+    let output = run_aegis_user(&["report", "token", "--db", db, "--json"]);
     assert!(
         output.status.success(),
-        "agentsight report token failed\nstdout:\n{}\nstderr:\n{}",
+        "aegis report token failed\nstdout:\n{}\nstderr:\n{}",
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
     );
@@ -113,10 +113,10 @@ fn report_total_tokens(db: &std::path::Path) -> i64 {
 
 fn report_text(db: &std::path::Path) -> String {
     let db = db.to_str().expect("db path");
-    let output = run_agentsight_user(&["report", "--db", db]);
+    let output = run_aegis_user(&["report", "--db", db]);
     assert!(
         output.status.success(),
-        "agentsight report failed\nstdout:\n{}\nstderr:\n{}",
+        "aegis report failed\nstdout:\n{}\nstderr:\n{}",
         String::from_utf8_lossy(&output.stdout),
         String::from_utf8_lossy(&output.stderr)
     );
@@ -144,7 +144,7 @@ fn real_gemini_cli_smoke_captures_http_tokens() {
             std::process::id(),
             attempt
         );
-        let output = run_agentsight(&[
+        let output = run_aegis(&[
             "record",
             "--no-server",
             "--db",
@@ -158,7 +158,7 @@ fn real_gemini_cli_smoke_captures_http_tokens() {
             "--output-format",
             "json",
         ]);
-        assert_agentsight_success(output, "real Gemini smoke");
+        assert_aegis_success(output, "real Gemini smoke");
 
         last_response_total = gemini_token_total(&db);
         if last_response_total > 0 {
@@ -192,7 +192,7 @@ fn real_claude_code_smoke_captures_observed_tokens() {
     for attempt in 1..=3 {
         let temp = tempfile::tempdir().expect("tempdir");
         let db = temp.path().join("claude.db");
-        let output = run_agentsight(&[
+        let output = run_aegis(&[
             "record",
             "--no-server",
             "--db",
@@ -204,7 +204,7 @@ fn real_claude_code_smoke_captures_observed_tokens() {
             "--output-format",
             "json",
         ]);
-        assert_agentsight_success(output, "real Claude Code smoke");
+        assert_aegis_success(output, "real Claude Code smoke");
 
         last_session_total = report_total_tokens(&db);
         if last_session_total > 0 {
@@ -236,7 +236,7 @@ fn real_claude_code_tool_use_smoke_captures_tool_calls() {
     for attempt in 1..=3 {
         let temp = tempfile::tempdir().expect("tempdir");
         let db = temp.path().join("claude-tool.db");
-        let output = run_agentsight(&[
+        let output = run_aegis(&[
             "record",
             "--no-server",
             "--db",
@@ -250,7 +250,7 @@ fn real_claude_code_tool_use_smoke_captures_tool_calls() {
             "--allowedTools",
             "Bash",
         ]);
-        assert_agentsight_success(output, "real Claude Code tool-use smoke");
+        assert_aegis_success(output, "real Claude Code tool-use smoke");
 
         last_session_total = report_total_tokens(&db);
         last_report = report_text(&db);
@@ -312,7 +312,7 @@ fn real_openclaw_provider_smoke_captures_http_tokens() {
         ])
         .output()
         .expect("docker run should execute");
-    assert_agentsight_success(start, "start OpenClaw container");
+    assert_aegis_success(start, "start OpenClaw container");
 
     std::thread::sleep(Duration::from_secs(8));
     let temp = tempfile::tempdir().expect("tempdir");
@@ -323,7 +323,7 @@ fn real_openclaw_provider_smoke_captures_http_tokens() {
         .args(["-n", "env"])
         .arg(format!("PATH={}", path))
         .arg(format!("HOME={}", home))
-        .arg(env!("CARGO_BIN_EXE_agentsight"))
+        .arg(env!("CARGO_BIN_EXE_aegis"))
         .args([
             "debug",
             "trace",
@@ -336,7 +336,7 @@ fn real_openclaw_provider_smoke_captures_http_tokens() {
             db.to_str().expect("db path"),
         ])
         .spawn()
-        .expect("agentsight debug trace should spawn");
+        .expect("aegis debug trace should spawn");
     let trace_pid = trace.id();
 
     std::thread::sleep(Duration::from_secs(6));
@@ -369,7 +369,7 @@ fn real_openclaw_provider_smoke_captures_http_tokens() {
         .args(["rm", "-f", &container])
         .output();
 
-    assert_agentsight_success(trigger, "trigger OpenClaw inference");
-    assert!(trace_status.success(), "agentsight debug trace failed");
+    assert_aegis_success(trigger, "trigger OpenClaw inference");
+    assert!(trace_status.success(), "aegis debug trace failed");
     assert!(report_total_tokens(&db) > 0);
 }

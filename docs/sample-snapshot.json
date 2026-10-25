@@ -46,7 +46,7 @@
       "attributes": {
         "session_id": "codex-demo-2026-08-21",
         "display_id": "codex:demo-worktree",
-        "cwd": "/workspace/agentsight",
+        "cwd": "/workspace/aegis",
         "prompt_preview": "Make the Aegis demo show the complete agent workflow",
         "last_message_at": "2026-08-22T03:55:00Z",
         "usage": {
@@ -91,7 +91,7 @@
       "attributes": {
         "session_id": "claude-demo-review",
         "display_id": "claude:review",
-        "cwd": "/workspace/agentsight",
+        "cwd": "/workspace/aegis",
         "prompt_preview": "Review the observability UI for missing evidence",
         "last_message_at": "2026-08-22T03:48:00Z",
         "usage": {
@@ -184,9 +184,9 @@
       "start_timestamp_ms": 1787370300000,
       "end_timestamp_ms": null,
       "comm": "codex",
-      "command": "codex --workspace /workspace/agentsight",
-      "argv": ["codex", "--workspace", "/workspace/agentsight"],
-      "cwd": "/workspace/agentsight",
+      "command": "codex --workspace /workspace/aegis",
+      "argv": ["codex", "--workspace", "/workspace/aegis"],
+      "cwd": "/workspace/aegis",
       "status": "running"
     },
     {
@@ -198,7 +198,7 @@
       "end_timestamp_ms": 1787370460000,
       "comm": "git",
       "command": "git status --short",
-      "cwd": "/workspace/agentsight",
+      "cwd": "/workspace/aegis",
       "exit_code": 0,
       "status": "success"
     },
@@ -211,7 +211,7 @@
       "end_timestamp_ms": null,
       "comm": "node",
       "command": "playwright test e2e/demo.spec.ts",
-      "cwd": "/workspace/agentsight/frontend",
+      "cwd": "/workspace/aegis/frontend",
       "status": "running"
     },
     {
@@ -223,7 +223,7 @@
       "end_timestamp_ms": null,
       "comm": "chromium",
       "command": "chromium --headless",
-      "cwd": "/workspace/agentsight/frontend",
+      "cwd": "/workspace/aegis/frontend",
       "status": "running"
     },
     {
@@ -235,7 +235,7 @@
       "end_timestamp_ms": 1787370480000,
       "comm": "claude",
       "command": "claude review",
-      "cwd": "/workspace/agentsight",
+      "cwd": "/workspace/aegis",
       "exit_code": 0,
       "status": "success"
     }
@@ -261,7 +261,7 @@
       "pid": 4242,
       "comm": "codex",
       "host": "github.com",
-      "path": "/aegis-oss/agentsight",
+      "path": "/aegis-oss/aegis",
       "count": 7,
       "error_count": 0,
       "first_timestamp_ms": 1787370400000,
@@ -310,7 +310,7 @@
       "pid": 4242,
       "comm": "codex",
       "action": "read",
-      "target": "/workspace/agentsight/ext/web/page.tsx",
+      "target": "/workspace/aegis/ext/web/page.tsx",
       "status": "success",
       "summary": "read ext/web/page.tsx"
     },
@@ -356,7 +356,7 @@
       "pid": 4242,
       "comm": "codex",
       "action": "write",
-      "target": "/workspace/agentsight/docs/sample-overview.json",
+      "target": "/workspace/aegis/docs/sample-overview.json",
       "status": "success",
       "summary": "write docs/sample-overview.json"
     },
@@ -389,7 +389,7 @@
       "pid": 4242,
       "comm": "codex",
       "action": "write",
-      "target": "/workspace/agentsight/ext/web/page.tsx",
+      "target": "/workspace/aegis/ext/web/page.tsx",
       "status": "success",
       "summary": "removed trailing whitespace and reran checks"
     },

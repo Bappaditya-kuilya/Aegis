@@ -33,11 +33,11 @@ eBPF Programs → JSON Events → Runners → Analyzer Chains → Output
 
 ```bash
 # Install the packaged CLI
-cargo install agentsight
+cargo install aegis
 
 # Clone and build
-git clone https://github.com/aegis-oss/agentsight.git --recursive
-cd agentsight/collector
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
+cd aegis/collector
 cargo build --release
 ```
 
@@ -384,6 +384,6 @@ sudo cargo run -- debug trace --server
 
 ## Package Information
 
-- **Package Name**: `agentsight`
-- **Repository**: https://github.com/aegis-oss/agentsight
-- **Binary Name**: `agentsight` (after `cargo build --release`)
+- **Package Name**: `aegis`
+- **Repository**: https://github.com/Bappaditya-kuilya/Aegis
+- **Binary Name**: `aegis` (after `cargo build --release`)

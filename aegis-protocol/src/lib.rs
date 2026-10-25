@@ -5,7 +5,7 @@
 use serde::{Deserialize, Serialize};
 
 pub const PROTOCOL_VERSION: u32 = 1;
-pub const PRODUCT: &str = "agentsight";
+pub const PRODUCT: &str = "aegis";
 const SESSION_PREFIX: &str = "/api/v1/sessions/";
 
 #[derive(Debug, Serialize, Deserialize)]

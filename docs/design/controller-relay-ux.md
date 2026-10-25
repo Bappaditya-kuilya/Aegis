@@ -51,7 +51,7 @@ A fresh browser has only the signed-in Controller session. It can still click an
 
 ### Local anonymous user
 
-A user can still run `agentsight bind` and use the Direct Node without creating an account. Signing in adds ownership/discovery/relay; it is not required for local data collection or local querying.
+A user can still run `aegis bind` and use the Direct Node without creating an account. Signing in adds ownership/discovery/relay; it is not required for local data collection or local querying.
 
 ## App information architecture
 
@@ -105,7 +105,7 @@ The Node validates the method/path again before issuing the request to its own l
 
 ## Enrollment and authentication
 
-`agentsight bind` already creates a persistent Node ID and persistent Direct bearer. When a signed-in browser successfully binds the Node, Node registration additionally sends that bearer to the Controller over HTTPS. The Controller hashes it immediately and stores only the hash.
+`aegis bind` already creates a persistent Node ID and persistent Direct bearer. When a signed-in browser successfully binds the Node, Node registration additionally sends that bearer to the Controller over HTTPS. The Controller hashes it immediately and stores only the hash.
 
 The Node opens an outbound authenticated WSS connection using the same bearer. Until the browser has enrolled the Node into an account, the Controller rejects that connection and the Node retries quietly.
 

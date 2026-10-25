@@ -5,9 +5,9 @@ import { controllerUrl, type CloudNode } from '@/lib/controllerClient';
 export { registerControllerNode, relayOnline } from '@/lib/controllerClient';
 import type { AegisSnapshot, CodingPlanStep, LiveOverview, TokenUsage } from '@/types/event';
 
-const DIRECT_CONNECTIONS_KEY = 'agentsight.direct-connections.v1';
-const DIRECT_SYNC_ENABLED_KEY = 'agentsight.direct-sync-enabled.v1';
-const LEGACY_CONNECTION_KEY = 'agentsight.local-connection.v1';
+const DIRECT_CONNECTIONS_KEY = 'aegis.direct-connections.v1';
+const DIRECT_SYNC_ENABLED_KEY = 'aegis.direct-sync-enabled.v1';
+const LEGACY_CONNECTION_KEY = 'aegis.local-connection.v1';
 const REQUEST_TIMEOUT_MS = 12_000;
 const SESSION_REQUEST_TIMEOUT_MS = 30_000;
 const DIRECT_CAPABILITY_TTL_SECONDS = 12 * 60 * 60;
@@ -196,7 +196,7 @@ export async function pairDirectNode(rawEndpoint: string, bootstrapToken: string
   } catch (cause) {
     throw new NodeRequestError(
       cause instanceof NodeRequestError ? cause.status : 401,
-      'That credential cannot mint Direct capabilities. Use the Node bootstrap key from agentsight bind.',
+      'That credential cannot mint Direct capabilities. Use the Node bootstrap key from aegis bind.',
     );
   }
   return {
@@ -231,7 +231,7 @@ export async function detectEmbeddedServer(): Promise<EmbeddedServer | null> {
     const body = await response.json() as {
       protocol_version?: number; product?: string; authorization_required?: boolean; pairing_required?: boolean;
     };
-    if (body.product !== 'agentsight' || body.protocol_version !== 1) return null;
+    if (body.product !== 'aegis' || body.protocol_version !== 1) return null;
     return {
       authorizationRequired: body.authorization_required === true || body.pairing_required === true,
       connection: {

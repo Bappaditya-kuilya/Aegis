@@ -59,8 +59,8 @@ Aegis 前端提供以下数据的直观可视化：
 
 ```bash
 # 克隆仓库
-git clone https://github.com/aegis-oss/aegis.git --recursive
-cd agentsight/frontend
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
+cd aegis/frontend
 
 # 安装依赖
 npm install
@@ -157,7 +157,7 @@ PORT=3000
 ### 项目结构
 
 ```
-agentsight/frontend/
+aegis/frontend/
 ├── src/
 │   ├── app/           # Next.js app 目录
 │   │   ├── page.tsx   # 主应用页面

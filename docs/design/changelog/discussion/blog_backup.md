@@ -4,7 +4,7 @@
 
 AI agents introduce fundamental observability challenges through their autonomous decision-making, dynamic code generation, and cross-process interactions that escape traditional monitoring approaches. We present Aegis, a system-level observability framework that employs *boundary tracing*—monitoring at kernel and network interfaces rather than within application code. Using eBPF technology, Aegis captures both semantic information (LLM interactions via TLS interception) and system behavior (process lifecycle, file operations) with <3% overhead. Our implementation demonstrates framework-agnostic monitoring without code instrumentation, addressing the rapid evolution of agent frameworks. We evaluate Aegis across multiple agent systems, showing its effectiveness in detecting prompt injection attacks, reasoning loops, and coordination patterns. The open-source release aims to catalyze research on AI agent observability challenges.
 
-**Repository**: [https://github.com/aegis-oss/agentsight](https://github.com/aegis-oss/agentsight)
+**Repository**: [https://github.com/Bappaditya-kuilya/Aegis](https://github.com/Bappaditya-kuilya/Aegis)
 
 ---
 
@@ -599,8 +599,8 @@ spec:
   containers:
   - name: agent
     image: ai-agent:latest
-  - name: agentsight
-    image: agentsight:latest
+  - name: aegis
+    image: aegis:latest
     securityContext:
       privileged: true
     env:
@@ -1010,7 +1010,7 @@ We release Aegis as open source to encourage community collaboration on these ch
 
 The evolution of AI agents necessitates corresponding advances in observability infrastructure. Aegis demonstrates that comprehensive, performant, framework-agnostic monitoring is technically feasible through system-level observation. As agents assume greater autonomy and responsibility in production systems, the deployment of robust observability becomes critical for both operational reliability and safety assurance.
 
-**Repository**: [https://github.com/aegis-oss/agentsight](https://github.com/aegis-oss/agentsight)
+**Repository**: [https://github.com/Bappaditya-kuilya/Aegis](https://github.com/Bappaditya-kuilya/Aegis)
 
 ## References
 

@@ -8,7 +8,7 @@ const path = require("path");
 
 const PACKAGE_ROOT = path.resolve(__dirname, "..");
 const WEB_ROOT = process.env.AEGIS_WEB_ROOT || path.join(PACKAGE_ROOT, "web");
-const PROJECT_URL = "https://github.com/aegis-oss/aegis";
+const PROJECT_URL = "https://github.com/Bappaditya-kuilya/Aegis";
 const COLLECTOR_COMMANDS = new Set(["record", "top", "monitor", "stat", "report", "debug"]);
 
 function packageJson() {

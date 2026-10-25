@@ -427,8 +427,8 @@ Potential report claims:
 This could become:
 
 ```bash
-agentsight verify -- ./run-skill-demo.sh
-agentsight report --badge
+aegis verify -- ./run-skill-demo.sh
+aegis report --badge
 ```
 
 The output could be attached to:
@@ -462,9 +462,9 @@ This could matter for:
 Potential product:
 
 ```bash
-agentsight record --label old -- ./task.sh
-agentsight record --label new -- ./task.sh
-agentsight diff old new
+aegis record --label old -- ./task.sh
+aegis record --label new -- ./task.sh
+aegis diff old new
 ```
 
 This is less validated than run receipts and verification reports, but it is a

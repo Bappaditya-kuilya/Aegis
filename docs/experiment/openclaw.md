@@ -12,7 +12,7 @@ OpenClaw.
 
 ```bash
 # OpenClaw is running in a Docker container named "openclaw"
-sudo ./agentsight record -c node --binary-path docker://openclaw
+sudo ./aegis record -c node --binary-path docker://openclaw
 ```
 
 Open <http://127.0.0.1:7395> to watch OpenClaw's LLM prompts, tool calls, and
@@ -52,20 +52,20 @@ docker run -d --name openclaw \
 ### 2. Attach Aegis
 
 ```bash
-sudo ./agentsight record -c node --binary-path docker://openclaw
+sudo ./aegis record -c node --binary-path docker://openclaw
 ```
 
 `record` enables SSL + process + system monitoring and serves the web UI on port
 7395 with agent-tuned filters. For finer control use `debug trace`:
 
 ```bash
-sudo ./agentsight debug trace --binary-path docker://openclaw --server
+sudo ./aegis debug trace --binary-path docker://openclaw --server
 ```
 
 Or raw SSL events only:
 
 ```bash
-sudo ./agentsight debug ssl --binary-path docker://openclaw --http-parser
+sudo ./aegis debug ssl --binary-path docker://openclaw --http-parser
 ```
 
 ### 3. Trigger agent activity and view captures

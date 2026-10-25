@@ -37,8 +37,8 @@ sudo apt-get update
 sudo apt-get install -y clang llvm libelf-dev
 
 # 克隆并构建
-git clone https://github.com/aegis-oss/agentsight.git --recursive
-cd agentsight/collector
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
+cd aegis/collector
 cargo build --release
 ```
 
@@ -385,6 +385,6 @@ sudo cargo run -- debug trace --server
 
 ## 包信息
 
-- **包名**：`agentsight`
-- **仓库**：https://github.com/aegis-oss/agentsight
-- **二进制名**：`agentsight`（`cargo build --release` 后）
+- **包名**：`aegis`
+- **仓库**：https://github.com/Bappaditya-kuilya/Aegis
+- **二进制名**：`aegis`（`cargo build --release` 后）

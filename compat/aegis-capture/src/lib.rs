@@ -3,4 +3,4 @@
 
 //! Backward-compatible facade for the Aegis capture and analysis API.
 
-pub use agentsight_analysis::*;
+pub use aegis_analysis::*;

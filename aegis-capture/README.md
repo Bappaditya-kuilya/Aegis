@@ -1,7 +1,7 @@
 # aegis-capture-core
 
 `aegis-capture-core` is the native collection substrate behind the
-[`agentsight`](https://crates.io/crates/agentsight) command-line tool. It
+[`aegis`](https://crates.io/crates/aegis) command-line tool. It
 provides embedded eBPF probe runners, agent-native and `/proc` sources, and the
 normalized event stream boundary. Product analysis, views, and sinks live in
 `aegis-analysis`.
@@ -11,7 +11,7 @@ capabilities. Aegis keeps the probes in isolated child processes; linking
 this crate does not link libbpf into the caller.
 
 ```rust,no_run
-use agentsight_capture_core::{
+use aegis_capture_core::{
     BinaryExtractor,
     runners::{AgentRunner, BinaryRunner, Runner},
 };
@@ -26,5 +26,5 @@ let _events = capture.run().await?;
 # }
 ```
 
-The `agentsight` binary is the primary consumer of this API. It adds command
+The `aegis` binary is the primary consumer of this API. It adds command
 parsing, terminal and web views, session orchestration, and reports.

@@ -53,7 +53,7 @@ Flamegraph 的价值不只是聚合，还在于**用堆栈表达因果关联**�
 
 **问题：** 哪些活动消耗了最多的模型预算？
 
-![Tokens flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-tokens.svg)
+![Tokens flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-tokens.svg)
 
 Token 分布按语义栈帧（task、phase、action 等）聚合。历史 gallery SVG 可能仍展示旧的 `prompt:` / `call:llm/` 前缀；当前 `agentpprof` 默认使用上述 operation-stack 帧。
 
@@ -61,7 +61,7 @@ Token 分布按语义栈帧（task、phase、action 等）聚合。历史 galler
 
 **问题：** Wall-clock 时间花在了哪里？
 
-![Time flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-time.svg)
+![Time flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-time.svg)
 
 Wall-clock 时间分布与 token 消耗相似：review（`prompt:review`）领先，其次是 git、edit、docs 和 code 类 prompt。continuation prompt（`prompt:continue`）频繁出现，说明复杂任务往往需要多轮后续交流才能完成。`prompt:inspect` 捕获了迭代开发中常见的「看一下」类请求。
 
@@ -81,7 +81,7 @@ Wall-clock 时间分布与 token 消耗相似：review（`prompt:review`）领�
 
 **问题：** 代码库的哪些部分被触及了，以什么方式？
 
-![Files flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-files.svg)
+![Files flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-files.svg)
 
 文件访问模式显示 `collector/src/`（Rust 代码库）和 `collector/Cargo.toml` 活动频繁，与开发工作一致。外部路径（`external/tmp`、`external/home`、`external/codex`）也频繁出现，反映了工具调用触及临时文件、home 目录配置和 Codex session 数据。Flamegraph 区分读和写两类效果，可以看出在项目路径和外部路径上，检查和修改各占多少。
 
@@ -89,7 +89,7 @@ Wall-clock 时间分布与 token 消耗相似：review（`prompt:review`）领�
 
 **问题：** 联系了哪些外部服务？
 
-![Network flamegraph](https://github.com/aegis-oss/aegis/raw/master/docs/flamegraph-example/aegis-network.svg)
+![Network flamegraph](https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/flamegraph-example/aegis-network.svg)
 
 网络活动比文件操作少得多，说明大部分开发工作在本地完成。被联系的域名包括 `anthropic.com`（模型推理）、`crates.io`（Rust 依赖）、`github.com`（版本控制）以及各种 localhost 端口（本地开发服务器）。上层 frame 展示了发起请求的进程链，网络活动因此可以归因到具体的 agent 操作。
 

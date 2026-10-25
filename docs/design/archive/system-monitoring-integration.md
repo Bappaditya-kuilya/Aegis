@@ -33,7 +33,7 @@ A new pure-Rust runner that monitors system resources without requiring eBPF:
 The `record` command now includes system monitoring by default:
 
 ```bash
-sudo ./agentsight record -c claude
+sudo ./aegis record -c claude
 ```
 
 This monitors:
@@ -46,7 +46,7 @@ This monitors:
 Enable system monitoring in trace mode:
 
 ```bash
-sudo ./agentsight debug trace \
+sudo ./aegis debug trace \
   --ssl true --process true --system \
   --comm python \
   --system-interval 1 \
@@ -58,7 +58,7 @@ sudo ./agentsight debug trace \
 Monitor system resources only:
 
 ```bash
-./agentsight system --comm python --interval 2
+./aegis system --comm python --interval 2
 ```
 
 ## Event Format
@@ -128,7 +128,7 @@ jq -r 'select(.source == "system" and (.data.cpu.percent | tonumber) > 50) | .ti
 Set thresholds for automatic alerts:
 
 ```bash
-./agentsight system \
+./aegis system \
   --comm claude \
   --cpu-threshold 80 \
   --memory-threshold 500 \
@@ -170,8 +170,8 @@ Events with `"alert": true` indicate threshold violations.
 ### Programmatic Usage
 
 ```rust
-use agentsight::framework::runners::SystemRunner;
-use agentsight::framework::analyzers::FileLogger;
+use aegis::framework::runners::SystemRunner;
+use aegis::framework::analyzers::FileLogger;
 
 let mut system_runner = SystemRunner::new()
     .interval(2)
@@ -213,7 +213,7 @@ This replaces the previous bash monitoring scripts with:
 
 ```bash
 # Start recording
-sudo ./agentsight record -c claude --db agent_metrics.db
+sudo ./aegis record -c claude --db agent_metrics.db
 
 # In another terminal, use the agent
 # ... agent performs tasks ...
@@ -233,7 +233,7 @@ cat agent_metrics.log | jq -r 'select(.source == "system") |
 
 ```bash
 # Monitor all three dimensions
-sudo ./agentsight debug trace \
+sudo ./aegis debug trace \
   --ssl true --process true --system \
   --comm python \
   --system-interval 1 \
@@ -246,7 +246,7 @@ sudo ./agentsight debug trace \
 ### Alert on Resource Spikes
 
 ```bash
-./agensight system \
+./aegis system \
   --comm python \
   --cpu-threshold 80 \
   --memory-threshold 1000 \

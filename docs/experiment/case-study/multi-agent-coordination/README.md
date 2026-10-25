@@ -494,7 +494,7 @@ EOF
 
 ```bash
 # Terminal 1: Start Aegis with multi-agent monitoring
-cd /root/yunwei37/agentsight/collector
+cd /root/yunwei37/aegis/collector
 cargo run trace --ssl --process \
     --comm python --comm Agent_A --comm Agent_B --comm Agent_C \
     --server \
@@ -526,7 +526,7 @@ class CoordinationAnalyzer:
         self.agent_interactions = defaultdict(lambda: defaultdict(int))
         self.bottlenecks = []
         
-    def analyze_agentsight_log(self, log_file):
+    def analyze_aegis_log(self, log_file):
         """Analyze Aegis output for coordination patterns"""
         
         # Parse Aegis events
@@ -721,7 +721,7 @@ class CoordinationAnalyzer:
 if __name__ == "__main__":
     analyzer = CoordinationAnalyzer()
     log_file = sys.argv[1] if len(sys.argv) > 1 else "multi_agent_test.log"
-    analyzer.analyze_agentsight_log(log_file)
+    analyzer.analyze_aegis_log(log_file)
 EOF
 ```
 

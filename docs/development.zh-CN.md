@@ -1,6 +1,6 @@
 # 开发指南
 
-[English](https://github.com/aegis-oss/agentsight/blob/master/docs/development.md) | **中文**
+[English](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/development.md) | **中文**
 
 ## 前端开发模式（磁盘优先加载）
 
@@ -15,7 +15,7 @@ collector 二进制在编译时通过 `RustEmbed` 将前端资源内嵌。默认
 make build-frontend
 
 # 2. 设置环境变量启动 collector
-AEGIS_FRONTEND_DIST=./frontend/dist sudo -E ./collector/target/release/agentsight record -c claude --binary-path /opt/node-v22.20.0/bin/node
+AEGIS_FRONTEND_DIST=./frontend/dist sudo -E ./collector/target/release/aegis record -c claude --binary-path /opt/node-v22.20.0/bin/node
 ```
 
 之后每次修改前端：

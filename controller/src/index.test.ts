@@ -25,9 +25,9 @@ test('PKCE challenge matches RFC 7636 example', async () => {
 });
 
 test('OAuth return URL stays on the hosted app origin', () => {
-  const app = 'https://app.agentsight.us';
+  const app = 'https://app.aegis.us';
   const preview = 'https://aegis-preview.yunwei356.workers.dev';
-  assert.equal(allowedReturnTo('https://app.agentsight.us/tree', app), `${app}/`);
+  assert.equal(allowedReturnTo('https://app.aegis.us/tree', app), `${app}/`);
   assert.equal(allowedReturnTo(`${preview}/tree`, preview), `${preview}/`);
   assert.equal(allowedReturnTo('https://evil.example/', app), `${app}/`);
   assert.equal(allowedReturnTo('not a URL', app), `${app}/`);

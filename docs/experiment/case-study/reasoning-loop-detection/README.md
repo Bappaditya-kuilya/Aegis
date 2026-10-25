@@ -83,7 +83,7 @@ EOF
 
 ```bash
 # Terminal 1: Start Aegis with enhanced monitoring for CrewAI
-cd /root/yunwei37/agentsight/collector
+cd /root/yunwei37/aegis/collector
 cargo run trace --ssl --process \
     --comm python --comm crewai \
     --server \

@@ -128,7 +128,7 @@ rendering layer that turns it into an Agent Footprint Map.
 1. **Data**: Already captured — `token_usage`, `audit_events`, `canonical_events` tables in session DB
 2. **Correlation**: Match tool_use timestamps with process/file events in the same time window
 3. **Rendering**: Generate SVG from correlated data (similar to how flamegraph.pl generates SVGs from collapsed stacks)
-4. **CLI**: `agentsight footprint --db session.db` → outputs SVG or HTML
+4. **CLI**: `aegis footprint --db session.db` → outputs SVG or HTML
 5. **Integration**: Embed in web UI at localhost:7395, export for blogs/reports
 
 ## References

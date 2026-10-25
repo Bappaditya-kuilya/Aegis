@@ -97,7 +97,7 @@ Aegis 的差异化应强调“system-boundary evidence”：不要求 agent、fr
 | Aegis 独特证据 | 一次 run 的进程树、命令、文件 read/write/delete、网络目标、LLM 请求/响应、token 变化、CPU/内存、循环迹象；可导出为 bug report |
 | 是否可能付费/安装 | 高概率安装；个人付费中低。更适合作为开源 CLI、免费本地报告、团队升级入口 |
 | 市场信心等级 | 中高：痛点公开且多源存在，但个人用户付费弱，且一部分用户会接受“多用 git/备份/少开 auto-run”作为替代 |
-| 最小可验证实验 | 发布 `agentsight exec -- claude/codex/gemini/cursor-agent` 生成 `run-receipt.html`。招募 20 个高频个人用户，在真实 coding session 后问两个指标：是否发现 git diff 看不到的信息；是否愿意把报告贴到 issue/PR。成功阈值：10 人以上每周保留使用，5 人以上主动分享报告 |
+| 最小可验证实验 | 发布 `aegis exec -- claude/codex/gemini/cursor-agent` 生成 `run-receipt.html`。招募 20 个高频个人用户，在真实 coding session 后问两个指标：是否发现 git diff 看不到的信息；是否愿意把报告贴到 issue/PR。成功阈值：10 人以上每周保留使用，5 人以上主动分享报告 |
 
 ### 待验证假设
 
@@ -177,7 +177,7 @@ skill/MCP/plugin 审核的特殊点在于：静态检查能发现一部分代码
 | Aegis 独特证据 | 动态验收报告：声明行为 vs 观测行为、是否只读、写入路径、网络域名、secret 文件访问、子进程、tool call 到 OS effect 的链路、token/loop 变化 |
 | 是否可能付费/安装 | 作者个人付费中低；marketplace、企业 internal registry、consulting/security reviewer 付费中高 |
 | 市场信心等级 | 中高：安全痛点强，MCP 生态快速增长；但 buyer 分散，marketplace 审核标准尚未稳定 |
-| 最小可验证实验 | 做 `agentsight verify --policy policy.yaml -- claude/codex/gemini ...`，对 20 个流行 MCP servers/skills 生成“read-only/path/network/secret”验收报告。把报告提交给作者或 registry，观察是否被采用为 release artifact。成功阈值：5 个项目愿意把报告链接进 README/release，1 个 registry 愿意讨论集成 |
+| 最小可验证实验 | 做 `aegis verify --policy policy.yaml -- claude/codex/gemini ...`，对 20 个流行 MCP servers/skills 生成“read-only/path/network/secret”验收报告。把报告提交给作者或 registry，观察是否被采用为 release artifact。成功阈值：5 个项目愿意把报告链接进 README/release，1 个 registry 愿意讨论集成 |
 
 ### 待验证假设
 
@@ -256,7 +256,7 @@ AI 产品团队已有 eval/observability 预算，但现有产品主要关注输
 | Aegis 独特证据 | old vs new system behavior diff：进程树、命令序列、文件 read/write、网络目标、token/runtime/CPU/mem、敏感路径 access；可作为 CI regression artifact |
 | 是否可能付费/安装 | 中高。已有 eval 预算的团队会为“agent behavior regression”付费，但需要与现有 eval stack 集成 |
 | 市场信心等级 | 中高：eval 市场确定存在；Aegis 的系统边界维度需要验证是否足够高频、足够独特 |
-| 最小可验证实验 | 构建 `agentsight compare baseline.json current.json --policy regression.yaml`。选 10 个真实 agent tasks，比较两个模型或两个 prompt 版本，输出新增文件访问/命令/网络/成本。成功阈值：AI 产品团队能用报告发现至少 2 个普通 eval 未发现的 regression |
+| 最小可验证实验 | 构建 `aegis compare baseline.json current.json --policy regression.yaml`。选 10 个真实 agent tasks，比较两个模型或两个 prompt 版本，输出新增文件访问/命令/网络/成本。成功阈值：AI 产品团队能用报告发现至少 2 个普通 eval 未发现的 regression |
 
 ### 待验证假设
 
@@ -295,7 +295,7 @@ AI 产品团队已有 eval/observability 预算，但现有产品主要关注输
 | Aegis 独特证据 | token spend 与 tool/command/file/network/resource timeline 关联；loop detection；per-run/per-user/per-repo cost attribution；runner CPU/mem/wall-clock；“高 token 低产出”报告 |
 | 是否可能付费/安装 | 高。团队和企业会为防止 runaway spend、容量规划、chargeback/showback 付费；个人会安装但不一定付费 |
 | 市场信心等级 | 高：成本是官方文档、论文、论坛 issue 都反复出现的明确痛点 |
-| 最小可验证实验 | 做 `agentsight report token` + loop/cost report：对 30 次 agent run 输出 token per turn、重复文件访问、重复命令、CPU/mem、runner time。成功阈值：能解释 80% 以上异常用量；至少 3 个团队愿意把报告用于月度 showback 或 CI guardrail |
+| 最小可验证实验 | 做 `aegis report token` + loop/cost report：对 30 次 agent run 输出 token per turn、重复文件访问、重复命令、CPU/mem、runner time。成功阈值：能解释 80% 以上异常用量；至少 3 个团队愿意把报告用于月度 showback 或 CI guardrail |
 
 ### 待验证假设
 
@@ -320,7 +320,7 @@ AI 产品团队已有 eval/observability 预算，但现有产品主要关注输
 
 Aegis 最小产品：
 
-- `agentsight exec -- <agent command>` 生成 report。
+- `aegis exec -- <agent command>` 生成 report。
 - GitHub Action/PR comment 集成。
 - 报告只显示高风险摘要，完整 evidence 可下载。
 
@@ -359,7 +359,7 @@ Aegis 最小产品：
 
 Aegis 最小产品：
 
-- `agentsight verify --policy`。
+- `aegis verify --policy`。
 - read-only/path/network/secret checklist。
 - 可复现实验脚本和 HTML report。
 

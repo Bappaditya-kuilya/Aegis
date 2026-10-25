@@ -6,5 +6,5 @@ existing integrations. The implementation is split into the native
 extension; this crate re-exports that combined API without copying it.
 
 New capture-only integrations may depend directly on
-`aegis-capture-core`. Existing `agentsight_capture` imports continue to
+`aegis-capture-core`. Existing `aegis_capture` imports continue to
 work unchanged.

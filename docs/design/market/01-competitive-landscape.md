@@ -24,7 +24,7 @@
 | LLM gateway/proxy | Helicone、Braintrust AI proxy、LiteLLM/Portkey 类替代方案 | 低改动记录 API 请求、成本、latency、routing/fallback/caching | base URL 替换、gateway/proxy、provider wrapper | 只能看到经过 gateway 的 LLM 请求；看不到本地工具执行和文件/进程副作用 |
 | OTel GenAI 与传统 APM | OpenTelemetry GenAI、Datadog、New Relic、Honeycomb、Traceloop/OpenLLMetry | 把 GenAI spans 放进现有 tracing/APM/infra 后端，统一治理、采样、脱敏、路由 | OTel SDK/Collector、vendor agent、auto-instrumentation、HTTP API | 能和已有 infra/app telemetry 并排分析；但没有自动建立 coding agent 到 OS syscall 的完整事实链 |
 | Coding-agent transcript/cost 工具 | Claude Code OTel/hooks、ccusage、CodeBurn、codlogs、cursor-history、Langfuse Cursor/Claude integrations | 本地 coding agent session 查账、成本、导出、回放、token waste 分析 | 官方 OTel、hooks、读取 JSONL/SQLite/local logs、CLI | 可见 agent 记录的 transcript/tool/cost；不能保证看见 agent 未记录或日志被关闭/遗漏的 OS 行为 |
-| Aegis 目标层 | Aegis | 独立运行收据、side-effect forensic、进程/文件/网络/LLM 关联、PR due diligence | eBPF + TLS uprobe + process tracer + `agentsight exec/record` | 当前最强差异点；仍需把 deletion/rename/network 等覆盖做实并验证低开销 |
+| Aegis 目标层 | Aegis | 独立运行收据、side-effect forensic、进程/文件/网络/LLM 关联、PR due diligence | eBPF + TLS uprobe + process tracer + `aegis exec/record` | 当前最强差异点；仍需把 deletion/rename/network 等覆盖做实并验证低开销 |
 
 ## 2. 单项产品分析
 
@@ -208,7 +208,7 @@ Langfuse Cursor integration 也说明可以 trace Cursor agent interactions，�
 
 1. 外部边界观测，而非 app/framework 插桩。Aegis README 明确说无需 SDK 或 proxy，可观察已有二进制和 CLI agents，并关联 LLM traffic 与 process execution、file access、system activity。[Aegis README](../../../README.md)
 
-2. 面向 local coding agents 的系统行为审计。README 提到 `agentsight exec -- claude`、attach to process、Claude Code monitoring、Node.js AI tools、Docker/container support、web UI、process tree、file operations、subprocess executions、OpenTelemetry GenAI export。[Aegis README](../../../README.md)
+2. 面向 local coding agents 的系统行为审计。README 提到 `aegis exec -- claude`、attach to process、Claude Code monitoring、Node.js AI tools、Docker/container support、web UI、process tree、file operations、subprocess executions、OpenTelemetry GenAI export。[Aegis README](../../../README.md)
 
 3. Claude Code 这类静态链接/剥离符号二进制的 TLS 捕获工程经验。README 和 Claude Code analysis 说明 Claude Code/Bun/BoringSSL 的特殊处理，包括 binary-path、byte-pattern matching、HTTP Client thread 等。[Aegis README](../../../README.md)、[Claude Code analysis](../../claude-code-analysis.md)
 
@@ -296,7 +296,7 @@ Aegis 应避免把自己描述成“LLM observability platform”或“LangSmith
 
 短期最合理 wedge：
 
-1. `agentsight record -- claude|codex|cursor-agent` 生成本地 run receipt。
+1. `aegis record -- claude|codex|cursor-agent` 生成本地 run receipt。
 2. 报告首屏回答：commands、process tree、files touched、network destinations、LLM/token/cost summary、unexpected/risky actions。
 3. 支持导出 Markdown/HTML/JSONL/OTel。
 4. 和 ccusage/CodeBurn 的成本能力保持互补：可读取或对齐它们的成本数据，但不以成本看板为核心。

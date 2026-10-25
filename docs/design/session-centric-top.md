@@ -2,7 +2,7 @@
 
 ## Problem
 
-`agentsight top` should not be a thin wrapper around Linux `top`.
+`aegis top` should not be a thin wrapper around Linux `top`.
 Traditional `top` answers:
 
 - Which process is using CPU or memory?
@@ -21,12 +21,12 @@ off that session.
 
 ## Product Definition
 
-`agentsight top` is the primary live display for Aegis.
+`aegis top` is the primary live display for Aegis.
 
 Default behavior:
 
 ```bash
-sudo agentsight top
+sudo aegis top
 ```
 
 should:
@@ -140,12 +140,12 @@ saved session is present.
 
 SQLite is the durable evidence store used by:
 
-- `agentsight record`
-- `agentsight report`
-- explicit `agentsight report --db`
+- `aegis record`
+- `aegis report`
+- explicit `aegis report --db`
 - exported dashboards and CI artifacts
 
-Saved-session inspection belongs to `agentsight report`; `top` is live-only.
+Saved-session inspection belongs to `aegis report`; `top` is live-only.
 
 ## Session Attachment Rules
 
@@ -240,7 +240,7 @@ runner lifecycle changes:
 After Stage 1:
 
 ```bash
-sudo agentsight top --once
+sudo aegis top --once
 ```
 
 should show a session-first table when local Claude/Codex sessions exist, even

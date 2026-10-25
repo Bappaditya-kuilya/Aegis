@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 aegis-oss org.
 
-use agentsight_capture_core::{
+use aegis_capture_core::{
     Event,
     analyzers::{Analyzer, AnalyzerError},
     runners::{AgentRunner, EventStream, Runner, RunnerError},

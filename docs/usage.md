@@ -1,13 +1,13 @@
 # Usage
 
-**English** | [中文](https://github.com/aegis-oss/aegis/blob/master/docs/usage.zh-CN.md)
+**English** | [中文](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/usage.zh-CN.md)
 
 ## Building from Source
 
 ### 1. Clone the repository and initialize submodules
 
 ```sh
-git clone https://github.com/aegis-oss/aegis.git
+git clone https://github.com/Bappaditya-kuilya/Aegis.git
 cd aegis
 git submodule update --init --recursive
 ```

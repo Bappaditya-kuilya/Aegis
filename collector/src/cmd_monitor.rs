@@ -661,7 +661,7 @@ fn monitor_service_unit_for_exe(exe: &str) -> String {
         "\
 [Unit]
 Description=Aegis background monitor
-Documentation=https://github.com/aegis-oss/aegis
+Documentation=https://github.com/Bappaditya-kuilya/Aegis
 After=default.target
 
 [Service]

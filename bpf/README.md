@@ -118,7 +118,7 @@ sudo ./process -m 0 --trace-net --heartbeat 5
 
 ```bash
 sudo ./process -m 0 --pidns-of 1234 --trace-net --heartbeat 2
-sudo ./agentsight debug process -- -m 0 --pidns-of 1234 --trace-net --heartbeat 2
+sudo ./aegis debug process -- -m 0 --pidns-of 1234 --trace-net --heartbeat 2
 ```
 
 **Verbose Debug Output (`-v`):**

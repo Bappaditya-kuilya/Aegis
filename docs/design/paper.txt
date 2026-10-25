@@ -27,7 +27,7 @@ tects prompt injection attacks, identifies resource-wasting          a data anal
 reasoning loops, and reveals hidden coordination bottle-             mised agent writing a malicious payload. Without under-
 necks in multi-agent systems. Aegis is released as              standing the preceding LLM instructions, the why behind
 an open-source project at https://github.com/aegis-oss/            the what, its stream of low-level events is meaningless noise.
-agentsight.                                                              We propose boundary tracing as a novel observability
+aegis.                                                              We propose boundary tracing as a novel observability
                                                                      method designed specifically to bridge this semantic gap.
 1   Introduction                                                     Our key insight is that while agent internals and frame-
                                                                      works are volatile, the interfaces through which they inter-

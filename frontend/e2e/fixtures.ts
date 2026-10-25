@@ -18,7 +18,7 @@ export const snapshot = {
       end_timestamp_ms: null, status: 'running', model: 'gpt-5',
       input_tokens: 1_200, output_tokens: 300, total_tokens: 1_500,
       attributes: {
-        session_id: sessionId, display_id: 'codex:thread-1', cwd: '/workspace/agentsight',
+        session_id: sessionId, display_id: 'codex:thread-1', cwd: '/workspace/aegis',
         prompt_preview: 'Implement browser regression coverage',
         last_message_at: '2026-08-13T18:00:00Z',
         usage: { input_tokens: 1_200, output_tokens: 300, cache_read_tokens: 500, total_tokens: 2_000 },
@@ -66,7 +66,7 @@ export const snapshot = {
     },
     {
       id: 'file-1', timestamp_ms: started + 22_000, audit_type: 'file', pid: 101,
-      comm: 'codex', action: 'write', target: '/workspace/agentsight/frontend/e2e/app.spec.ts',
+      comm: 'codex', action: 'write', target: '/workspace/aegis/frontend/e2e/app.spec.ts',
       status: 'success', summary: 'write frontend/e2e/app.spec.ts',
     },
   ],
@@ -87,10 +87,10 @@ export const overview = {
     model: 'gpt-5', age_s: 2, cpu_percent: 12, rss_mb: 140, processes: 2,
     tokens: 1_500, tools: 1, execs: 1, failures: 0, files: 1, network: 1,
     trace: 'agent-native+proc', command: 'Implement browser regression coverage',
-    workspace: '/workspace/agentsight', last_message_at: '2026-08-13T18:00:00Z',
+    workspace: '/workspace/aegis', last_message_at: '2026-08-13T18:00:00Z',
     process_details: [
-      { pid: 101, ppid: 1, start_timestamp_ms: started, comm: 'codex', command: 'codex', cwd: '/workspace/agentsight', cpu_percent: 8, rss_mb: 120 },
-      { pid: 102, ppid: 101, start_timestamp_ms: started + 10_000, comm: 'git', command: 'git diff', cwd: '/workspace/agentsight', cpu_percent: 4, rss_mb: 20 },
+      { pid: 101, ppid: 1, start_timestamp_ms: started, comm: 'codex', command: 'codex', cwd: '/workspace/aegis', cpu_percent: 8, rss_mb: 120 },
+      { pid: 102, ppid: 101, start_timestamp_ms: started + 10_000, comm: 'git', command: 'git diff', cwd: '/workspace/aegis', cpu_percent: 4, rss_mb: 20 },
     ],
     plan: [{ step: 'Verify conversation and analysis', status: 'in_progress' }],
     subscription: snapshot.sessions[0].attributes.subscription,
@@ -113,7 +113,7 @@ export const studioOverview = {
 };
 
 export const sessionDetail = {
-  session_id: sessionId, agent_type: 'codex', model: 'gpt-5', cwd: '/workspace/agentsight',
+  session_id: sessionId, agent_type: 'codex', model: 'gpt-5', cwd: '/workspace/aegis',
   duration_ms: 60_000,
   usage: { input_tokens: 1_200, output_tokens: 300, cache_read_tokens: 500, total_tokens: 2_000 },
   model_usage: { 'gpt-5': { input_tokens: 1_200, output_tokens: 300, total_tokens: 1_500 } },
@@ -183,7 +183,7 @@ export async function mockController(page: Page, options: {
   await mockEmbeddedProbe(page);
   if (options.signedIn) {
     await page.addInitScript(() => {
-      window.localStorage.setItem('agentsight.cloud-session.v1', 'browser-test-session');
+      window.localStorage.setItem('aegis.cloud-session.v1', 'browser-test-session');
       window.localStorage.setItem('aegis-locale', 'en');
     });
   }
@@ -204,7 +204,7 @@ export async function mockController(page: Page, options: {
     if (path.startsWith('/api/v1/sessions/')) return json(route, sessionDetail);
     return json(route, { error: `Unhandled Direct route: ${request.method()} ${path}` }, 500);
   });
-  await page.route('https://control.agentsight.us/**', async (route) => {
+  await page.route('https://control.aegis.us/**', async (route) => {
     const request = route.request();
     const url = new URL(request.url());
     const path = url.pathname;

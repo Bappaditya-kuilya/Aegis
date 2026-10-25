@@ -1,6 +1,6 @@
 # Development Guide
 
-**English** | [中文](https://github.com/aegis-oss/aegis/blob/master/docs/development.zh-CN.md)
+**English** | [中文](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/development.zh-CN.md)
 
 ## Frontend Dev Mode (Disk-First Assets)
 

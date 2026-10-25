@@ -13,7 +13,7 @@ Spec: <https://opentelemetry.io/docs/specs/semconv/gen-ai/>
 Point Aegis at a running collector with `--otel`:
 
 ```bash
-sudo ./agentsight debug trace --otel --otel-endpoint http://localhost:4318
+sudo ./aegis debug trace --otel --otel-endpoint http://localhost:4318
 ```
 
 Each LLM request/response pair becomes a `chat {model}` CLIENT span. By default
@@ -35,7 +35,7 @@ are not inferred yet.
 
 Standard OTel env vars are honored: `OTEL_EXPORTER_OTLP_ENDPOINT`,
 `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` (used as-is if set), and `OTEL_SERVICE_NAME`
-(default `agentsight`).
+(default `aegis`).
 
 ## Run a collector
 

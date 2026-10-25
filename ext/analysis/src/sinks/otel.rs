@@ -87,7 +87,7 @@ impl OtelExporter {
         };
 
         let service_name =
-            std::env::var("OTEL_SERVICE_NAME").unwrap_or_else(|_| "agentsight".to_string());
+            std::env::var("OTEL_SERVICE_NAME").unwrap_or_else(|_| "aegis".to_string());
 
         Self {
             traces_url,
@@ -222,23 +222,23 @@ fn build_otlp_payload(
         }
     }
     for (key, value) in [
-        ("agentsight.connection.id", req.connection_id.as_deref()),
+        ("aegis.connection.id", req.connection_id.as_deref()),
         (
-            "agentsight.http.exchange.id",
+            "aegis.http.exchange.id",
             req.http_exchange_id.as_deref(),
         ),
         ("http.request.id", req.request_id.as_deref()),
         ("gen_ai.response.id", req.response_id.as_deref()),
         (
-            "agentsight.correlation.method",
+            "aegis.correlation.method",
             req.correlation_method.as_deref(),
         ),
         (
-            "agentsight.correlation.status",
+            "aegis.correlation.status",
             req.correlation_status.as_deref(),
         ),
         (
-            "agentsight.completion.reason",
+            "aegis.completion.reason",
             req.completion_reason.as_deref(),
         ),
     ] {
@@ -247,14 +247,14 @@ fn build_otlp_payload(
         }
     }
     if let Some(stream_id) = req.stream_id {
-        attributes.push(attr_int("agentsight.http.stream_id", stream_id as i64));
+        attributes.push(attr_int("aegis.http.stream_id", stream_id as i64));
     }
     if let Some(version) = req.correlation_version {
-        attributes.push(attr_int("agentsight.correlation.version", version as i64));
+        attributes.push(attr_int("aegis.correlation.version", version as i64));
     }
     if let Some(confidence) = req.confidence {
         attributes.push(attr_double(
-            "agentsight.correlation.confidence",
+            "aegis.correlation.confidence",
             confidence as f64,
         ));
     }
@@ -303,7 +303,7 @@ fn build_otlp_payload(
                 "attributes": [ attr_str("service.name", service_name) ]
             },
             "scopeSpans": [{
-                "scope": { "name": "agentsight", "version": env!("CARGO_PKG_VERSION") },
+                "scope": { "name": "aegis", "version": env!("CARGO_PKG_VERSION") },
                 "spans": [{
                     "traceId": trace_id,
                     "spanId": span_id,
@@ -563,7 +563,7 @@ mod tests {
             "choices": [{ "finish_reason": "stop" }]
         });
         let payload = build_otlp_payload(
-            "agentsight",
+            "aegis",
             "0123456789abcdef0123456789abcdef",
             "0123456789abcdef",
             &req,
@@ -636,7 +636,7 @@ mod tests {
             input_messages: None,
             ..Default::default()
         };
-        let payload = build_otlp_payload("agentsight", "t", "s", &req, 2, Some(429), None, false);
+        let payload = build_otlp_payload("aegis", "t", "s", &req, 2, Some(429), None, false);
         let span = &payload["resourceSpans"][0]["scopeSpans"][0]["spans"][0];
         assert_eq!(span["status"]["code"], 2);
     }

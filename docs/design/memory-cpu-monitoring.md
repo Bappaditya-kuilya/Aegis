@@ -210,21 +210,21 @@ echo 50000 > /sys/fs/cgroup/cpu/myapp/cpu.cfs_quota_us
 ### Combined Monitoring
 ```bash
 # Start Aegis
-sudo ./agentsight debug trace --ssl true --process true --comm node --server &
+sudo ./aegis debug trace --ssl true --process true --comm node --server &
 
 # Monitor resources alongside
 watch -n 2 'echo "=== Aegis Process Resources ==="; \
-    ps aux | grep -E "(agentsight|node)" | grep -v grep; \
+    ps aux | grep -E "(aegis|node)" | grep -v grep; \
     echo "=== Memory Summary ==="; \
-    ps aux | grep -E "(agentsight|node)" | awk "{sum+=\$6} END {print \"Total RSS: \"sum/1024\" MB\"}"; \
+    ps aux | grep -E "(aegis|node)" | awk "{sum+=\$6} END {print \"Total RSS: \"sum/1024\" MB\"}"; \
     echo "=== CPU Summary ==="; \
-    ps aux | grep -E "(agentsight|node)" | awk "{sum+=\$3} END {print \"Total CPU: \"sum\"%\"}"'
+    ps aux | grep -E "(aegis|node)" | awk "{sum+=\$3} END {print \"Total CPU: \"sum\"%\"}"'
 ```
 
 ### Correlate Events with Resources
 ```bash
 # Log resources when events occur
-tail -f agentsight.log | while read line; do
+tail -f aegis.log | while read line; do
     if echo "$line" | grep -q "SSL_write\|SSL_read"; then
         timestamp=$(date +%s)
         pid=$(echo "$line" | grep -oP '"pid":\K\d+')

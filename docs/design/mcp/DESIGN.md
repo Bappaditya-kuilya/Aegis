@@ -370,7 +370,7 @@ sudo ./aegis-mcp --port 3000 --host 0.0.0.0
 ```json
 {
   "mcpServers": {
-    "agentsight": {
+    "aegis": {
       "url": "http://localhost:3000/mcp",
       "transport": "streamable-http"
     }
@@ -382,7 +382,7 @@ sudo ./aegis-mcp --port 3000 --host 0.0.0.0
 ```json
 {
   "mcpServers": {
-    "agentsight": {
+    "aegis": {
       "url": "http://localhost:3000/mcp",
       "transport": "sse"
     }
@@ -394,8 +394,8 @@ sudo ./aegis-mcp --port 3000 --host 0.0.0.0
 ```json
 {
   "mcpServers": {
-    "agentsight": {
-      "url": "https://agentsight.example.com/mcp",
+    "aegis": {
+      "url": "https://aegis.example.com/mcp",
       "transport": "streamable-http",
       "headers": {
         "Authorization": "Bearer YOUR_TOKEN"

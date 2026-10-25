@@ -1,6 +1,6 @@
 # aegis-py
 
-Official Python helper for [Eunomia Aegis](https://github.com/aegis-oss/aegis).
+Official Python helper for [Eunomia Aegis](https://github.com/Bappaditya-kuilya/Aegis).
 
 `aegis-py` is the PyPI package name because the bare PyPI name
 `aegis` is owned by an unrelated project. The canonical Aegis collector

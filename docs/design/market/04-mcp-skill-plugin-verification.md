@@ -220,7 +220,7 @@ Skill/MCP/plugin 行为验收是安装前或发布前信任评估：“这个工
 让一个第三方作者在自己的 repo 中运行一条命令，生成可公开链接的 report 和 README badge：
 
 ```md
-[![Aegis verified](https://agentsight.dev/badges/io.github.acme/weather-mcp/read-only.svg)](https://agentsight.dev/reports/io.github.acme/weather-mcp/1.2.0)
+[![Aegis verified](https://aegis.dev/badges/io.github.acme/weather-mcp/read-only.svg)](https://aegis.dev/reports/io.github.acme/weather-mcp/1.2.0)
 ```
 
 Badge 不应该写“safe”这种绝对词，而应写：
@@ -243,7 +243,7 @@ Badge 不应该写“safe”这种绝对词，而应写：
 
 ### 作者工作流
 
-作者在 repo 中创建 `agentsight.verify.yaml`：
+作者在 repo 中创建 `aegis.verify.yaml`：
 
 ```yaml
 subject:
@@ -283,9 +283,9 @@ tests:
 运行：
 
 ```sh
-agentsight verify --config agentsight.verify.yaml
-agentsight report --format html --output dist/aegis-report
-agentsight badge --input dist/aegis-report/report.json --output dist/aegis-badge.json
+aegis verify --config aegis.verify.yaml
+aegis report --format html --output dist/aegis-report
+aegis badge --input dist/aegis-report/report.json --output dist/aegis-badge.json
 ```
 
 CI 集成：
@@ -301,13 +301,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: agentsight/setup-agentsight@v0
-      - run: agentsight verify --config agentsight.verify.yaml
-      - run: agentsight report --format html --output public/agentsight
+      - uses: aegis/setup-aegis@v0
+      - run: aegis verify --config aegis.verify.yaml
+      - run: aegis report --format html --output public/aegis
       - uses: actions/upload-artifact@v4
         with:
           name: aegis-report
-          path: public/agentsight
+          path: public/aegis
 ```
 
 ### v0 report schema
@@ -327,7 +327,7 @@ jobs:
   "environment": {
     "host": "mcp-inspector-headless",
     "os": "ubuntu-24.04",
-    "agentsight_version": "0.x"
+    "aegis_version": "0.x"
   },
   "claims": {
     "read_only": "pass",

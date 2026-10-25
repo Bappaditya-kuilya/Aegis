@@ -28,7 +28,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "agentsight"
+name = "aegis"
 version = "1.0.0"
 dependencies = [
  "agent-session",

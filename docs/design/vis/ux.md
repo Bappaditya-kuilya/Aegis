@@ -26,10 +26,10 @@ This document defines the desired command line and report experience. It complem
 - `agent-workspace-map.md`: workspace/file behavior visualizations.
 - `why.md`: why boundary tracing/eBPF is needed.
 
-Current CLI note: the user-facing entrypoint is `agentsight top` for live
-session monitoring. Use `agentsight record -- <command>` to save a run and
-`agentsight report` to inspect saved runs. Low-level tracing is currently
-exposed as `agentsight debug trace`; top-level `script`, `trace`, and `export`
+Current CLI note: the user-facing entrypoint is `aegis top` for live
+session monitoring. Use `aegis record -- <command>` to save a run and
+`aegis report` to inspect saved runs. Low-level tracing is currently
+exposed as `aegis debug trace`; top-level `script`, `trace`, and `export`
 commands below are future UX proposals unless explicitly marked as current.
 
 ## Product Positioning
@@ -38,11 +38,11 @@ Aegis should borrow the interaction grammar of familiar systems tools:
 
 | Tool | User expectation | Aegis equivalent |
 | --- | --- | --- |
-| `perf top` / `top` | live ranked activity | `agentsight top` |
-| `perf record` | capture a session artifact | `agentsight record -- <agent>` |
-| `perf report` | inspect a saved artifact | `agentsight report` |
-| `perf script` | dump ordered events | future: `agentsight script` |
-| `strace -f -tt -e ...` | follow subprocesses and filter events | current: `agentsight debug trace`; future: `agentsight trace` |
+| `perf top` / `top` | live ranked activity | `aegis top` |
+| `perf record` | capture a session artifact | `aegis record -- <agent>` |
+| `perf report` | inspect a saved artifact | `aegis report` |
+| `perf script` | dump ordered events | future: `aegis script` |
+| `strace -f -tt -e ...` | follow subprocesses and filter events | current: `aegis debug trace`; future: `aegis trace` |
 | Nsight Systems | time-correlated lanes and markers | Agent run timeline with LLM/tool/process/file lanes |
 
 Aegis is not trying to replace SDK trace tools. It should be the local,
@@ -277,33 +277,33 @@ raw event stream printer used for debug/live event output.
 Current top-level command set:
 
 ```bash
-agentsight top     [options]
-agentsight record  [options] [-- command ...]
-agentsight report  [options]
-agentsight report prompts [options]
-agentsight report list
-agentsight discover
-agentsight report      ...
-agentsight debug   ...
+aegis top     [options]
+aegis record  [options] [-- command ...]
+aegis report  [options]
+aegis report prompts [options]
+aegis report list
+aegis discover
+aegis report      ...
+aegis debug   ...
 ```
 
 Future shorthand commands can be considered after the current surfaces are
 stable:
 
 ```bash
-agentsight script  [options]
-agentsight trace   [options]
-agentsight export  [options]
+aegis script  [options]
+aegis trace   [options]
+aegis export  [options]
 ```
 
 ### Run Counters
 
 The old top-level counter surface has been removed. Counter-focused views now
-live under `agentsight report`: the default report prints a concise run summary,
+live under `aegis report`: the default report prints a concise run summary,
 while structured counters are available through focused report queries such as
-`agentsight report token --json`.
+`aegis report token --json`.
 
-### `agentsight top`
+### `aegis top`
 
 Like `top` or `perf top`: live ranked view. The primary unit should be an
 agent root process or agent process family, not a global dashboard panel.
@@ -311,12 +311,12 @@ agent root process or agent process family, not a global dashboard panel.
 Examples:
 
 ```bash
-agentsight top
-agentsight top -p 1234
-agentsight top -c claude
-agentsight top --sort tokens
-agentsight top --view files
-agentsight top --once
+aegis top
+aegis top -p 1234
+aegis top -c claude
+aegis top --sort tokens
+aegis top --view files
+aegis top --once
 ```
 
 Default layout should mirror normal `top`: a compact summary followed by a
@@ -381,17 +381,17 @@ a        show attributed/unattributed
 q        quit
 ```
 
-### `agentsight record`
+### `aegis record`
 
 Like `perf record`: capture a run artifact.
 
 Examples:
 
 ```bash
-agentsight record -- claude "fix the failing API test"
-agentsight record -c claude
-agentsight record -p 1234
-agentsight record --db run.db -- claude
+aegis record -- claude "fix the failing API test"
+aegis record -c claude
+aegis record -p 1234
+aegis record --db run.db -- claude
 ```
 
 Default output:
@@ -399,7 +399,7 @@ Default output:
 ```text
 Aegis record
   target: claude "fix the failing API test"
-  db: ~/.local/share/agentsight/sessions/20260602-113015.db
+  db: ~/.local/share/aegis/sessions/20260602-113015.db
 
 Recording. Press Ctrl-C to stop.
 ```
@@ -407,23 +407,23 @@ Recording. Press Ctrl-C to stop.
 At exit:
 
 ```text
-Recorded 13.2s to ~/.local/share/agentsight/sessions/20260602-113015.db
+Recorded 13.2s to ~/.local/share/aegis/sessions/20260602-113015.db
 Run:
-  agentsight report --db ...
+  aegis report --db ...
 ```
 
-### `agentsight report`
+### `aegis report`
 
 Like `perf report`, but for agent runs.
 
 Examples:
 
 ```bash
-agentsight report
-agentsight report --db run.db
-agentsight report --section side-effects
-agentsight report --markdown -o report.md
-agentsight report --json
+aegis report
+aegis report --db run.db
+aegis report --section side-effects
+aegis report --markdown -o report.md
+aegis report --json
 ```
 
 Default report structure:
@@ -464,18 +464,18 @@ Capture notes
   correlation: timestamp + process context
 ```
 
-### Future: `agentsight script`
+### Future: `aegis script`
 
 Like `perf script`: ordered event stream. Current CLI users should query saved
-sessions with `agentsight report audit --json` until this shorthand exists.
+sessions with `aegis report audit --json` until this shorthand exists.
 
 Examples:
 
 ```bash
-agentsight script --db run.db
-agentsight script --db run.db -F time,pid,comm,kind,summary
-agentsight script --db run.db -e process,file
-agentsight script --json --db run.db
+aegis script --db run.db
+aegis script --db run.db -F time,pid,comm,kind,summary
+aegis script --db run.db -e process,file
+aegis script --json --db run.db
 ```
 
 Example output:
@@ -488,18 +488,18 @@ Example output:
 03.902  npm[1244]    process.exit     code 1
 ```
 
-### Current: `agentsight debug trace`; Future: `agentsight trace`
+### Current: `aegis debug trace`; Future: `aegis trace`
 
 Like `strace`: detailed follow/filter mode. The current implemented command is
-`agentsight debug trace`; the shorter top-level `trace` spelling is a future UX
+`aegis debug trace`; the shorter top-level `trace` spelling is a future UX
 proposal.
 
 Examples:
 
 ```bash
-agentsight debug trace -c claude
-agentsight debug trace -p 1234 --process true --ssl false
-agentsight debug trace -c claude --ssl true --process true --server
+aegis debug trace -c claude
+aegis debug trace -p 1234 --process true --ssl false
+aegis debug trace -c claude --ssl true --process true --server
 ```
 
 Design notes:
@@ -632,11 +632,11 @@ Empty states should be action-oriented:
 No run loaded.
 
 Start a run:
-  agentsight record -- claude
+  aegis record -- claude
 
 Or open an existing run:
-  agentsight report --db run.db
-  agentsight script --db run.db
+  aegis report --db run.db
+  aegis script --db run.db
 ```
 
 Partial states should be explicit:
@@ -690,9 +690,9 @@ model:claude-sonnet
 
 The same filter grammar should work in:
 
-- `agentsight script -e ...`
-- `agentsight top --filter ...`
-- `agentsight report --filter ...`
+- `aegis script -e ...`
+- `aegis top --filter ...`
+- `aegis report --filter ...`
 - export commands
 
 ## MVP Priorities
@@ -707,10 +707,10 @@ The same filter grammar should work in:
 
 ### P1: Make It Shareable
 
-1. `agentsight report --markdown`.
+1. `aegis report --markdown`.
 2. Footprint SVG export.
 3. Workspace changed-file table.
-4. `agentsight script`.
+4. `aegis script`.
 5. Raw evidence pointers for every summarized claim.
 
 ### P2: Make It Feel Like a Systems Tool
@@ -726,9 +726,9 @@ The same filter grammar should work in:
 The next release is good enough when a user can run:
 
 ```bash
-agentsight record -- claude "fix the failing API test"
-agentsight report
-agentsight script --summary
+aegis record -- claude "fix the failing API test"
+aegis report
+aegis script --summary
 ```
 
 And immediately answer:

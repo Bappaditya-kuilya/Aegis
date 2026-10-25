@@ -313,7 +313,7 @@ drilldown，不应默认进入 folded stack frame。
 
 Setup：R170 在本机 Aegis research branch 上运行 AgentFlame Rust prototype。命令
 扫描最多 10,000 个 session files，并连接本地 llama.cpp HTTP server。模型是
-`qwen2.5-3b-instruct-q4_k_m.gguf`。输出写入 `.agentsight/agentflame/r170-full-current`，
+`qwen2.5-3b-instruct-q4_k_m.gguf`。输出写入 `.aegis/agentflame/r170-full-current`，
 公开 summary 写入 `docs/visexp/out/full-history-r170.json` 和同目录 Markdown。
 
 Workload：本机可读的 Aegis 相关 Codex/Claude session histories。R170 共读取
@@ -498,7 +498,7 @@ Claim supported：capture-time envelope 和 checker path 可以工作。Boundary
 
 ### R114：固定 Codex command-mode exact lineage suite
 
-Setup：20 个真实 Codex command-mode tasks 在 `agentsight record` 下运行。任务包括 read-only、
+Setup：20 个真实 Codex command-mode tasks 在 `aegis record` 下运行。任务包括 read-only、
 edit、test/debug、dependency、failure/retry 和 disposable-workspace write。每个 task 都有
 negative controls。
 

@@ -30,7 +30,7 @@ Aegis maps those fields to OTLP only at export time and leaves
 ## Release
 
 Aegis's release workflow publishes `agent-session` before publishing
-`agentsight`. The workflow finds the next available `agent-session` patch
+`aegis`. The workflow finds the next available `agent-session` patch
 version on crates.io, updates `ext/session/Cargo.toml`, updates the collector
 dependency, regenerates `collector/Cargo.lock`, and commits that release
 snapshot before packaging.

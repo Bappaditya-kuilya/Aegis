@@ -7,11 +7,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends libelf1 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY collector/target/release/agentsight /app/agentsight
+COPY collector/target/release/aegis /app/aegis
 
-RUN chmod +x /app/agentsight
+RUN chmod +x /app/aegis
 
 # Expose default web server port
 EXPOSE 7395
 
-ENTRYPOINT ["/app/agentsight"]
+ENTRYPOINT ["/app/aegis"]

@@ -1,11 +1,11 @@
 #!/bin/bash
-# Generate flamegraphs for agentsight project
+# Generate flamegraphs for aegis project
 # This script demonstrates the iterative tagging workflow for agentpprof
 
 set -e
 
 AGENTPPROF="${AGENTPPROF:-agentpprof}"
-PROJECT_ROOT="${PROJECT_ROOT:-$HOME/workspace/agentsight}"
+PROJECT_ROOT="${PROJECT_ROOT:-$HOME/workspace/aegis}"
 OUTPUT_DIR="${OUTPUT_DIR:-$(dirname "$0")}"
 
 # Tag rules developed through iterative refinement
@@ -17,7 +17,7 @@ TAG_RULES=(
   --tag-rule 'session:docs=(?i)docs|readme|document'
   --tag-rule 'session:refactor=(?i)refactor|重构|cleanup'
   --tag-rule 'session:flame=(?i)flame|pprof|agentpprof'
-  --tag-rule 'session:dev=(?i)agentsight|workspace'
+  --tag-rule 'session:dev=(?i)aegis|workspace'
 
   # Prompt rules - development activities
   --tag-rule 'prompt:review=(?i)review|审核|check|diff|pr|code review'
@@ -84,20 +84,20 @@ TAG_RULES=(
   --tag-rule 'llm:usage=(?i)^token report$'
 )
 
-echo "Generating flamegraphs for agentsight..."
+echo "Generating flamegraphs for aegis..."
 
 for view in tokens files network time; do
   echo "  $view..."
   "$AGENTPPROF" \
     --project-root "$PROJECT_ROOT" \
-    --project-name agentsight \
+    --project-name aegis \
     "${TAG_RULES[@]}" \
     --view "$view" \
     -o "$OUTPUT_DIR/aegis-${view}.svg"
 
   "$AGENTPPROF" \
     --project-root "$PROJECT_ROOT" \
-    --project-name agentsight \
+    --project-name aegis \
     "${TAG_RULES[@]}" \
     --view "$view" \
     -o "$OUTPUT_DIR/aegis-${view}.folded"

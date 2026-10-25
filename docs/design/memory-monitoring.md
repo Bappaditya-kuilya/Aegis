@@ -158,7 +158,7 @@ When monitoring AI agents with Aegis, you can track memory usage alongside SSL/T
 
 ```bash
 # Start Aegis monitoring
-sudo ./agentsight debug trace --ssl true --process true --comm node &
+sudo ./aegis debug trace --ssl true --process true --comm node &
 
 # In another terminal, monitor memory
 while true; do

@@ -573,19 +573,19 @@ fn parse_container_execution(value: &Value) -> Result<ContainerExecution, Contai
         .get("User")
         .and_then(Value::as_str)
         .filter(|value| !value.is_empty());
-    let user = label("com.agentsight.user").or_else(|| {
+    let user = label("com.aegis.user").or_else(|| {
         configured_user
             .filter(|value| !is_root_container_user(value))
             .map(str::to_string)
     });
-    let workdir = label("com.agentsight.workspace").or_else(|| {
+    let workdir = label("com.aegis.workspace").or_else(|| {
         config
             .get("WorkingDir")
             .and_then(Value::as_str)
             .filter(|value| !value.is_empty())
             .map(str::to_string)
     });
-    let home = label("com.agentsight.home").or_else(|| {
+    let home = label("com.aegis.home").or_else(|| {
         config
             .get("Env")
             .and_then(Value::as_array)
@@ -597,8 +597,8 @@ fn parse_container_execution(value: &Value) -> Result<ContainerExecution, Contai
             .map(str::to_string)
     });
     for (name, path) in [
-        ("com.agentsight.workspace", workdir.as_deref()),
-        ("com.agentsight.home", home.as_deref()),
+        ("com.aegis.workspace", workdir.as_deref()),
+        ("com.aegis.home", home.as_deref()),
     ] {
         if let Some(path) = path {
             validate_container_path(name, path)?;
@@ -695,7 +695,7 @@ fn docker_bridge_command(
         validate_container_path("home", home)?;
         command.args(["--env", &format!("HOME={home}")]);
     }
-    command.args([container, "agentsight", "bridge"]);
+    command.args([container, "aegis", "bridge"]);
     Ok(command)
 }
 
@@ -772,15 +772,15 @@ mod tests {
     }
 
     #[test]
-    fn execution_uses_agentsight_labels_and_valid_absolute_paths() {
+    fn execution_uses_aegis_labels_and_valid_absolute_paths() {
         let inspected = json!([{
             "Config": {
                 "User": "root",
                 "WorkingDir": "/",
                 "Labels": {
-                    "com.agentsight.user": "vscode",
-                    "com.agentsight.workspace": "/workspaces/ebpfos",
-                    "com.agentsight.home": "/home/vscode"
+                    "com.aegis.user": "vscode",
+                    "com.aegis.workspace": "/workspaces/ebpfos",
+                    "com.aegis.home": "/home/vscode"
                 }
             }
         }]);
@@ -800,7 +800,7 @@ mod tests {
             "Config": {
                 "User": "",
                 "WorkingDir": "",
-                "Labels": {"com.agentsight.home": "/home/vscode"}
+                "Labels": {"com.aegis.home": "/home/vscode"}
             }
         }]);
         assert_eq!(
@@ -815,7 +815,7 @@ mod tests {
             "Config": {
                 "User": "root:root",
                 "WorkingDir": "/",
-                "Labels": {"com.agentsight.home": "/home/vscode"}
+                "Labels": {"com.aegis.home": "/home/vscode"}
             }
         }]);
         assert_eq!(
@@ -825,7 +825,7 @@ mod tests {
         );
         let invalid = json!([{
             "Config": {
-                "Labels": {"com.agentsight.workspace": "../../host"}
+                "Labels": {"com.aegis.workspace": "../../host"}
             }
         }]);
         assert!(parse_container_execution(&invalid).is_err());
@@ -881,7 +881,7 @@ mod tests {
                 "--env",
                 "HOME=/home/vscode",
                 "ebpfos-dev",
-                "agentsight",
+                "aegis",
                 "bridge",
             ]
         );

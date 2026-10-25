@@ -2628,7 +2628,7 @@ sec-websocket-extensions: permessage-deflate\r\n\r\n"
             "input": [{"role": "developer", "content": shared}],
         })
         .to_string();
-        let prompt = "agentsight websocket exact prompt 7f31";
+        let prompt = "aegis websocket exact prompt 7f31";
         let second = json!({
             "type": "response.create",
             "model": "gpt-test",
@@ -3473,7 +3473,7 @@ sec-websocket-extensions: permessage-deflate\r\n\r\n"
         // Codex 0.153 posts ~40KB /v1/responses bodies. OpenSSL/rustls emit
         // 8-16KB records, so the first chunk is not valid JSON and used to
         // be dropped before llm_calls/audit_events were written.
-        let prompt = "agentsight mock prompt collect this exact text";
+        let prompt = "aegis mock prompt collect this exact text";
         let body = json!({
             "model": "gpt-aegis-mock",
             "input": [{"role": "user", "content": prompt}],

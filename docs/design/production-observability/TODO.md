@@ -31,11 +31,11 @@ Claude/Gemini smoke path. Keep items small enough to finish and test in one PR.
   - Added an ignored real smoke test that forces one allowed Claude Code Bash
     tool call and asserts a `tool_calls` row.
 
-- [x] `agentsight discover`
+- [x] `aegis discover`
   - Scope: list known targets and local attach hints for Claude Code, Gemini
     CLI, OpenClaw containers, and generic Node/Python processes.
-  - Done when: `agentsight discover --json` returns stable machine-readable
-    candidates and `agentsight discover` prints a concise table.
+  - Done when: `aegis discover --json` returns stable machine-readable
+    candidates and `aegis discover` prints a concise table.
 
 - [x] `--no-adapters`
   - Scope: allow capture/replay/export paths to persist raw/canonical/generic
@@ -59,7 +59,7 @@ Claude/Gemini smoke path. Keep items small enough to finish and test in one PR.
   - Scope: add DB-backed dashboard client and keep static JSON snapshot upload
     for demos.
   - Done when: local server can show a SQLite-backed capture and static demo
-    upload can show `agentsight report export` snapshots.
+    upload can show `aegis report export` snapshots.
 
 ## Cleanup Before PR
 

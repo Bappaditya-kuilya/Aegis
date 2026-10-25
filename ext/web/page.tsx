@@ -52,8 +52,8 @@ import { snapshotSessions } from '@/utils/sessionData';
 type AppMode = 'loading' | 'disconnected' | 'directory' | 'live' | 'demo';
 type CloudNodeRefreshResult = 'loaded' | 'failed' | 'stale' | 'session-expired';
 
-const ACTIVE_ORGANIZATION_KEY = 'agentsight.active-organization.v1';
-const PENDING_INVITE_KEY = 'agentsight.pending-invite.v1';
+const ACTIVE_ORGANIZATION_KEY = 'aegis.active-organization.v1';
+const PENDING_INVITE_KEY = 'aegis.pending-invite.v1';
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 let cachedLaunchFragment: URLSearchParams | null | undefined;
 
@@ -364,7 +364,7 @@ export default function Home() {
         ? 'No Direct path is saved for this browser. Relay is still being checked.'
         : 'No reachable transport. Re-pair Direct or bring Controller relay online.');
     } else {
-      setNodeError('This Node is not reachable from this browser. Pair it with agentsight bind.');
+      setNodeError('This Node is not reachable from this browser. Pair it with aegis bind.');
     }
     setLoadingNodeId(null);
   }, [activateClient, cloudNodes, directConnections, relayStatus]);

@@ -5,7 +5,7 @@ edition = "2024"
 rust-version = "1.87"
 description = "Bounded in-process WebAssembly Component runtime for Aegis extensions."
 license = "MIT"
-repository = "https://github.com/aegis-oss/agentsight"
+repository = "https://github.com/Bappaditya-kuilya/Aegis"
 
 [dependencies]
 wasmtime = { version = "37.0.2", default-features = false, features = ["component-model", "cranelift", "runtime"] }

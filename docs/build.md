@@ -1,6 +1,6 @@
 # Build From Source
 
-Use this guide when developing Aegis or building a local binary from the repository. If you only want to run a release binary, see the Quick Start in [README.md](https://github.com/aegis-oss/aegis#quick-start).
+Use this guide when developing Aegis or building a local binary from the repository. If you only want to run a release binary, see the Quick Start in [README.md](https://github.com/Bappaditya-kuilya/Aegis#quick-start).
 
 ## Requirements
 
@@ -32,7 +32,7 @@ make install
 Clone with submodules:
 
 ```bash
-git clone https://github.com/aegis-oss/aegis.git --recursive
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
 cd aegis
 ```
 

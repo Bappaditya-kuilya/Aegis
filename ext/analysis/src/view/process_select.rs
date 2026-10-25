@@ -281,8 +281,8 @@ mod tests {
     fn known_agent_label_uses_executable_not_model_argument() {
         assert_eq!(
             known_agent_label(
-                "agentsight",
-                "agentsight top -s tokens -v all -c claude --model claude-sonnet"
+                "aegis",
+                "aegis top -s tokens -v all -c claude --model claude-sonnet"
             ),
             None
         );
@@ -354,12 +354,12 @@ mod tests {
     #[test]
     fn process_comm_matching_uses_comm_and_executable_tokens_only() {
         let proc_info = ProcInfo {
-            comm: "agentsight".to_string(),
-            command: "agentsight top -c claude --model claude-sonnet".to_string(),
+            comm: "aegis".to_string(),
+            command: "aegis top -c claude --model claude-sonnet".to_string(),
             ..Default::default()
         };
         assert!(!process_matches_comm(&proc_info, "claude"));
-        assert!(process_matches_comm(&proc_info, "agentsight"));
+        assert!(process_matches_comm(&proc_info, "aegis"));
 
         let codebuddy = ProcInfo {
             comm: "node".to_string(),

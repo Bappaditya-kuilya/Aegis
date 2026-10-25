@@ -220,7 +220,7 @@ Aegis 应避免成为过重平台的方式：
 
 3. 不做完整 SIEM。输出结构化事件、OpenTelemetry/SIEM export、HTML/JSON report，让企业安全栈消费。
 
-4. 不做 agent IDE。保持 CLI-first：`agentsight top`、`agentsight record -- claude`、`agentsight report`、`agentsight verify -- mcp-server`。
+4. 不做 agent IDE。保持 CLI-first：`aegis top`、`aegis record -- claude`、`aegis report`、`aegis verify -- mcp-server`。
 
 5. 不先追求全企业 control plane。先服务本地开发机、CI runner、sandbox、coding agent review、MCP 工具验收这几个高痛场景。
 

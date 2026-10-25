@@ -14,18 +14,18 @@ agent are left on the terminal and are not written to SQLite. Aegis records
 OS-side process/file/network facts, then derives model/token data only from
 network request/response/telemetry that can be parsed or from explicit
 agent-native local session logs such as `~/.claude` and `~/.codex`.
-Use `agentsight report prompts --json` to inspect LLM request/response bodies that
+Use `aegis report prompts --json` to inspect LLM request/response bodies that
 were stored in SQLite from parsed network traffic or SQL adapters.
 
 Use the debug binary shown below from the repository root, or replace
-`./collector/target/debug/agentsight` with `agentsight` after installation.
+`./collector/target/debug/aegis` with `aegis` after installation.
 
 ## Common checks
 
 ```bash
 sudo -n true
-./collector/target/debug/agentsight --help
-./collector/target/debug/agentsight discover
+./collector/target/debug/aegis --help
+./collector/target/debug/aegis discover
 ```
 
 Tested local versions:
@@ -53,7 +53,7 @@ Aegis capture:
 
 ```bash
 sudo -n env PATH="$PATH" HOME="$HOME" \
-  ./collector/target/debug/agentsight record \
+  ./collector/target/debug/aegis record \
   --no-server \
   --db /tmp/aegis-claude.db \
   --adapter auto \
@@ -64,9 +64,9 @@ sudo -n env PATH="$PATH" HOME="$HOME" \
 Summary:
 
 ```bash
-./collector/target/debug/agentsight report --db /tmp/aegis-claude.db
-./collector/target/debug/agentsight report prompts --db /tmp/aegis-claude.db --json
-./collector/target/debug/agentsight report --local
+./collector/target/debug/aegis report --db /tmp/aegis-claude.db
+./collector/target/debug/aegis report prompts --db /tmp/aegis-claude.db --json
+./collector/target/debug/aegis report --local
 ```
 
 Evidence sources:
@@ -102,7 +102,7 @@ Aegis capture:
 ```bash
 tmp=$(mktemp -d)
 sudo -n env PATH="$PATH" HOME="$HOME" \
-  ./collector/target/debug/agentsight record \
+  ./collector/target/debug/aegis record \
   --no-server \
   --db /tmp/aegis-codex.db \
   --adapter auto \
@@ -118,7 +118,7 @@ rm -rf "$tmp"
 Local Codex summary:
 
 ```bash
-./collector/target/debug/agentsight report --local
+./collector/target/debug/aegis report --local
 ```
 
 Evidence sources:
@@ -136,7 +136,7 @@ Test result on this machine:
 - `codex --version`, `codex --help`, and `codex exec --help` passed.
 - Direct Codex prompt passed and printed `aegis-smoke`.
 - Aegis-wrapped Codex prompt passed and printed `aegis-smoke`.
-- `agentsight report --local` returned a `codex session` with model/token
+- `aegis report --local` returned a `codex session` with model/token
   and tool-call summary.
 - Integration test added: `cargo test --test export_snapshot_test local_summary_reads_codex_session_jsonl`.
 
@@ -164,7 +164,7 @@ Aegis capture:
 ```bash
 tmp=$(mktemp -d)
 sudo -n env PATH="$PATH" HOME="$HOME" \
-  ./collector/target/debug/agentsight record \
+  ./collector/target/debug/aegis record \
   --no-server \
   --db /tmp/aegis-opencode.db \
   --no-adapters \
@@ -203,7 +203,7 @@ Aegis capture:
 
 ```bash
 sudo -n env PATH="$PATH" HOME="$HOME" \
-  ./collector/target/debug/agentsight record \
+  ./collector/target/debug/aegis record \
   --no-server \
   --db /tmp/aegis-gemini.db \
   --adapter auto \
@@ -252,7 +252,7 @@ Aegis container attach:
 
 ```bash
 sudo -n env PATH="$PATH" HOME="$HOME" \
-  ./collector/target/debug/agentsight record \
+  ./collector/target/debug/aegis record \
   -c node \
   --binary-path docker://openclaw \
   --db /tmp/aegis-openclaw.db \

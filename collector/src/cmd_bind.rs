@@ -14,8 +14,8 @@ use std::process::Command;
 use std::time::Duration;
 use url::{Url, form_urlencoded};
 
-const DEFAULT_APP_URL: &str = "https://app.agentsight.us/";
-const DEFAULT_CONTROLLER_URL: &str = "https://control.agentsight.us";
+const DEFAULT_APP_URL: &str = "https://app.aegis.us/";
+const DEFAULT_CONTROLLER_URL: &str = "https://control.aegis.us";
 const CONTROLLER_URL_ENV: &str = "AEGIS_CONTROLLER_URL";
 
 pub(crate) async fn run_bind(
@@ -273,7 +273,7 @@ fn controller_url_for_app(
             return Ok(Some(normalize_controller_url(value.trim())?));
         }
     }
-    if app_url.origin().ascii_serialization() == "https://app.agentsight.us" {
+    if app_url.origin().ascii_serialization() == "https://app.aegis.us" {
         return Ok(Some(DEFAULT_CONTROLLER_URL.to_string()));
     }
     Ok(None)
@@ -389,7 +389,7 @@ mod tests {
     #[test]
     fn direct_endpoint_accepts_https_hostname_and_strips_path() {
         assert_eq!(
-            normalize_endpoint("https://lab.example.net/agentsight?ignored=1#fragment").unwrap(),
+            normalize_endpoint("https://lab.example.net/aegis?ignored=1#fragment").unwrap(),
             "https://lab.example.net"
         );
     }

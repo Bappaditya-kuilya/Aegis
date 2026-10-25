@@ -27,7 +27,7 @@ agentvis . --global \
 
 HTML output is a self-contained interactive file. SVG and PNG are still
 artifacts; GIF and MP4 replay the same layout frames. Aegis exposes the
-same implementation through `agentsight vis`.
+same implementation through `aegis vis`.
 
 GIF/MP4 default to `--compact-rate 30s`: media frames are selected at uniform
 action intervals and encoded at 30 fps. Use `--compact-rate full` to encode
@@ -44,8 +44,8 @@ frame instead of disappearing.
 ## Example
 
 The committed ACTplane example uses the default 30-second action-uniform
-compaction: [PNG](https://github.com/aegis-oss/agentsight/raw/master/ext/vis/examples/actplane-agent-nebula.png),
-[GIF](https://github.com/aegis-oss/agentsight/raw/master/ext/vis/examples/actplane-agent-nebula.gif), and
-[MP4](https://github.com/aegis-oss/agentsight/raw/master/ext/vis/examples/actplane-agent-nebula.mp4).
+compaction: [PNG](https://github.com/Bappaditya-kuilya/Aegis/raw/master/ext/vis/examples/actplane-agent-nebula.png),
+[GIF](https://github.com/Bappaditya-kuilya/Aegis/raw/master/ext/vis/examples/actplane-agent-nebula.gif), and
+[MP4](https://github.com/Bappaditya-kuilya/Aegis/raw/master/ext/vis/examples/actplane-agent-nebula.mp4).
 
-![Agent Nebula visualizing ACTplane](https://github.com/aegis-oss/agentsight/raw/master/ext/vis/examples/actplane-agent-nebula.png)
+![Agent Nebula visualizing ACTplane](https://github.com/Bappaditya-kuilya/Aegis/raw/master/ext/vis/examples/actplane-agent-nebula.png)

@@ -105,7 +105,7 @@ Aegis uses eBPF to:
 
 ## Open Source Availability
 
-Aegis is available as an open-source project at [https://github.com/aegis-oss/agentsight](https://github.com/aegis-oss/agentsight), enabling the community to build upon this foundational methodology for secure and reliable AI agent deployment.
+Aegis is available as an open-source project at [https://github.com/Bappaditya-kuilya/Aegis](https://github.com/Bappaditya-kuilya/Aegis), enabling the community to build upon this foundational methodology for secure and reliable AI agent deployment.
 
 ## Conclusion
 

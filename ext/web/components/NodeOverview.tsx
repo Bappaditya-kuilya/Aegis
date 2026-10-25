@@ -254,7 +254,7 @@ export function NodeOverview({
                     {organization.effectivePlan === 'unlimited'
                       ? t('overview.unlimitedRemaining') : t('overview.capacityNotReported')}
                   </div>
-                  <p className="mt-0.5 text-[11px] text-slate-400">{t('overview.agentSightCapacity')}</p>
+                  <p className="mt-0.5 text-[11px] text-slate-400">{t('overview.aegisCapacity')}</p>
                 </div>
               )}
               {subscriptions.length === 0 && !organization && (

@@ -1,4 +1,4 @@
-package agentsight:session@0.1.0;
+package aegis:session@0.1.0;
 
 world session-ext {
     /// Parse one transcript supplied by the host. File discovery and related

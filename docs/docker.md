@@ -2,15 +2,15 @@
 
 Use Docker when you want a packaged Aegis runtime for container, CI, or isolated Linux environments. Docker does not remove the eBPF permission requirements: the container must observe the host kernel and host processes, so it needs privileged mode and host mounts.
 
-The published `ghcr.io/aegis-oss/agentsight` image supports both `linux/amd64`
+The published `ghcr.io/aegis-oss/aegis` image supports both `linux/amd64`
 and `linux/arm64`.
 
 Release CI uses `script/Dockerfile.release` with architecture-specific binaries
 staged by the workflow. It is not a standalone source-build Dockerfile; local
 source builds continue to use the repository-root `dockerfile` after `make build`.
 
-For local day-to-day use, the release binary plus `agentsight top` or
-`sudo agentsight record -- ...` in [README.md](https://github.com/aegis-oss/agentsight#quick-start) is usually simpler.
+For local day-to-day use, the release binary plus `aegis top` or
+`sudo aegis record -- ...` in [README.md](https://github.com/Bappaditya-kuilya/Aegis#quick-start) is usually simpler.
 
 ## Requirements
 
@@ -26,7 +26,7 @@ For local day-to-day use, the release binary plus `agentsight top` or
 ```bash
 docker run --privileged --pid=host --network=host \
   -v /sys:/sys:ro -v /usr:/usr:ro -v /lib:/lib:ro \
-  ghcr.io/aegis-oss/agentsight:latest \
+  ghcr.io/aegis-oss/aegis:latest \
   record --comm python
 ```
 
@@ -38,7 +38,7 @@ Claude Code uses a user-local binary. Mount the Claude install directory and pas
 docker run --privileged --pid=host --network=host \
   -v /sys:/sys:ro -v /usr:/usr:ro -v /lib:/lib:ro \
   -v "$HOME/.local/share/claude:/claude:ro" \
-  ghcr.io/aegis-oss/agentsight:latest \
+  ghcr.io/aegis-oss/aegis:latest \
   record --comm claude --binary-path /claude/versions/2.1.39
 ```
 

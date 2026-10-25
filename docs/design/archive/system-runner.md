@@ -149,8 +149,8 @@ cargo run system --pid 1234 --no-children
 ## Programmatic Usage
 
 ```rust
-use agentsight::framework::runners::SystemRunner;
-use agentsight::framework::analyzers::FileLogger;
+use aegis::framework::runners::SystemRunner;
+use aegis::framework::analyzers::FileLogger;
 use futures::StreamExt;
 
 #[tokio::main]

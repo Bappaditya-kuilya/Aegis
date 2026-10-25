@@ -1,16 +1,16 @@
 {
   "name": "@aegis-oss/aegis",
   "version": "0.2.53",
-  "description": "Official npm entrypoint for Eunomia Aegis, a system-level AI agent observability tool with an eBPF collector and Web trace viewer.",
+  "description": "Official npm entrypoint for Aegis, a system-level AI agent observability tool with an eBPF collector and Web trace viewer.",
   "license": "MIT",
-  "homepage": "https://github.com/aegis-oss/aegis",
+  "homepage": "https://github.com/Bappaditya-kuilya/Aegis",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aegis-oss/aegis.git",
+    "url": "git+https://github.com/Bappaditya-kuilya/Aegis.git",
     "directory": "package/npm/aegis"
   },
   "bugs": {
-    "url": "https://github.com/aegis-oss/aegis/issues"
+    "url": "https://github.com/Bappaditya-kuilya/Aegis/issues"
   },
   "bin": {
     "aegis": "bin/aegis.js"

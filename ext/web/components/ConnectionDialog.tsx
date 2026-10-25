@@ -65,7 +65,7 @@ export function ConnectionDialog({
         <div className={`grid gap-4 ${allowSignIn ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
           <section className="rounded-xl border border-slate-200 p-4">
             <h2 className="font-semibold text-slate-950">{t('connect.nodeTitle')}</h2>
-            <pre className="mt-4 overflow-x-auto rounded-lg bg-slate-950 px-3 py-2 text-xs text-white">agentsight bind</pre>
+            <pre className="mt-4 overflow-x-auto rounded-lg bg-slate-950 px-3 py-2 text-xs text-white">aegis bind</pre>
             <p className="mt-3 text-xs text-slate-500">{t('connect.nodeArgs')}</p>
           </section>
 

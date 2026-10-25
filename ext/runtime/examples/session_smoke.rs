@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 aegis-oss org.
 
-use agentsight_ext_runtime::ExtRuntime;
+use aegis_ext_runtime::ExtRuntime;
 use std::fs;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {

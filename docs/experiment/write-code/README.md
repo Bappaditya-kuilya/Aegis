@@ -2,11 +2,11 @@
 
 claude --permission-mode acceptEdits -p \'write a script for cpufreq in bpftrace\'
 
-## without agentsight
+## without aegis
 
 ```
 === Benchmark completed ===
-(base) root@gpu01:~/yunwei37# python /root/yunwei37/agentsight/docs/experiment/write-code/code_benchmark.py
+(base) root@gpu01:~/yunwei37# python /root/yunwei37/aegis/docs/experiment/write-code/code_benchmark.py
 === BPF Developer Tutorial Build Benchmark ===
 
 Phase 1: Cloning repositories...
@@ -58,10 +58,10 @@ Phase 3 completed: All directories cleaned up.
 === Benchmark completed ===
 ```
 
-## with agentsight
+## with aegis
 
 ```
-(base) root@gpu01:~/yunwei37# python /root/yunwei37/agentsight/docs/experiment/write-code/code_benchmark.py
+(base) root@gpu01:~/yunwei37# python /root/yunwei37/aegis/docs/experiment/write-code/code_benchmark.py
 === BPF Developer Tutorial Build Benchmark ===
 
 Phase 1: Cloning repositories...

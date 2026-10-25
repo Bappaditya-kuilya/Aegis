@@ -26,7 +26,7 @@ case "$(uname -m)" in
 esac
 mkdir -p "$HOME/.local/bin"
 curl -fL --retry 3 \
-  "https://github.com/aegis-oss/aegis/releases/latest/download/$asset" \
+  "https://github.com/Bappaditya-kuilya/Aegis/releases/latest/download/$asset" \
   -o "$HOME/.local/bin/aegis"
 chmod 0755 "$HOME/.local/bin/aegis"
 "$HOME/.local/bin/aegis" --version
@@ -87,7 +87,7 @@ ssh -L 17400:127.0.0.1:7395 user@remote-host
 ```ini
 [Unit]
 Description=Aegis local Node API and Controller relay
-Documentation=https://github.com/aegis-oss/aegis
+Documentation=https://github.com/Bappaditya-kuilya/Aegis
 Wants=network-online.target
 After=network-online.target
 

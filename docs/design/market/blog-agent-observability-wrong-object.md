@@ -15,7 +15,7 @@
 > 我们一直在观察 agent 的叙事，却没有观察 agent 改变过的世界。
 
 
-这也是我们做 [Aegis](https://github.com/aegis-oss/agentsight) 的出发点：一个本地优先、类似 `perf` 的 agent 追踪和可观测工具, 先记录 agent 实际启动了什么进程、改了哪些文件、发生了哪些 LLM/API 和网络活动。
+这也是我们做 [Aegis](https://github.com/Bappaditya-kuilya/Aegis) 的出发点：一个本地优先、类似 `perf` 的 agent 追踪和可观测工具, 先记录 agent 实际启动了什么进程、改了哪些文件、发生了哪些 LLM/API 和网络活动。
 
 ## 一个流行但不够完整的信念
 
@@ -312,7 +312,7 @@ MCP、skills、plugins 把问题进一步放大。
 
 前面一直没有提工具，是刻意的。因为如果论点不成立，工具名字不重要；如果论点成立，工具也不应该先长成一个复杂平台。
 
-我们在做 [Aegis](https://github.com/aegis-oss/agentsight) 时，希望它被理解成一个更像 `perf` 的本地工具，而不是又一个 agent dashboard:
+我们在做 [Aegis](https://github.com/Bappaditya-kuilya/Aegis) 时，希望它被理解成一个更像 `perf` 的本地工具，而不是又一个 agent dashboard:
 
 `perf` 的价值不是替你判断程序“好不好”，而是把运行时事实变成可保存、可查询、可分析的记录。Aegis 想做的是类似的事情，只是对象从普通进程变成了 agent run。
 
@@ -321,16 +321,16 @@ MCP、skills、plugins 把问题进一步放大。
 一个典型用法应该尽量普通：
 
 ```bash
-agentsight exec -- claude
-agentsight exec -- gemini
-agentsight exec -- python my_agent.py
+aegis exec -- claude
+aegis exec -- gemini
+aegis exec -- python my_agent.py
 ```
 
 或者 attach 到已经运行的 agent：
 
 ```bash
-agentsight record -c claude
-agentsight record -c node
+aegis record -c claude
+aegis record -c node
 ```
 
 这背后的设计取舍是：
@@ -360,7 +360,7 @@ Dashboard 默认暗示人坐在那里看图。Agent run 的关键问题往往发
 假设你让 agent 修一个后端测试：
 
 ```bash
-agentsight exec --db run.db -- claude "fix the failing API test"
+aegis exec --db run.db -- claude "fix the failing API test"
 ```
 
 Agent 最后给你的总结是：
@@ -372,9 +372,9 @@ Fixed the API test and ran npm test successfully.
 这句话不一定是谎言。它可能只是把自己最后一次看到的局部结果，当成了整次 run 的事实。Aegis 里更有用的输出应该长这样：
 
 ```text
-$ agentsight report summary --db run.db
+$ aegis report summary --db run.db
 
-agentsight session · 7s · 1 API calls · 1380 tokens
+aegis session · 7s · 1 API calls · 1380 tokens
 
   claude-sonnet-4-20250514 — 1 calls, 1380 tokens (in: 1200, out: 180)
 
@@ -386,10 +386,10 @@ Network: api.anthropic.com, registry.npmjs.org
 再往下查，过程事实会更具体：
 
 ```bash
-agentsight report audit --db run.db --audit-type process --limit 20
-agentsight report audit --db run.db --audit-type file --json --limit 20
-agentsight report token --db run.db --json
-agentsight report export --db run.db -o snapshot.json
+aegis report audit --db run.db --audit-type process --limit 20
+aegis report audit --db run.db --audit-type file --json --limit 20
+aegis report token --db run.db --json
+aegis report export --db run.db -o snapshot.json
 ```
 
 这份输出没有替你判断代码好不好。它只是把 review 真正需要的问题摆到了桌面上：
@@ -466,7 +466,7 @@ Academic and research papers:
 
 Project reference, official docs, and standards:
 
-- [Aegis repository](https://github.com/aegis-oss/agentsight)
+- [Aegis repository](https://github.com/Bappaditya-kuilya/Aegis)
 - [Claude Code auto mode: a safer way to skip permissions](https://www.anthropic.com/engineering/claude-code-auto-mode)
 - [Claude Code permission modes](https://code.claude.com/docs/en/permission-modes)
 - [Claude Code user FAQ](https://support.claude.com/en/articles/14554922-claude-code-user-faq)

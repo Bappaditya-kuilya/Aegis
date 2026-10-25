@@ -1,6 +1,6 @@
 # Aegis npm package
 
-Official npm entrypoint for [Eunomia Aegis](https://github.com/aegis-oss/aegis).
+Official npm entrypoint for [Eunomia Aegis](https://github.com/Bappaditya-kuilya/Aegis).
 
 This package claims the global `aegis` command for the Node ecosystem and
 ships the Aegis Web viewer for exported trace snapshots. The Linux eBPF
@@ -43,7 +43,7 @@ cargo install aegis
 or download the official binary from:
 
 ```text
-https://github.com/aegis-oss/aegis/releases/latest
+https://github.com/Bappaditya-kuilya/Aegis/releases/latest
 ```
 
 This npm package does not download or execute hidden binaries during

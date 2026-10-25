@@ -23,7 +23,7 @@ other telemetry backend they use.
 
 ## Publishing
 
-The crate is published from the Aegis release workflow before `agentsight`
-itself, then `agentsight` depends on that published version. Publishing to
+The crate is published from the Aegis release workflow before `aegis`
+itself, then `aegis` depends on that published version. Publishing to
 crates.io also makes the crate available to docs.rs and discoverable by the
 unofficial lib.rs index.

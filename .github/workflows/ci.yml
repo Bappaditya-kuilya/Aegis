@@ -101,7 +101,7 @@ jobs:
       - name: Validate npm package
         run: |
           node script/npm/sync-version.mjs
-          node script/npm/prepare-agentsight.mjs
+          node script/npm/prepare-aegis.mjs
           npm --prefix package/npm/aegis test
           (cd package/npm/aegis && npm pack --dry-run)
 
@@ -318,7 +318,7 @@ jobs:
           install -m 0755 ext/pprof/target/release/agentpprof "release-assets/agentpprof-${{ matrix.arch }}"
           install -m 0755 collector/target/release/aegis docker-assets/aegis
           if [[ "${{ matrix.legacy_assets }}" == true ]]; then
-            cp release-assets/aegis-x86_64 release-assets/agentsight
+            cp release-assets/aegis-x86_64 release-assets/aegis
             cp release-assets/agentpprof-x86_64 release-assets/agentpprof
           fi
 
@@ -376,8 +376,8 @@ jobs:
             [[ "$attempt" -eq 6 ]] && exit 1
             sleep $((attempt * 10))
           done
-          "$root/bin/agentsight" --version
-          "$root/bin/agentsight" --help | grep -Eq '^[[:space:]]+record[[:space:]]'
+          "$root/bin/aegis" --version
+          "$root/bin/aegis" --help | grep -Eq '^[[:space:]]+record[[:space:]]'
 
           pprof_root="$(mktemp -d)"
           cargo install agentpprof --version "$VERSION" --locked --root "$pprof_root"
@@ -420,9 +420,9 @@ jobs:
           dir="$(mktemp -d)"
           gh release download "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" \
             --pattern aegis --pattern agentpprof --dir "$dir"
-          chmod +x "$dir/agentsight" "$dir/agentpprof"
-          "$dir/agentsight" --version
-          "$dir/agentsight" --help | grep -Eq '^[[:space:]]+record[[:space:]]'
+          chmod +x "$dir/aegis" "$dir/agentpprof"
+          "$dir/aegis" --version
+          "$dir/aegis" --help | grep -Eq '^[[:space:]]+record[[:space:]]'
           "$dir/agentpprof" --help | grep -F -- '--session-file'
 
       - name: Dispatch and monitor npm package publish

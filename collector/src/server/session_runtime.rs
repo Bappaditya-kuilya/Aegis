@@ -476,7 +476,7 @@ async fn start_codex(
     send_json(
         &mut stdin,
         json!({"method":"initialize","id":1,"params":{
-            "clientInfo":{"name":"agentsight","title":"Aegis","version":env!("CARGO_PKG_VERSION")},
+            "clientInfo":{"name":"aegis","title":"Aegis","version":env!("CARGO_PKG_VERSION")},
             "capabilities":{
                 "experimentalApi":true,
                 "optOutNotificationMethods":[

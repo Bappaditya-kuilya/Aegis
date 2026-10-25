@@ -12,7 +12,7 @@ use crate::sources::agent_native::{self as agent_native_sessions, SessionCache};
 use crate::sources::sqlite as sqlite_source;
 use crate::view::SharedMaterializedView;
 use crate::view::live_top::{LiveCaptureSnapshot, LiveView};
-use agentsight_protocol::{
+use aegis_protocol::{
     PRODUCT, PROTOCOL_VERSION, SessionMessageRequest, session_detail_id, session_message_id,
 };
 use http_body_util::{BodyExt, Full, LengthLimitError, Limited};
@@ -1033,7 +1033,7 @@ mod tests {
     fn cors_uses_the_configured_app_origin() {
         let auth = test_auth();
         assert!(allowed_origin("https://console.example", Some(&auth)));
-        assert!(!allowed_origin("https://app.agentsight.us", Some(&auth)));
+        assert!(!allowed_origin("https://app.aegis.us", Some(&auth)));
         assert!(!allowed_origin("https://evil.example", Some(&auth)));
     }
 

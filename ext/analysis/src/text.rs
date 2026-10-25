@@ -84,7 +84,7 @@ mod tests {
                 {
                     "role": "user",
                     "content": [
-                        {"type": "input_text", "text": "agentsight mock prompt collect this exact text"}
+                        {"type": "input_text", "text": "aegis mock prompt collect this exact text"}
                     ]
                 }
             ]
@@ -92,7 +92,7 @@ mod tests {
 
         assert_eq!(
             extract_prompt_text(&request).as_deref(),
-            Some("agentsight mock prompt collect this exact text")
+            Some("aegis mock prompt collect this exact text")
         );
     }
 }

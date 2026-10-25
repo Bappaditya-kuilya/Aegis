@@ -431,7 +431,7 @@ mod tests {
                  ) VALUES (
                     'audit-1', 1000, 'process', 42, 'codex', 'exec', '/tmp/tools/bin/codex',
                     'observed',
-                    '{\"full_command\":\"/tmp/tools/bin/codex exec --skip-git-repo-check -c model=gpt agentsight local codex prompt\"}'
+                    '{\"full_command\":\"/tmp/tools/bin/codex exec --skip-git-repo-check -c model=gpt aegis local codex prompt\"}'
                  )",
                 [],
             )
@@ -444,7 +444,7 @@ mod tests {
         assert_eq!(rows[0].comm.as_deref(), Some("codex"));
         assert_eq!(
             rows[0].request.get("prompt").and_then(Value::as_str),
-            Some("agentsight local codex prompt")
+            Some("aegis local codex prompt")
         );
         let prompts = view.audit_rows(Some("llm"), 10);
         assert_eq!(prompts.len(), 1);
@@ -472,7 +472,7 @@ mod tests {
                 details: json!({
                     "full_command": concat!(
                         "/usr/bin/codex exec --skip-git-repo-check ",
-                        "agentsight captured provenance prompt"
+                        "aegis captured provenance prompt"
                     ),
                 }),
                 view_source: "view".to_string(),
@@ -509,7 +509,7 @@ mod tests {
                 details: json!({
                     "full_command": concat!(
                         "/usr/bin/codex exec --skip-git-repo-check ",
-                        "agentsight round trip provenance prompt"
+                        "aegis round trip provenance prompt"
                     ),
                 }),
                 view_source: "view".to_string(),
@@ -551,7 +551,7 @@ mod tests {
         store
             .llm_call(&ssl_call_row(
                 "gpt-aegis-mock",
-                "agentsight local codex prompt",
+                "aegis local codex prompt",
             ))
             .unwrap();
         store
@@ -569,7 +569,7 @@ mod tests {
                 details: json!({
                     "full_command": concat!(
                         "/tmp/tools/bin/codex exec --skip-git-repo-check ",
-                        "-c model=gpt agentsight local codex prompt"
+                        "-c model=gpt aegis local codex prompt"
                     ),
                 }),
                 view_source: "view".to_string(),
@@ -597,13 +597,13 @@ mod tests {
     #[test]
     fn observed_codex_home_reprojects_session_prompt_as_llm_call() {
         let temp = tempfile::tempdir().unwrap();
-        let state_path = write_codex_home(temp.path(), "agentsight inferred codex home prompt");
+        let state_path = write_codex_home(temp.path(), "aegis inferred codex home prompt");
         let db = temp.path().join("codex.db");
         let store = SqliteStore::open(&db).unwrap();
         insert_exec_event(
             &store,
             current_epoch_ms(),
-            "/usr/bin/codex exec --skip-git-repo-check agentsight inferred codex home prompt",
+            "/usr/bin/codex exec --skip-git-repo-check aegis inferred codex home prompt",
         );
         insert_file_event(&store, current_epoch_ms() + 100, &state_path);
 
@@ -615,7 +615,7 @@ mod tests {
         assert_eq!(rows[0].comm.as_deref(), Some("codex"));
         assert_eq!(
             rows[0].request.get("prompt").and_then(Value::as_str),
-            Some("agentsight inferred codex home prompt")
+            Some("aegis inferred codex home prompt")
         );
         assert_eq!(snapshot.sessions.len(), 1);
         let prompts = view.audit_rows(Some("llm"), 10);
@@ -627,7 +627,7 @@ mod tests {
     #[test]
     fn mixed_db_and_agent_native_prompts_keep_provenance_distinct() {
         let temp = tempfile::tempdir().unwrap();
-        let state_path = write_codex_home(temp.path(), "agentsight mixed local prompt");
+        let state_path = write_codex_home(temp.path(), "aegis mixed local prompt");
         let db = temp.path().join("mixed.db");
         let mut store = SqliteStore::open(&db).unwrap();
         store
@@ -636,7 +636,7 @@ mod tests {
         insert_exec_event(
             &store,
             current_epoch_ms(),
-            "/usr/bin/codex exec --skip-git-repo-check agentsight mixed local prompt",
+            "/usr/bin/codex exec --skip-git-repo-check aegis mixed local prompt",
         );
         insert_file_event(&store, current_epoch_ms() + 100, &state_path);
         drop(store);
@@ -660,7 +660,7 @@ mod tests {
     #[test]
     fn observed_codex_home_without_exec_prompt_does_not_import_sessions() {
         let temp = tempfile::tempdir().unwrap();
-        let state_path = write_codex_home(temp.path(), "agentsight unrelated codex home prompt");
+        let state_path = write_codex_home(temp.path(), "aegis unrelated codex home prompt");
         let db = temp.path().join("codex.db");
         let store = SqliteStore::open(&db).unwrap();
         insert_file_event(&store, current_epoch_ms(), &state_path);

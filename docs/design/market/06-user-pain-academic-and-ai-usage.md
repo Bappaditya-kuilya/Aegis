@@ -46,8 +46,8 @@ Aegis product implication:
 Potential product command:
 
 ```bash
-agentsight policy suggest --from last-20-runs
-agentsight record --policy suggested.yaml -- claude
+aegis policy suggest --from last-20-runs
+aegis record --policy suggested.yaml -- claude
 ```
 
 ### 2. Destructive File Operations And Failed Recovery
@@ -77,8 +77,8 @@ Aegis product implication:
 Potential product command:
 
 ```bash
-agentsight report --recovery --since "last agent run"
-agentsight report export -o recovery.json
+aegis report --recovery --since "last agent run"
+aegis report export -o recovery.json
 ```
 
 ### 3. Token/Cost Runaway And Agent Loops
@@ -107,8 +107,8 @@ Aegis product implication:
 Potential product command:
 
 ```bash
-agentsight report --waste
-agentsight watch --budget-tokens 200000 --idle-side-effect-window 5m -- claude
+aegis report --waste
+aegis watch --budget-tokens 200000 --idle-side-effect-window 5m -- claude
 ```
 
 ### 4. Debugging Agents Is Still Too Much Guesswork
@@ -131,15 +131,15 @@ User pain:
 Aegis product implication:
 
 - 输出不能只是 timeline UI；必须有 summary、root-cause hints、state transition summary、side-effect delta。
-- 需要 `agentsight query` 或 `agentsight explain`，让人或 AI 按问题查询。
+- 需要 `aegis query` 或 `aegis explain`，让人或 AI 按问题查询。
 - 需要把 trace 简化为可回答的问题：What changed? What failed? What repeated? What touched sensitive state? What did not happen despite success claims?
 
 Potential product command:
 
 ```bash
-agentsight query "what changed outside the repo?"
-agentsight query "which command first touched .env?"
-agentsight query "why did token usage spike?"
+aegis query "what changed outside the repo?"
+aegis query "which command first touched .env?"
+aegis query "why did token usage spike?"
 ```
 
 ### 5. Agent Says Success, Reality Says Otherwise
@@ -166,7 +166,7 @@ Aegis product implication:
 Potential product command:
 
 ```bash
-agentsight verify-side-effects --expect changed:src/app.ts --expect command:"npm test"
+aegis verify-side-effects --expect changed:src/app.ts --expect command:"npm test"
 ```
 
 ### 6. MCP/Tool Trust Is A User Pain, Not Just Security Theory
@@ -188,7 +188,7 @@ User pain:
 
 Aegis product implication:
 
-- `agentsight verify` 是强场景，但它不应只叫 audit；它是 tool adoption 的信任工件。
+- `aegis verify` 是强场景，但它不应只叫 audit；它是 tool adoption 的信任工件。
 - 验收报告要和版本、安装命令、测试 fixture、policy、observed behavior 绑定。
 
 ## Academic And Research Tool Landscape
@@ -342,12 +342,12 @@ Codex, Gemini CLI, Cursor terminal workflows, CI, and scripts.
 Useful commands:
 
 ```bash
-agentsight record --label fix-bug -- claude
-agentsight report --json --label fix-bug
-agentsight query --json "what changed outside the repo?"
-agentsight diff --json baseline current
-agentsight policy suggest --json --from last-20-runs
-agentsight verify --json --policy agentsight.verify.yaml -- ./run-mcp-fixture.sh
+aegis record --label fix-bug -- claude
+aegis report --json --label fix-bug
+aegis query --json "what changed outside the repo?"
+aegis diff --json baseline current
+aegis policy suggest --json --from last-20-runs
+aegis verify --json --policy aegis.verify.yaml -- ./run-mcp-fixture.sh
 ```
 
 The important part is not just the commands. The output must be machine-readable:
@@ -369,15 +369,15 @@ An Aegis MCP server would make it easier for agents to query evidence without pa
 
 Potential MCP tools:
 
-- `agentsight_latest_session`
-- `agentsight_get_report`
-- `agentsight_query_events`
-- `agentsight_get_changed_paths`
-- `agentsight_get_risk_flags`
-- `agentsight_compare_sessions`
-- `agentsight_suggest_policy`
-- `agentsight_generate_pr_comment`
-- `agentsight_generate_recovery_context`
+- `aegis_latest_session`
+- `aegis_get_report`
+- `aegis_query_events`
+- `aegis_get_changed_paths`
+- `aegis_get_risk_flags`
+- `aegis_compare_sessions`
+- `aegis_suggest_policy`
+- `aegis_generate_pr_comment`
+- `aegis_generate_recovery_context`
 
 This is especially useful for a review agent or recovery agent:
 
@@ -423,51 +423,51 @@ Recommended product layers:
 1. **Capture**
 
    ```bash
-   agentsight record -- <agent command>
+   aegis record -- <agent command>
    ```
 
 2. **Receipt**
 
    ```bash
-   agentsight report --html
-   agentsight report --json
+   aegis report --html
+   aegis report --json
    ```
 
 3. **Query**
 
    ```bash
-   agentsight query "what changed outside the repo?"
+   aegis query "what changed outside the repo?"
    ```
 
 4. **Recovery**
 
    ```bash
-   agentsight report --recovery
+   aegis report --recovery
    ```
 
 5. **Policy**
 
    ```bash
-   agentsight policy suggest
-   agentsight record --policy policy.yaml -- <agent command>
+   aegis policy suggest
+   aegis record --policy policy.yaml -- <agent command>
    ```
 
 6. **Verification**
 
    ```bash
-   agentsight verify --policy agentsight.verify.yaml -- ./fixture.sh
+   aegis verify --policy aegis.verify.yaml -- ./fixture.sh
    ```
 
 7. **Diff**
 
    ```bash
-   agentsight diff old new
+   aegis diff old new
    ```
 
 8. **MCP**
 
    ```bash
-   agentsight mcp
+   aegis mcp
    ```
 
 ## Revised User Pain Ranking
@@ -540,7 +540,7 @@ Goal:
 
 Method:
 
-- Feed only `agentsight report --json` to a review/recovery agent.
+- Feed only `aegis report --json` to a review/recovery agent.
 - Compare against feeding raw logs or HTML.
 
 Success:

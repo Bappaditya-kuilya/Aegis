@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 aegis-oss org.
 
-pub use agentsight_capture_core::analyzers::{Analyzer, AnalyzerError};
+pub use aegis_capture_core::analyzers::{Analyzer, AnalyzerError};
 
 pub mod auth_header_remover;
 mod capture_metadata;

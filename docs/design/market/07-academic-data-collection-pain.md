@@ -63,9 +63,9 @@ Aegis 在这个场景里的价值不是“再做一个 PR 分析工具”，而�
 最小产品形态：
 
 ```bash
-agentsight record --label pr-123 -- claude
-agentsight report --label pr-123 --format markdown > aegis-pr-receipt.md
-agentsight report --label pr-123 --format json > aegis-pr-receipt.json
+aegis record --label pr-123 -- claude
+aegis report --label pr-123 --format markdown > aegis-pr-receipt.md
+aegis report --label pr-123 --format json > aegis-pr-receipt.json
 ```
 
 PR receipt 应该回答：
@@ -158,12 +158,12 @@ Example:
 Aegis 可以把 permission 研究从“prompt classifier eval”扩展为“observed state-change eval”：
 
 ```bash
-agentsight record \
+aegis record \
   --policy permission-benchmark.yaml \
   --label permission-eval-001 \
   -- claude
 
-agentsight report export -o permission-eval-001.json
+aegis report export -o permission-eval-001.json
 ```
 
 数据 schema 需要明确区分：
@@ -205,7 +205,7 @@ Example:
 Aegis 可以提供“bug report evidence bundle”：
 
 ```bash
-agentsight bug-report --since last-run --redact-secrets --format zip
+aegis bug-report --since last-run --redact-secrets --format zip
 ```
 
 Bundle 内容：
@@ -250,9 +250,9 @@ Example:
 Aegis 可以成为 dependency side-effect profiler：
 
 ```bash
-agentsight record --label gen-project -- codex
-agentsight deps --label gen-project --format json
-agentsight replay-check --clean-container --label gen-project
+aegis record --label gen-project -- codex
+aegis deps --label gen-project --format json
+aegis replay-check --clean-container --label gen-project
 ```
 
 最小数据能力：
@@ -298,7 +298,7 @@ Aegis 的价值是把 “instruction -> observed action -> code diff -> human co
 这也支持一个产品功能：
 
 ```bash
-agentsight verify --policy observability-policy.yaml -- claude
+aegis verify --policy observability-policy.yaml -- claude
 ```
 
 Policy 可以检查：
@@ -386,12 +386,12 @@ Examples:
 Aegis 的强场景：
 
 ```bash
-agentsight verify \
+aegis verify \
   --fixture fixtures/mcp-readonly.yaml \
   --policy policies/no-secret-no-network.yaml \
   -- claude
 
-agentsight verify \
+aegis verify \
   --fixture fixtures/skill-injection.yaml \
   --policy policies/workspace-local-readonly.yaml \
   -- codex
@@ -510,11 +510,11 @@ Manifest、README、final diff 都不能证明代码能在 clean environment 跑
 最小产品应优先是 CLI + JSON/Markdown/HTML artifact：
 
 ```bash
-agentsight record --label task-001 -- claude
-agentsight report export -o task-001.json
-agentsight report --label task-001 --format markdown
-agentsight query --label task-001 --json "what changed outside the repo?"
-agentsight diff --baseline codex-task-001 --candidate claude-task-001 --json
+aegis record --label task-001 -- claude
+aegis report export -o task-001.json
+aegis report --label task-001 --format markdown
+aegis query --label task-001 --json "what changed outside the repo?"
+aegis diff --baseline codex-task-001 --candidate claude-task-001 --json
 ```
 
 这比 dashboard 更重要，因为：
@@ -530,11 +530,11 @@ agentsight diff --baseline codex-task-001 --candidate claude-task-001 --json
 不是第一天就做，但可以作为增长/可信度路线：
 
 ```bash
-agentsight dataset init --name permission-gate-study
-agentsight dataset add --label task-001
-agentsight dataset export --format parquet
-agentsight dataset redact --policy privacy.yaml
-agentsight dataset schema --print
+aegis dataset init --name permission-gate-study
+aegis dataset add --label task-001
+aegis dataset export --format parquet
+aegis dataset redact --policy privacy.yaml
+aegis dataset schema --print
 ```
 
 Research pack 的价值：
@@ -564,10 +564,10 @@ Research pack 的价值：
 一个 review agent 应该能这样用：
 
 ```bash
-agentsight query --json "did this run touch secrets or files outside the repo?"
-agentsight query --json "which command first modified package-lock.json?"
-agentsight query --json "did the agent run tests after changing backend code?"
-agentsight query --json "what did the agent claim that was not observed?"
+aegis query --json "did this run touch secrets or files outside the repo?"
+aegis query --json "which command first modified package-lock.json?"
+aegis query --json "did the agent run tests after changing backend code?"
+aegis query --json "what did the agent claim that was not observed?"
 ```
 
 ## 12. High-Value Academic Pain Scenarios

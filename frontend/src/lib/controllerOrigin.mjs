@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 // Copyright (c) 2026 aegis-oss org.
 
-const PRODUCTION_CONTROLLER_URL = 'https://control.agentsight.us';
+const PRODUCTION_CONTROLLER_URL = 'https://control.aegis.us';
 const PREVIEW_HOSTNAME = 'aegis-preview.yunwei356.workers.dev';
 
 /**

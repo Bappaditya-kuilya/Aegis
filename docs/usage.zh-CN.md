@@ -1,13 +1,13 @@
 # 使用说明
 
-[English](https://github.com/aegis-oss/aegis/blob/master/docs/usage.md) | **中文**
+[English](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/usage.md) | **中文**
 
 ## 从源代码编译
 
 ### 1. 克隆仓库并初始化子模块
 
 ```sh
-git clone https://github.com/aegis-oss/aegis.git
+git clone https://github.com/Bappaditya-kuilya/Aegis.git
 cd aegis
 git submodule update --init --recursive
 ```

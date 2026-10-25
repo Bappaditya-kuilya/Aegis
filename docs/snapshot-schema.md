@@ -1,6 +1,6 @@
 # Report export snapshot schema
 
-`agentsight report export -o snapshot.json` writes a JSON snapshot of the
+`aegis report export -o snapshot.json` writes a JSON snapshot of the
 materialized view. The same shape is returned by `GET /api/v1/snapshot`.
 This document describes schema version 1.
 

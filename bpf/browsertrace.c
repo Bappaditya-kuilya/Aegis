@@ -38,7 +38,7 @@
 volatile sig_atomic_t exiting = 0;
 
 const char *argp_program_version = "browsertrace 0.1";
-const char *argp_program_bug_address = "https://github.com/aegis-oss/aegis";
+const char *argp_program_bug_address = "https://github.com/Bappaditya-kuilya/Aegis";
 const char argp_program_doc[] =
 	"Trace browser plaintext data for Chrome/Firefox and output JSON.\n"
 	"\n"

@@ -108,7 +108,7 @@ export function NodeManager({
 
   const copyBindCommand = async () => {
     try {
-      await navigator.clipboard.writeText('agentsight bind');
+      await navigator.clipboard.writeText('aegis bind');
       setCopyState('copied');
     } catch {
       setCopyState('failed');
@@ -326,7 +326,7 @@ export function NodeManager({
             </div>
           </div>
           <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <code className="max-w-full overflow-x-auto rounded-lg bg-slate-950 px-3 py-2 text-sm text-white">agentsight bind</code>
+            <code className="max-w-full overflow-x-auto rounded-lg bg-slate-950 px-3 py-2 text-sm text-white">aegis bind</code>
             <button type="button" onClick={() => { void copyBindCommand(); }}
               className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50">
               {copyState === 'copied' ? <CheckIcon className="h-4 w-4" /> : <CommandLineIcon className="h-4 w-4" />}

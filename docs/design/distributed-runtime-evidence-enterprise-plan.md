@@ -56,7 +56,7 @@ Aegis 采用一套从个人到企业逐级增强的 local-first 架构，而不�
 ```mermaid
 flowchart TB
     subgraph P["Presentation Plane"]
-        SPA["app.agentsight.us static SPA"]
+        SPA["app.aegis.us static SPA"]
         PRIVATE["Optional customer-hosted static SPA"]
         CLIENTS["CLI / TUI / MCP"]
     end
@@ -85,7 +85,7 @@ flowchart TB
 
 ### Data Plane
 
-`agentsightd`/Aegis Node 运行在 laptop、workstation、GPU server、CI runner、sandbox、
+`aegisd`/Aegis Node 运行在 laptop、workstation、GPU server、CI runner、sandbox、
 Kubernetes node 或 edge box 上。它负责：
 
 - agent-native session discovery；
@@ -97,7 +97,7 @@ Kubernetes node 或 edge box 上。它负责：
 - control plane 不可用时继续工作。
 
 目标 Node binary 不需要内嵌或 serve 完整前端资源。它只提供 API；默认 UI 是部署在
-`app.agentsight.us` 的静态 SPA。CLI/TUI 仍能在没有网页和网络时查询本地 Node。
+`app.aegis.us` 的静态 SPA。CLI/TUI 仍能在没有网页和网络时查询本地 Node。
 
 Node 内部不是永久 full capture，而是两档自适应运行：
 
@@ -146,7 +146,7 @@ Aegis Cloud。
 ### Presentation Plane
 
 Dashboard 只是 Node Protocol 的一个客户端。默认只维护一份部署在
-`app.agentsight.us` 的静态 SPA，不在每台 Node serve，也不打包进 Node release。它通过
+`app.aegis.us` 的静态 SPA，不在每台 Node serve，也不打包进 Node release。它通过
 `LocalProvider`、`DirectFleetProvider` 或 `CloudProvider` 选择数据路径，而不是把数据
 位置写死成同源 `/api/v1/snapshot`。Enterprise Gateway 位于 `CloudProvider` 的查询路径
 下面，不需要另一套页面。
@@ -173,10 +173,10 @@ Managed query 通过 relay 传输但不写入控制面数据库。严格 air-gap
 当前 CLI 已经基本具备这个模式：
 
 ```bash
-agentsight top
-agentsight monitor install-service
-sudo agentsight record -- claude
-agentsight report serve --db run.db
+aegis top
+aegis monitor install-service
+sudo aegis record -- claude
+aegis report serve --db run.db
 ```
 
 目标体验是打开 presentation SPA 后先自动发现 same-origin Aegis Node；没有发现时再让
@@ -184,14 +184,14 @@ agentsight report serve --db run.db
 看到账号中已注册的 Node 元数据、当前浏览器的直连状态和准确的重新连接指引，不再重复
 显示匿名三选一弹窗。目录中的 `Registered` 只表示最近一次成功注册，不是在线 heartbeat；
 Direct 访问详细数据需要当前浏览器持有 Node capability；已登录的账号成员也可通过授权 relay
-访问，不会因此获得 Direct bearer。`agentsight bind` 默认生成 loopback endpoint，但 Local
+访问，不会因此获得 Direct bearer。`aegis bind` 默认生成 loopback endpoint，但 Local
 不是另一套特殊协议或页面模式。`record` 可写入本地 SQLite；bind 显式 `--db` 时只读已有
 saved SQLite，不带 `--db` 时只读取 live processes 和本地 agent session。用户不需要 Cloud account。当前 release 仍内嵌并 serve UI，这是
 待移除的兼容实现，不是最终 presentation architecture。完全离线时使用 CLI/TUI、已缓存
 PWA，或在可信网络里部署同一份静态 bundle。
 
-这个变化不改变用户入口：`agentsight top`、`sudo agentsight record -- ...`、
-`agentsight report ...` 和 `agentsight monitor install-service` 保持有效。`record`/`report serve`
+这个变化不改变用户入口：`aegis top`、`sudo aegis record -- ...`、
+`aegis report ...` 和 `aegis monitor install-service` 保持有效。`record`/`report serve`
 现有的本地 server 生命周期先保留，但目标职责从“serve 内嵌网页 + API”缩小为“只提供
 Node API，并引导浏览器打开 hosted UI”。托管能力是 opt-in；只增加网页引导的一次性
 enrollment，不替换现有采集和查询命令。
@@ -209,9 +209,9 @@ ssh -N -L 17395:127.0.0.1:7395 workstation
 ssh -N -L 27395:127.0.0.1:7395 server
 ```
 
-统一 fleet 入口仍是 `app.agentsight.us`；目标 `DirectFleetProvider` 通过 authenticated
+统一 fleet 入口仍是 `app.aegis.us`；目标 `DirectFleetProvider` 通过 authenticated
 Node Protocol 查询配置的节点并在浏览器合并，不要求用户学习另一组采集命令。本轮实现的
-`agentsight bind` 默认开放 loopback，也允许显式指定 listen IP、port、browser endpoint
+`aegis bind` 默认开放 loopback，也允许显式指定 listen IP、port、browser endpoint
 和 self-hosted app URL；它把持久化 Node bearer 通过 URL fragment 交给浏览器，SPA
 读取后立即清除 fragment，不再增加短码交换协议。现有 `record` server 的兼容接口没有因此变成可公开的远程 API。Direct Mode
 不需要 Aegis backend；SSH 只是现有可用的 tunnel，不是独立 provider。
@@ -348,7 +348,7 @@ response、argv、路径或 network target。
 ### Enrollment flow
 
 ```text
-1. User -> app.agentsight.us -> OIDC login
+1. User -> app.aegis.us -> OIDC login
 2. Control Plane -> one-time join token scoped to org/site, short expiry
 3. Node -> generate Ed25519/X25519 keys locally
 4. Node -> submit public keys, version, labels and proof-of-possession
@@ -407,10 +407,10 @@ revocation 采用：
 
 ## Hosted UI 的浏览器安全边界
 
-从 `https://app.agentsight.us` 访问 loopback/private Node 是 cross-origin local-network
+从 `https://app.aegis.us` 访问 loopback/private Node 是 cross-origin local-network
 request。Node 和 SPA 必须共同处理：
 
-- Node 只允许精确 origin `https://app.agentsight.us` 和客户显式配置的 private UI origin，
+- Node 只允许精确 origin `https://app.aegis.us` 和客户显式配置的 private UI origin，
   禁止当前的 `Access-Control-Allow-Origin: *`；
 - 支持 CORS preflight/`OPTIONS`、允许的方法与 authorization headers；
 - Chromium Local Network Access permission；SPA 在浏览器支持时声明 local target address
@@ -426,7 +426,7 @@ request。Node 和 SPA 必须共同处理：
 所有本地 Node”不能只靠 CORS `*` 假定可用；Managed relay 是跨浏览器的零配置路径。
 
 另外，E2E relay 不等于完全不信任 UI operator：由 Aegis 实时托管的 JavaScript 能
-接触浏览器中解密后的结果。普通 SaaS 模式将 `app.agentsight.us` 作为受信客户端；要求抵抗
+接触浏览器中解密后的结果。普通 SaaS 模式将 `app.aegis.us` 作为受信客户端；要求抵抗
 托管前端被替换的企业，应使用可复现、version-pinned、customer-hosted static bundle 或
 后续 signed native client。
 
@@ -533,8 +533,8 @@ agent evidence，而不是采集最多 telemetry。
 | Capture pipeline | 已有 SSL/process/stdio/system、analyzer、MaterializedView 和 sinks |
 | Local persistence | 已有 SQLite，但产品化 lifecycle 仍不完整 |
 | Container targeting | 已支持 Docker/Kubernetes binary resolution |
-| Static app | `app.agentsight.us` 托管本仓库 SPA；匿名且无连接时选择 Bind、OAuth 登录或 recorded demo；登录后显示 metadata-only Node 目录，当前直连 Node 进入数据概览 |
-| Node bind | `agentsight bind` 用 URL fragment 向浏览器交付持久化 Node bearer；默认自动发现 loopback，也可指定 listen IP、port、browser endpoint 和自托管 app URL；Node ID 和 token 均跨进程复用 |
+| Static app | `app.aegis.us` 托管本仓库 SPA；匿名且无连接时选择 Bind、OAuth 登录或 recorded demo；登录后显示 metadata-only Node 目录，当前直连 Node 进入数据概览 |
+| Node bind | `aegis bind` 用 URL fragment 向浏览器交付持久化 Node bearer；默认自动发现 loopback，也可指定 listen IP、port、browser endpoint 和自托管 app URL；Node ID 和 token 均跨进程复用 |
 | Direct API | `/api/v1/info`、机器级 `/api/v1/overview`、`/api/v1/snapshot` 和按需 session detail/message；CORS origin 来自本次选择的 hosted/self-hosted app；bind 默认读取 live processes 和本地 agent session index，只有显式 `--db` 才读取 saved SQLite |
 | Cloud control | 同一 Cloudflare Worker 原子部署 SPA 与 Controller；D1 已实现 PKCE OAuth、organization、membership/RBAC、Node registry、配置与计费元数据；Direct 配置加密保存 |
 | Managed relay | 已实现 Node outbound WSS、Durable Object routing、浏览器 relay fallback 和基础 capability gate；relay payload 仅在请求期间转发，不写入 D1 |
@@ -552,7 +552,7 @@ typed query、完整 disclosure audit、SAML/SCIM、HA 和 enterprise rollout �
 1. 稳定的 Machine → Agent → Session → Turn/Task → LLM/Tool → Process → Effect identity
    和 causal/provenance graph；
 2. `view_source`、confidence、capture completeness 和 schema/protocol version；
-3. 正式 `agentsightd` lifecycle，将 always-on cheap plane 与按需 deep capture 组合；
+3. 正式 `aegisd` lifecycle，将 always-on cheap plane 与按需 deep capture 组合；
 4. typed、bounded、只读 Node Protocol；
 5. retention、rotation、quota、migration、recovery、local redaction 和 native-log reference；
 6. local detection engine：retry loop、token anomaly、process explosion、repeated compilation、

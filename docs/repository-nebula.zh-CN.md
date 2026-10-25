@@ -21,7 +21,7 @@ SVG/PNG，完整回放可导出 GIF/MP4；所有格式必须来自同一次动�
    session、Tool action、时间、状态和路径事实；它不知道 Git 仓库、星域布局或媒体格式；
 2. 独立 Rust 库与 CLI `agentvis` 负责仓库/worktree 归属、文件动作投影、Git 里程碑、
    布局调度和 HTML/SVG/PNG/GIF/MP4 导出；其他 Agent report 可以直接调用库或嵌入产物；
-3. Aegis 只复用并发布 `agentvis`：`agentsight vis` 委托同一库执行，可以额外传入
+3. Aegis 只复用并发布 `agentvis`：`aegis vis` 委托同一库执行，可以额外传入
    已有的系统文件观察，但不维护另一份可视化实现。
 
 可视化链路不增加隐私审计、脱敏审批或所谓 canonical evidence artifact。输入只取布局
@@ -105,7 +105,7 @@ agentvis [PATH] --global \
   -o output/agent-nebula.mp4
 
 # Aegis 中的等价入口；输出语义与独立 CLI 相同
-agentsight vis [PATH] --global \
+aegis vis [PATH] --global \
   --compact-rate 30s \
   -o output/agent-nebula.html \
   -o output/agent-nebula.svg \

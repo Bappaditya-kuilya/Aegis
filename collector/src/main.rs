@@ -218,7 +218,7 @@ enum Commands {
         #[arg(long)]
         db: Option<String>,
         /// Static Aegis app to open (official hosted app by default).
-        #[arg(long, default_value = "https://app.agentsight.us/")]
+        #[arg(long, default_value = "https://app.aegis.us/")]
         app_url: String,
         /// Browser-reachable Node base URL (defaults to http://LISTEN:PORT).
         #[arg(long)]

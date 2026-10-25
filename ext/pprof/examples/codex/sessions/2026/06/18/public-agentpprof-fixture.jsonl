@@ -7,7 +7,7 @@
 {"payload": {"content": "Compare the test command with the network command and produce pprof outputs.", "type": "user_message"}, "timestamp": "2026-06-18T10:00:06Z", "type": "event_msg"}
 {"payload": {"arguments": "{\"cmd\": \"cargo test --manifest-path agentpprof/Cargo.toml pprof_writer_emits_gzip_profile\"}", "call_id": "call-cargo-test", "name": "exec_command", "type": "function_call"}, "timestamp": "2026-06-18T10:00:07Z", "type": "response_item"}
 {"payload": {"call_id": "call-cargo-test", "output": "Process exited with code 0\n1 test passed", "type": "function_call_output"}, "timestamp": "2026-06-18T10:00:08Z", "type": "response_item"}
-{"payload": {"arguments": "{\"cmd\": \"curl -I https://github.com/aegis-oss/agentsight\"}", "call_id": "call-curl-network", "name": "exec_command", "type": "function_call"}, "timestamp": "2026-06-18T10:00:09Z", "type": "response_item"}
+{"payload": {"arguments": "{\"cmd\": \"curl -I https://github.com/Bappaditya-kuilya/Aegis\"}", "call_id": "call-curl-network", "name": "exec_command", "type": "function_call"}, "timestamp": "2026-06-18T10:00:09Z", "type": "response_item"}
 {"payload": {"call_id": "call-curl-network", "output": "Process exited with code 0\nHTTP/2 200", "type": "function_call_output"}, "timestamp": "2026-06-18T10:00:10Z", "type": "response_item"}
 {"payload": {"content": [{"text": "Generated task, tools, files, network, and token projections.", "type": "output_text"}], "type": "message"}, "timestamp": "2026-06-18T10:00:11Z", "type": "response_item"}
 {"payload": {"type": "token_count", "usage": {"input_tokens": 120, "output_tokens": 45, "total_tokens": 165}}, "timestamp": "2026-06-18T10:00:12Z", "type": "event_msg"}

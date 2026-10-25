@@ -1,9 +1,9 @@
 # Aegis：基于 eBPF 的零侵入 LLM 智能体可观测性工具
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CI](https://github.com/aegis-oss/aegis/actions/workflows/ci.yml/badge.svg)](https://github.com/aegis-oss/aegis/actions/workflows/ci.yml)
+[![CI](https://github.com/Bappaditya-kuilya/Aegis/actions/workflows/ci.yml/badge.svg)](https://github.com/Bappaditya-kuilya/Aegis/actions/workflows/ci.yml)
 
-[English](https://github.com/aegis-oss/aegis/blob/master/README.md) | **中文**
+[English](https://github.com/Bappaditya-kuilya/Aegis/blob/master/README.md) | **中文**
 
 Aegis 是一款专为监控 LLM 智能体行为而设计的可观测性工具，通过 SSL/TLS 流量拦截和进程监控来实现。与传统的应用级插桩不同，Aegis 使用 eBPF 技术在系统边界进行观测，以极低的性能开销提供对 AI 智能体交互的全面洞察。
 
@@ -13,12 +13,12 @@ Aegis 是一款专为监控 LLM 智能体行为而设计的可观测性工具，
 
 ```bash
 cargo install aegis
-# 或：wget https://github.com/aegis-oss/aegis/releases/latest/download/aegis && chmod +x aegis
+# 或：wget https://github.com/Bappaditya-kuilya/Aegis/releases/latest/download/aegis && chmod +x aegis
 aegis top
 ```
 
 <div align="center">
-  <img src="https://github.com/aegis-oss/aegis/raw/master/docs/top-mode-demo.png" alt="Aegis top 实时 session 视图" width="1000">
+  <img src="https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/top-mode-demo.png" alt="Aegis top 实时 session 视图" width="1000">
   <p><em>按 model、session token、health、进程族、工具调用、文件活动和网络活动排序的实时智能体视图</em></p>
 </div>
 
@@ -128,7 +128,7 @@ docker run --privileged --pid=host --network=host \
 
 ```bash
 # 克隆仓库（含子模块）
-git clone https://github.com/aegis-oss/aegis.git --recursive
+git clone https://github.com/Bappaditya-kuilya/Aegis.git --recursive
 cd aegis
 
 # 安装系统依赖（Ubuntu/Debian）
@@ -153,17 +153,17 @@ make build
 查看已保存的 SQLite 会话可以运行 `aegis report serve --db run.db`，然后打开同样的 Web 路由。
 
 <div align="center">
-  <img src="https://github.com/aegis-oss/aegis/raw/master/docs/demo-tree.png" alt="Aegis 演示 - 进程树可视化" width="800">
+  <img src="https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/demo-tree.png" alt="Aegis 演示 - 进程树可视化" width="800">
   <p><em>进程树视图，展示智能体子进程和文件活动</em></p>
 </div>
 
 <div align="center">
-  <img src="https://github.com/aegis-oss/aegis/raw/master/docs/demo-timeline.png" alt="Aegis 演示 - 时间线可视化" width="800">
+  <img src="https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/demo-timeline.png" alt="Aegis 演示 - 时间线可视化" width="800">
   <p><em>时间线视图，展示 LLM、进程、文件和网络事件</em></p>
 </div>
 
 <div align="center">
-  <img src="https://github.com/aegis-oss/aegis/raw/master/docs/demo-metrics.png" alt="Aegis 演示 - 指标可视化" width="800">
+  <img src="https://github.com/Bappaditya-kuilya/Aegis/raw/master/docs/demo-metrics.png" alt="Aegis 演示 - 指标可视化" width="800">
   <p><em>指标视图，展示内存和 CPU 使用情况</em></p>
 </div>
 
@@ -181,7 +181,7 @@ make build
 | Docker 容器（OpenClaw 等） | `sudo ./aegis record -c node --binary-path docker://openclaw` |
 | 任意命令 | `sudo ./aegis record -- <command>` |
 
-详见 [docs/agents.md](https://github.com/aegis-oss/aegis/blob/master/docs/agents.md)，了解各智能体的详细设置、SSL 注意事项、浏览器捕获、MCP stdio 和高级选项。
+详见 [docs/agents.md](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/agents.md)，了解各智能体的详细设置、SSL 注意事项、浏览器捕获、MCP stdio 和高级选项。
 
 ### OpenTelemetry 导出
 
@@ -192,7 +192,7 @@ Aegis 可以将捕获的 LLM 调用导出为 OpenTelemetry **GenAI**（`gen_ai.*
 sudo ./aegis debug trace --otel --otel-endpoint http://localhost:4318
 ```
 
-详见 [docs/otel.md](https://github.com/aegis-oss/aegis/blob/master/docs/otel.md)。
+详见 [docs/otel.md](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/otel.md)。
 
 ## 常见问题
 
@@ -250,12 +250,12 @@ make -C bpf debug
 
 ### 关键资源
 
-- [CLAUDE.md](https://github.com/aegis-oss/aegis/blob/master/CLAUDE.md) - 项目指南和架构
-- [docs/design/README.md](https://github.com/aegis-oss/aegis/blob/master/docs/design/README.md) - 归档的设计笔记和研究草稿
+- [CLAUDE.md](https://github.com/Bappaditya-kuilya/Aegis/blob/master/CLAUDE.md) - 项目指南和架构
+- [docs/design/README.md](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/design/README.md) - 归档的设计笔记和研究草稿
 
 ## 许可证
 
-MIT 许可证 - 详见 [LICENSE](https://github.com/aegis-oss/aegis/blob/master/LICENSE)。
+MIT 许可证 - 详见 [LICENSE](https://github.com/Bappaditya-kuilya/Aegis/blob/master/LICENSE)。
 
 ---
 
