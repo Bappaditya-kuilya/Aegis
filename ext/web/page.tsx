@@ -7,7 +7,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { NodeOverview } from '@/components/NodeOverview';
 import { FleetOverview } from '@/components/FleetOverview';
 import { SessionWorkspace } from '@/components/SessionWorkspace';
-import { LanguageSwitcher } from '@/components/common/LanguageSwitcher';
 import { ConnectionDialog } from '@/components/ConnectionDialog';
 import { NodeManager } from '@/components/NodeManager';
 import { tryNodeTransports } from '@/lib/nodeOpening.mjs';
@@ -790,7 +789,11 @@ export default function Home() {
       <header className="border-b border-slate-200 bg-white">
         <div className="mx-auto flex max-w-[1500px] flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 lg:px-8">
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-3">
-            <a href="/" className="text-lg font-semibold tracking-tight">Aegis</a>
+            <a href="/" className="flex items-center gap-2 text-lg font-semibold tracking-tight">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logo.svg" alt="Aegis" className="h-7 w-7" />
+              Aegis
+            </a>
             {identity && activeOrganization && (
               <div className="flex items-center gap-2">
                 <select value={activeOrganization.id} onChange={(event) => switchOrganization(event.target.value)}
@@ -839,7 +842,6 @@ export default function Home() {
                 className="text-sm font-medium text-slate-600 hover:text-slate-950">{t('app.signIn')}</button>
             )}
             {identity && <span className="hidden text-xs text-slate-400 sm:inline">{identity.name || identity.email}</span>}
-            <LanguageSwitcher />
           </div>
         </div>
       </header>

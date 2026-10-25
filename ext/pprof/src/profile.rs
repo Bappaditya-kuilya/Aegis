@@ -1903,10 +1903,10 @@ mod tests {
 
     #[test]
     fn semantic_frames_preserve_unicode_labels() {
-        assert_eq!(safe_frame("写论文", Some("task")), "task:写论文");
+        assert_eq!(safe_frame("write a paper", Some("task")), "task:write_a_paper");
         assert_eq!(
-            safe_frame("撰写 Abstract", Some("subtask")),
-            "subtask:撰写_abstract"
+            safe_frame("Naïve Abstract", Some("subtask")),
+            "subtask:naïve_abstract"
         );
     }
 

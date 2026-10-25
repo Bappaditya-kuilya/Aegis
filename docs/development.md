@@ -1,7 +1,5 @@
 # Development Guide
 
-**English** | [中文](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/development.zh-CN.md)
-
 ## Frontend Dev Mode (Disk-First Assets)
 
 The collector binary embeds frontend assets via `RustEmbed` at compile time. By default, every frontend change requires recompiling the collector (`cargo build --release`) to take effect.

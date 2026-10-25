@@ -8,6 +8,9 @@ import { I18nProvider } from '@/i18n'
 export const metadata: Metadata = {
   title: 'Aegis App',
   description: 'Local-first Aegis viewer for local and recorded AI agent sessions.',
+  icons: {
+    icon: '/logo.svg',
+  },
   robots: {
     index: false,
     follow: true,

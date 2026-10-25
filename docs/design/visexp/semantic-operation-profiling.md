@@ -187,5 +187,5 @@ The contribution should be described as:
 This is stronger and more precise than "AgentPProf draws flamegraphs." The
 flamegraph is just one renderer for the folded operation paths.
 
-The evaluation note tracks current evidence:
-[paper/evaluation-claims-setup.zh-CN.md](paper/evaluation-claims-setup.zh-CN.md).
+The evaluation note tracks current evidence for claims, oracles, results, and
+evidence boundaries.

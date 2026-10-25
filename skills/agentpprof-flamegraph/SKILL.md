@@ -47,7 +47,7 @@ Add `--tag-rule` arguments iteratively:
 ```bash
 agentpprof \
   --project-root /path/to/project \
-  --tag-rule 'prompt:review=(?i)review|审核|check' \
+  --tag-rule 'prompt:review=(?i)review|check' \
   --tag-rule 'prompt:debug=(?i)fix|bug|error|broken' \
   --tag-rule 'prompt:git=(?i)commit|push|pull|git' \
   --view tokens \
@@ -186,22 +186,22 @@ agentpprof \
 --tag-rule 'prompt:paper=(?i)paper|arxiv|latex|abstract|intro|section'
 
 # Code review
---tag-rule 'prompt:review=(?i)review|审核|check|diff|pr'
+--tag-rule 'prompt:review=(?i)review|check|diff|pr'
 
 # Git operations  
 --tag-rule 'prompt:git=(?i)commit|push|pull|git|merge|rebase'
 
 # Debugging
---tag-rule 'prompt:debug=(?i)fix|bug|error|broken|为啥|failed'
+--tag-rule 'prompt:debug=(?i)fix|bug|error|broken|fail|failed'
 
 # Testing
 --tag-rule 'prompt:test=(?i)test|cargo test|pytest|verify'
 
 # Formatting/style
---tag-rule 'prompt:format=(?i)格式|style|format|font|图'
+--tag-rule 'prompt:format=(?i)style|format|font|theme|layout'
 
 # Confirmations (short responses)
---tag-rule 'prompt:confirm=(?i)^嗯$|^是$|^好$|^ok$'
+--tag-rule 'prompt:confirm=(?i)^ok$|^okay$|^yes$|^done$'
 
 # Context continuations
 --tag-rule 'prompt:context=(?i)session is being continued'

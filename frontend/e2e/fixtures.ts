@@ -184,7 +184,6 @@ export async function mockController(page: Page, options: {
   if (options.signedIn) {
     await page.addInitScript(() => {
       window.localStorage.setItem('aegis.cloud-session.v1', 'browser-test-session');
-      window.localStorage.setItem('aegis-locale', 'en');
     });
   }
   await page.route(/^https?:\/\/node-direct\.test:7395\//, async (route) => {

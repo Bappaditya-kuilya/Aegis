@@ -3179,7 +3179,7 @@ sec-websocket-extensions: permessage-deflate\r\n\r\n"
 
     #[tokio::test]
     async fn http1_gzip_body_keeps_binary_bytes_across_tls_fragments() {
-        let body = "{\"model\":\"模型\",\"usage\":{\"total_tokens\":5}}";
+        let body = "{\"model\":\"model\",\"usage\":{\"total_tokens\":5}}";
         let mut encoder = GzEncoder::new(Vec::new(), Compression::default());
         encoder.write_all(body.as_bytes()).unwrap();
         let compressed = encoder.finish().unwrap();

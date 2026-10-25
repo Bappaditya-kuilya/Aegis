@@ -39,8 +39,8 @@ the same code path produces the same stack, and identical stacks can be directly
 merged.
 
 Agent traces break this assumption. Prompts are natural language: non-
-deterministic, variable-length, multilingual, and often conversational. "Fix the
-bug" and "修一下这个 error" express the same intent but share no common string.
+deterministic, variable-length, multilingual, and often conversational. Two
+prompts that mean the same thing can share no common string.
 If you use raw prompt text as frame labels, the flamegraph becomes too wide to
 read, with each prompt as an isolated bar, losing the point of aggregation. And
 raw prompts often contain sensitive information, making them unsuitable for
@@ -158,10 +158,10 @@ different frames form an uneven outline.
 ## Tagging
 
 Mapping natural language prompts to stable semantic tags is not trivial. Prompts
-in a single project may mix languages ("fix the 编译 error"), range from single
-characters ("嗯", "ok") to long paragraphs, and include many fragments that make
-no sense in isolation ("continue", "ok", system-generated context restoration
-messages). To address these challenges, `agentpprof` provides a pluggable tagger
+in a single project may range from single characters ("ok") to long paragraphs,
+and include many fragments that make no sense in isolation ("continue", "ok",
+system-generated context restoration messages). To address these challenges,
+`agentpprof` provides a pluggable tagger
 framework with multiple backends:
 
 | Backend | Approach | Best for |

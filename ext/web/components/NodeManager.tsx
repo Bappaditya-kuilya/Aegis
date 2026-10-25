@@ -43,9 +43,9 @@ interface NodeManagerProps {
   onSignOut: () => void;
 }
 
-function formatSeen(value: number, locale: string): string {
+function formatSeen(value: number): string {
   if (!value) return 'Not reported yet';
-  return new Intl.DateTimeFormat(locale, {
+  return new Intl.DateTimeFormat('en', {
     dateStyle: 'medium',
     timeStyle: 'short',
   }).format(new Date(value * 1000));
@@ -79,7 +79,7 @@ export function NodeManager({
   onDemo,
   onSignOut,
 }: NodeManagerProps) {
-  const { locale, t } = useTranslation();
+  const { t } = useTranslation();
   const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
   const [directEditorNodeId, setDirectEditorNodeId] = useState<string | null>(null);
   const [directEndpoint, setDirectEndpoint] = useState('');
@@ -236,7 +236,7 @@ export function NodeManager({
                       )}
                       {relay === true && <span className="rounded bg-emerald-50 px-2 py-1 text-emerald-700">{t('nodes.relay')}</span>}
                       <span className="min-w-0">{node.lastRegisteredAt
-                        ? t('nodes.seen', { time: formatSeen(node.lastRegisteredAt, locale) })
+                        ? t('nodes.seen', { time: formatSeen(node.lastRegisteredAt) })
                         : t('nodes.localBinding')}</span>
                     </div>
                   </button>

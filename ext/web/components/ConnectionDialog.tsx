@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { fetchLoginProviders, startLogin, type LoginProvider } from '@/lib/controllerClient';
 import { useTranslation } from '@/i18n';
-import { LanguageSwitcher } from '@/components/common/LanguageSwitcher';
 
 interface ConnectionDialogProps {
   error: string;
@@ -52,9 +51,6 @@ export function ConnectionDialog({
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-blue-700">Aegis</p>
             <h1 id="connect-title" className="mt-1 text-2xl font-bold text-slate-950">{t('connect.title')}</h1>
-          </div>
-          <div className={canClose ? 'mr-8' : ''}>
-            <LanguageSwitcher />
           </div>
         </div>
 

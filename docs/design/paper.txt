@@ -26,7 +26,7 @@ formance overhead. Our evaluation shows Aegis de-               it lacks all sem
 tects prompt injection attacks, identifies resource-wasting          a data analysis script is indistinguishable from a compro-
 reasoning loops, and reveals hidden coordination bottle-             mised agent writing a malicious payload. Without under-
 necks in multi-agent systems. Aegis is released as              standing the preceding LLM instructions, the why behind
-an open-source project at https://github.com/aegis-oss/            the what, its stream of low-level events is meaningless noise.
+an open-source project (this repository)             the what, its stream of low-level events is meaningless noise.
 aegis.                                                              We propose boundary tracing as a novel observability
                                                                      method designed specifically to bridge this semantic gap.
 1   Introduction                                                     Our key insight is that while agent internals and frame-
@@ -230,66 +230,61 @@ score (5/5). The LLM’s analysis concluded that the agent’s           for the
 actions, executing a shell command to read ‘/etc/passwd‘             tonomous AI systems.
                                                                  4
 References                                                                       [24] Qiusi Zhan, Zhixiang Liang, Zifan Ying, and Daniel Kang. 2024.
- [1] Anthropic. 2025. Introducing Claude Code. https://www.anthropic.                 InjecAgent: Benchmarking Indirect Prompt Injections in Tool-
-     com/news/claude-code. Agentic coding tool announcement, An-                      Integrated Large Language Model Agents. In Findings of the Associa-
+ [1] Anthropic. 2025. Introducing Claude Code.                                        InjecAgent: Benchmarking Indirect Prompt Injections in Tool-
+     Agentic coding tool announcement, An-                      Integrated Large Language Model Agents. In Findings of the Associa-
      thropic blog.                                                                    tion for Computational Linguistics (ACL Findings). fake.doi.org/fake-doi/arXiv.
- [2] Anysphere Inc. 2025. Cursor: The AI‑powered Code Editor. https:                  2403.02691 arXiv:2500.00001.
-     //cursor.com/. AI‑assisted IDE with agent mode; latest release ver-
+ [2] Anysphere Inc. 2025. Cursor: The AI‑powered Code Editor.                        2403.02691 arXiv:2500.00001.
+     AI‑assisted IDE with agent mode; latest release ver-
      sion 1.0 on June 4, 2025.
- [3] The Falco Authors. 2023. Falco: Cloud Native Runtime Security. https:
-     //falco.org/
+ [3] The Falco Authors. 2023. Falco: Cloud Native Runtime Security.
  [4] Alexandr Bandurchin. [n. d.]. AI Agent Observability Explained:
-     Key Concepts and Standards. https://uptrace.dev/blog/ai-agent-
-     observability. Uptrace Blog, April 16, 2025.
+     Key Concepts and Standards.
+     Uptrace Blog, April 16, 2025.
  [5] Harrison Chase. 2023. LangChain: Building applications with LLMs
-     through composability. https://github.com/langchain-ai/langchain
+     through composability.
  [6] Linux Kernel Community. 2023. BPF Documentation - The Linux Ker-
-     nel. https://www.kernel.org/doc/html/latest/bpf/
+     nel.
  [7] Datadog Inc. [n. d.].      Monitor, troubleshoot, and improve AI
-     agents with Datadog. https://www.datadoghq.com/blog/monitor-ai-
-     agents/. Datadog Blog, 2023.
+     agents with Datadog.
+     Datadog Blog, 2023.
  [8] Liming Dong, Qinghua Lu, and Liming Zhu. 2024. AgentOps: En-
      abling Observability of LLM Agents. arXiv preprint arXiv:2500.00001
      (2024).
- [9] eBPF Community. 2023. eBPF Documentation. https://ebpf.io/
-[10] aegis-oss. 2024. eBPF Developer Tutorial. https://github.com/
-     aegis-oss/bpf-developer-tutorial. Accessed: 2025-01-29.
+ [9] eBPF Community. 2023. eBPF Documentation.
+[10] aegis-oss. 2024. eBPF Developer Tutorial.
 [11] Brendan Gregg. 2019. BPF Performance Tools. Addison-Wesley Profes-
      sional.
-[12] Helicone. 2023. Helicone / LLM-Observability for Developers. https:
-     //www.helicone.ai/
+[12] Helicone. 2023. Helicone / LLM-Observability for Developers.
 [13] Been Kim, John Hewitt, Neel Nanda, Noah Fiedel, and Oyvind Tafjord.
      2025. Because we have LLMs, we Can and Should Pursue Agentic
      Interpretability. arXiv preprint arXiv:2500.00001 (2025).
 [14] LangChain. 2023. Observability Quick Start - LangSmith - LangChain.
-     https://docs.smith.langchain.com/observability
 [15] Langfuse. 2024. Langfuse - LLM Observability & Application Tracing.
-     https://langfuse.com/
 [16] Guangya Liu and Sujay Solomon. [n. d.]. AI Agent Observability –
-     Evolving Standards and Best Practices. https://opentelemetry.io/blog/
-     2025/ai-agent-observability/. OpenTelemetry Blog, March 6, 2025.
+     Evolving Standards and Best Practices.
+     OpenTelemetry Blog, March 6, 2025.
 [17] Jannik Maierhöfer. [n. d.].      AI Agent Observability with Lang-
-     fuse.      https://langfuse.com/blog/2024-07-ai-agent-observability-
-     with-langfuse. Langfuse Blog, March 16, 2025.
+     fuse.
+     Langfuse Blog, March 16, 2025.
 [18] Dany Moshkovich and Sergey Zeltyn. 2025. Taming Uncertainty via
      Automation: Observing, Analyzing, and Optimizing Agentic AI Sys-
      tems. arXiv preprint arXiv:2500.00001 (2025).
 [19] Cilium Project. 2023. eBPF-based Networking, Observability, and Se-
-     curity. https://cilium.io/
+     curity.
 [20] Benjamin Rombaut, Sogol Masoumzadeh, Kirill Vasilevski, Dayi Lin,
      and Ahmed E. Hassan. 2025. Watson: A Cognitive Observability
      Framework for the Reasoning of LLM-Powered Agents. arXiv preprint
      arXiv:2500.00001 (2025).
 [21] Aqua Security. 2023. Tracee: Runtime Security and Forensics using
-     eBPF. https://github.com/aquasecurity/tracee
+     eBPF.
 [22] Taylor Mullen and Ryan J. Salva. 2025.              Gemini CLI: Your
-     Open‑Source AI Agent. https://blog.google/technology/developers/
-     introducing-gemini-cli-open-source-ai-agent/. Google Developers
+     Open‑Source AI Agent.
+     Google Developers
      Blog, Jun 2025.
 [23] Qingyun Wu, Gagan Bansal, Jieyu Zhang, Yiran Wu, Shaokun Zhang,
      Erkang Zhu, Beibin Li, Li Jiang, Xiaoyun Zhang, and Chi Wang.
      2023. AutoGen: Enable Next-Gen Large Language Model Applica-
-     tions. https://github.com/microsoft/autogen
+     tions.
 
 
 

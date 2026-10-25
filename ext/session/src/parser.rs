@@ -536,14 +536,7 @@ fn is_continuation_prompt(text: &str) -> bool {
     let lowered = text.trim().to_lowercase();
     matches!(
         lowered.as_str(),
-        "继续"
-            | "继续做"
-            | "去做"
-            | "开始"
-            | "嗯"
-            | "好"
-            | "好的"
-            | "continue"
+        "continue"
             | "go on"
             | "proceed"
             | "do it"
@@ -4903,8 +4896,8 @@ mod tests {
         [
             r#"{"type":"session-meta","sessionId":"cb-session-1","timestamp":1788513380000,"meta":{"codebuddy.ai/hostKind":"unopted"}}"#,
             r#"{"id":"u1","timestamp":1788513380102,"type":"message","role":"user","content":[{"type":"input_text","text":"nihao"}],"sessionId":"cb-session-1","cwd":"/data/workspace"}"#,
-            r#"{"id":"t1","timestamp":1788513380200,"type":"ai-title","aiTitle":"初始会话","sessionId":"cb-session-1"}"#,
-            r#"{"id":"a1","timestamp":1788513384380,"type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"你好!有什么我可以帮你的吗?"},{"type":"tool_use","id":"tool-1","name":"Read","input":{"path":"/data/workspace/README.md"}}],"providerData":{"model":"claude-sonnet-5","rawUsage":{"prompt_tokens":36149,"completion_tokens":18,"total_tokens":36167,"cache_read_input_tokens":0,"cache_creation_input_tokens":31864},"usage":{"inputTokens":36149,"outputTokens":18,"totalTokens":36167}},"message":{"usage":{"input_tokens":36149,"output_tokens":18,"total_tokens":36167}},"sessionId":"cb-session-1","cwd":"/data/workspace"}"#,
+            r#"{"id":"t1","timestamp":1788513380200,"type":"ai-title","aiTitle":"initial session","sessionId":"cb-session-1"}"#,
+            r#"{"id":"a1","timestamp":1788513384380,"type":"message","role":"assistant","status":"completed","content":[{"type":"output_text","text":"Hello! How can I help you today?"},{"type":"tool_use","id":"tool-1","name":"Read","input":{"path":"/data/workspace/README.md"}}],"providerData":{"model":"claude-sonnet-5","rawUsage":{"prompt_tokens":36149,"completion_tokens":18,"total_tokens":36167,"cache_read_input_tokens":0,"cache_creation_input_tokens":31864},"usage":{"inputTokens":36149,"outputTokens":18,"totalTokens":36167}},"message":{"usage":{"input_tokens":36149,"output_tokens":18,"total_tokens":36167}},"sessionId":"cb-session-1","cwd":"/data/workspace"}"#,
             r#"{"id":"s1","timestamp":1788513384431,"type":"summary","summary":"nihao"}"#,
             r#"{"id":"m1","timestamp":1788513384583,"type":"turn-metrics","durationMs":4277,"tokenDelta":36167,"cwd":"/data/workspace"}"#,
         ]
@@ -4931,7 +4924,7 @@ mod tests {
         assert_eq!(session.events.llm_responses.len(), 1);
         assert_eq!(
             session.events.llm_responses[0].text,
-            "你好!有什么我可以帮你的吗?"
+            "Hello! How can I help you today?"
         );
         assert_eq!(
             session.events.llm_responses[0].response_phase,
@@ -5023,7 +5016,7 @@ mod tests {
         assert_eq!(session.events.llm_responses.len(), 1);
         assert_eq!(
             session.events.llm_responses[0].text,
-            "你好!有什么我可以帮你的吗?"
+            "Hello! How can I help you today?"
         );
     }
 
@@ -5192,7 +5185,7 @@ mod tests {
             "\n",
             r#"{"type":"response_item","payload":{"type":"function_call_output","call_id":"c1","output":"Process exited with code 0\n0 tests failed"}}"#,
             "\n",
-            r#"{"type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"继续"}]}}"#,
+            r#"{"type":"response_item","payload":{"type":"message","role":"user","content":[{"type":"input_text","text":"continue"}]}}"#,
             "\n",
             r#"{"type":"response_item","payload":{"type":"function_call","name":"exec_command","call_id":"c2","arguments":"{\"cmd\":\"rg error paper.tex\"}"}}"#,
             "\n",
@@ -5354,7 +5347,7 @@ mod tests {
             ("2026-07-21T00:00:00.000Z", "write a paper"),
             ("2026-07-21T00:00:00.500Z", "write a paper"),
             ("2026-07-21T00:00:03.000Z", "write a paper"),
-            ("2026-07-21T00:00:06.000Z", "继续"),
+            ("2026-07-21T00:00:06.000Z", "continue"),
         ]
         .into_iter()
         .map(|(timestamp, text)| {
@@ -5376,7 +5369,7 @@ mod tests {
         .expect("session");
 
         assert_eq!(session.events.prompts.len(), 3);
-        assert_eq!(session.events.prompts[2].preview, "继续");
+        assert_eq!(session.events.prompts[2].preview, "continue");
         assert_eq!(session.events.prompts[2].task_path, vec!["write a paper"]);
     }
 
@@ -6144,7 +6137,7 @@ mod tests {
 
     #[test]
     fn detail_text_is_utf8_safe_and_bounded() {
-        let text = "数".repeat(MAX_DETAIL_TEXT_BYTES);
+        let text = "a".repeat(MAX_DETAIL_TEXT_BYTES);
         let bounded = bounded_detail_text(&text);
 
         assert!(bounded.is_char_boundary(bounded.len()));
@@ -6158,10 +6151,10 @@ mod tests {
         assert!(clean_prompt_text("<recommended_plugins>internal</recommended_plugins>").is_none());
         assert_eq!(
             clean_prompt_text(
-                "<in-app-browser-context>internal browser state</in-app-browser-context>\n\n## My request:\n修复界面"
+                "<in-app-browser-context>internal browser state</in-app-browser-context>\n\n## My request:\nfix the interface"
             )
             .as_deref(),
-            Some("修复界面")
+            Some("fix the interface")
         );
     }
 

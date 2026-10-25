@@ -360,37 +360,37 @@ dashboard primitive.
 
 ### Primary Tool Documentation
 
-- [LangSmith Observability](https://www.langchain.com/langsmith/observability)
-- [Langfuse Overview](https://langfuse.com/docs/observability/overview)
-- [Arize Phoenix](https://phoenix.arize.com/)
-- [W&B Weave](https://wandb.ai/site/weave/)
-- [Datadog Agent Observability](https://docs.datadoghq.com/llm_observability/)
-- [Helicone](https://www.helicone.ai/)
-- [Braintrust](https://www.braintrust.dev/)
-- [AgentOps](https://www.agentops.ai/)
-- [Laminar](https://laminar.sh/)
-- [MLflow GenAI](https://mlflow.org/genai/observability)
-- [Traceloop OpenLLMetry](https://www.traceloop.com/openllmetry)
-- [LangWatch](https://langwatch.ai/)
-- [PromptLayer](https://www.promptlayer.com/)
+- LangSmith Observability
+- Langfuse Overview
+- Arize Phoenix
+- W&B Weave
+- Datadog Agent Observability
+- Helicone
+- Braintrust
+- AgentOps
+- Laminar
+- MLflow GenAI
+- Traceloop OpenLLMetry
+- LangWatch
+- PromptLayer
 
 ### Industry Analysis
 
-- [Top 6 Agent Observability Platforms 2026](https://laminar.sh/article/2026-04-23-top-6-agent-observability-platforms) (Laminar)
-- [15 AI Agent Observability Tools in 2026](https://aimultiple.com/agentic-monitoring) (AIMultiple)
-- [Top 7 LLM Observability Tools in 2026](https://www.confident-ai.com/knowledge-base/compare/top-7-llm-observability-tools) (Confident AI)
-- [AI Agent Observability in 2026: OpenAI Agents SDK, LangSmith, and OpenTelemetry](https://dev.to/chunxiaoxx/ai-agent-observability-in-2026-openai-agents-sdk-langsmith-and-opentelemetry-3ale) (DEV Community)
+- Top 6 Agent Observability Platforms 2026 (Laminar)
+- 15 AI Agent Observability Tools in 2026 (AIMultiple)
+- Top 7 LLM Observability Tools in 2026 (Confident AI)
+- AI Agent Observability in 2026: OpenAI Agents SDK, LangSmith, and OpenTelemetry (DEV Community)
 
 ### OpenTelemetry GenAI
 
-- [OpenTelemetry GenAI Semantic Conventions](https://dev.to/x4nent/opentelemetry-genai-semantic-conventions-the-standard-for-llm-observability-1o2a)
-- [Inside the LLM Call: GenAI Observability with OpenTelemetry](https://opentelemetry.io/blog/2026/genai-observability/)
-- [Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions](https://www.datadoghq.com/blog/llm-otel-semantic-convention/)
+- OpenTelemetry GenAI Semantic Conventions
+- Inside the LLM Call: GenAI Observability with OpenTelemetry
+- Datadog LLM Observability natively supports OpenTelemetry GenAI Semantic Conventions
 
 ### Semantic Clustering Research
 
-- [How we built automatic clustering for LLM traces](https://posthog.com/blog/llm-analytics-clustering-how-it-works) (PostHog)
-- [Tutorial: Semantic Clustering of User Messages with LLM Prompts](https://towardsdatascience.com/tutorial-semantic-clustering-of-user-messages-with-llm-prompts/) (Towards Data Science)
+- How we built automatic clustering for LLM traces (PostHog)
+- Tutorial: Semantic Clustering of User Messages with LLM Prompts (Towards Data Science)
 
 ### Agent Observability and Debugging Research
 
@@ -415,5 +415,5 @@ dashboard primitive.
 
 ### Flamegraph Analysis (Traditional)
 
-- [AI-powered insights for continuous profiling: introducing Flame graph AI in Grafana Cloud](https://grafana.com/blog/ai-powered-insights-for-continuous-profiling-introducing-flame-graph-ai-in-grafana-cloud/)
-- [Introducing "Explain Flame Graph"](https://coralogix.com/blog/introducing-explain-flame-graph-stop-fighting-fires-and-start-explaining-them/) (Coralogix)
+- AI-powered insights for continuous profiling: introducing Flame graph AI in Grafana Cloud
+- Introducing "Explain Flame Graph" (Coralogix)

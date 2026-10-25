@@ -1,22 +1,22 @@
 # Run Impact Map
 
-用户看完一次 agent run，最想知道的经常不是“所有事件”，而是：
+After watching an agent run, what a user usually wants is not "all events" but:
 
-> 这次 run 的影响范围有多大？
+> How big was this run's blast radius?
 
-Run Impact Map 不是安全告警页，也不是文件系统图。它把一次 run 的影响聚成几个区域：workspace、process、network、resource、tests、generated output、unattributed activity。
+The Run Impact Map is neither a security-alert page nor a file-system diagram. It clusters one run's impact into a few zones: workspace, process, network, resource, tests, generated output, unattributed activity.
 
-每个区域都必须能连回语义来源。
+Every zone must link back to its semantic source.
 
-## 适合什么场景
+## When it fits
 
-- run 结束后的 summary
-- PR review 的第一屏
-- 判断 agent 是否只围绕用户目标行动
-- recovery 前快速知道需要检查哪些地方
-- 比较两个 run 的行为范围
+- The summary after a run finishes
+- The first screen of a PR review
+- Checking whether the agent acted only around the user's goal
+- Quickly knowing what to inspect before recovery
+- Comparing the behavioral scope of two runs
 
-## 视觉结构
+## Visual structure
 
 ```text
 Goal: "fix failing API test"
@@ -41,33 +41,33 @@ Impact Radius
    └─ git status x6
 ```
 
-## 视觉编码
+## Visual encoding
 
-- 中心是 user goal 或 run label。
-- 周围是 impact zones。
-- 每个 impact item 旁边显示 semantic source。
-- item 大小表示 effect weight，例如 writes、network、duration、cost、retry count。
-- 没有 semantic source 的 item 进入 `Unattributed` 区域。
+- The center is the user goal or run label.
+- Around it are the impact zones.
+- Each impact item shows its semantic source.
+- Item size represents effect weight: writes, network, duration, cost, retry count.
+- Items without a semantic source fall into the `Unattributed` zone.
 
-## 和 Workspace Map 的区别
+## Difference from the Workspace Map
 
-Workspace Map 只关心 repo/workspace 内部行为。
+The Workspace Map only cares about behavior inside the repo/workspace.
 
-Run Impact Map 关心完整影响范围：
+The Run Impact Map covers the full blast radius:
 
-- workspace 改动
+- workspace changes
 - process tree
-- network destination
+- network destinations
 - token/cost/resource
 - tests and commands
 - generated output
 - background activity
 
-它适合作为“这次 run 碰了哪些东西”的第一张 summary 图。
+It works as the first summary chart for "what did this run touch".
 
-## 不要做成纯计数面板
+## Do not turn it into a counting panel
 
-下面这种 summary 不够：
+This kind of summary is not enough:
 
 ```text
 17 files touched
@@ -76,9 +76,9 @@ Run Impact Map 关心完整影响范围：
 1380 tokens
 ```
 
-它缺少因果关系。
+It lacks causality.
 
-更好的写法是：
+A better formulation:
 
 ```text
 17 files touched
@@ -93,4 +93,4 @@ Run Impact Map 关心完整影响范围：
   registry lookup triggered by npm test
 ```
 
-Run Impact Map 的重点不是数量，而是“影响范围是否和语义目标相称”。
+The point of the Run Impact Map is not the counts but whether the blast radius is proportionate to the semantic goal.

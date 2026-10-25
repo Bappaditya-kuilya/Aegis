@@ -1,22 +1,22 @@
 # Multi-Agent Causal Map
 
-多 agent 系统最难读的地方不是消息多，而是因果关系分散。
+The hardest part of reading a multi-agent system is not the message volume — it is that causality is scattered.
 
-Agent A 的一句话可能触发 Agent B 的工具调用；Agent B 的失败可能让 Agent C 改计划；一个 MCP server 或 background worker 可能在两个 agent 之外改变系统状态。
+One sentence from Agent A may trigger Agent B's tool call; Agent B's failure may make Agent C change plans; an MCP server or background worker may change system state outside both agents.
 
-Multi-Agent Causal Map 的目标是回答：
+The Multi-Agent Causal Map answers:
 
-> 多个 agent、tool worker 和系统动作之间，谁影响了谁？
+> Between agents, tool workers, and system actions, who influenced whom?
 
-## 适合什么场景
+## When it fits
 
-- multi-agent coding
-- agent handoff debugging
-- MCP server 行为理解
-- parallel agent solving and merge conflict
-- agent swarm 的资源和结果归因
+- Multi-agent coding
+- Agent handoff debugging
+- Understanding MCP server behavior
+- Parallel agent solving and merge conflicts
+- Resource and outcome attribution for an agent swarm
 
-## 视觉结构
+## Visual structure
 
 ```text
 Agent A: planner
@@ -42,21 +42,21 @@ Unattributed worker
   system: background process writes cache
 ```
 
-## 必须跨 agent 和跨系统层
+## It must span agents and system layers
 
-不能只画 conversation graph：
+A conversation graph alone is not enough:
 
 ```text
 Agent A -> Agent B -> Agent C
 ```
 
-也不能只画 process tree：
+A process tree alone is not enough either:
 
 ```text
 npm -> node -> jest
 ```
 
-合格的 Multi-Agent Causal Map 要展示：
+A proper Multi-Agent Causal Map shows:
 
 ```text
 Agent A semantic decision
@@ -66,9 +66,9 @@ Agent A semantic decision
         -> Agent C or Agent A next decision
 ```
 
-## 冲突视图
+## Conflict view
 
-多 agent coding 的一个强场景是解释 conflict：
+A strong use case in multi-agent coding is explaining conflicts:
 
 ```text
 Agent B
@@ -85,7 +85,7 @@ Conflict:
   same file, same function, different failure source
 ```
 
-冲突类型可以分成：
+Conflict types can be split into:
 
 - text conflict
 - semantic conflict
@@ -94,23 +94,23 @@ Conflict:
 - workspace state conflict
 - human approval conflict
 
-## 视觉编码
+## Visual encoding
 
-- 每个 agent 一条 swimlane。
-- tool/process/file/network effect 作为 agent lane 下的子节点。
-- 跨 agent message 用实线。
-- system result feedback 用回环线。
-- shared resource 冲突用汇聚节点。
-- unattributed worker 单独一条 lane。
+- One swimlane per agent.
+- Tool/process/file/network effects are child nodes under the agent lane.
+- Cross-agent messages use solid lines.
+- System result feedback uses loop-back lines.
+- Shared-resource conflicts use converging nodes.
+- Unattributed workers get their own lane.
 
-## 这张图的价值
+## Value of this view
 
-它不是为了展示“多 agent 很复杂”。它是为了找到：
+It is not there to show that "multi-agent is complex". It is there to find:
 
-- 哪个 agent 的判断影响了其他 agent？
-- 哪个 tool result 被错误传播？
-- 哪个系统动作绕过了 agent message 层？
-- 哪个 workspace/resource 冲突导致最终失败？
-- 哪个 agent 可以被重跑，哪个不能？
+- Which agent's judgment influenced the other agents?
+- Which tool result was propagated incorrectly?
+- Which system action bypassed the agent message layer?
+- Which workspace/resource conflict caused the final failure?
+- Which agent can be re-run, and which cannot?
 
-这张图应该和 [Causal Timeline](causal-timeline.md) 联动：timeline 看时间顺序，Multi-Agent Causal Map 看跨 actor 因果。
+This view should interlock with the [Causal Timeline](causal-timeline.md): the timeline shows time order, the Multi-Agent Causal Map shows cross-actor causality.

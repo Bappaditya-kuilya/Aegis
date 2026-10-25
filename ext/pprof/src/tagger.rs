@@ -904,7 +904,6 @@ fn keyword_tag(text: &str) -> Option<String> {
                 "otel",
                 "span",
                 "observability",
-                "火焰图",
             ],
         ),
         (
@@ -915,8 +914,6 @@ fn keyword_tag(text: &str) -> Option<String> {
                 "novelty",
                 "evaluation",
                 "literature",
-                "论文",
-                "调研",
             ],
         ),
         (
@@ -927,8 +924,6 @@ fn keyword_tag(text: &str) -> Option<String> {
                 "visualization",
                 "schema",
                 "projection",
-                "设计",
-                "可视化",
             ],
         ),
         (

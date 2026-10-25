@@ -45,13 +45,13 @@ In summary, analyses underscore eBPF's essential role within modern computing, p
 ---
 
 ### References
-1. [eBPF Summit 2024 Provides a Data-Driven Revolution](https://www.linkedin.com/pulse/ebpf-summit-2024-provides-data-driven-revolution-paul-nashawaty-kgpte)  
-2. [State of eBPF 2024 - Linux Foundation](https://www.linuxfoundation.org/research/state-of-ebpf)  
-3. [eBPF and Kernel Extensions - Events](https://conferences.sigcomm.org/sigcomm/2024/workshop/ebpf/)  
-4. [eBPF use cases - Security Boulevard](https://securityboulevard.com/2024/07/ebpf-use-cases/)  
-5. [The eBPF Evolution and Future: From Linux Origins to Cross ...](https://aegis-oss.dev/en/blogs/ebpf-2024/)  
-6. [eBPF Security Power and Shortfalls - The New Stack](https://thenewstack.io/ebpf-security-power-and-shortfalls/)  
-7. [eBPF at Prompt Security: The first no-code security offering for LLM ...](https://www.prompt.security/blog/ebpf-at-prompt-security-the-first-no-code-security-offering-for-llm-based-applications)  
-8. [How eBPF is shaping the future of Linux and platform engineering](https://www.infoworld.com/article/2510370/how-ebpf-is-shaping-the-future-of-linux-and-platform-engineering.html)  
-9. [eBPF Track · Indico - Linux Plumbers Conference](https://lpc.events/event/18/sessions/181/)  
-10. [An In-Depth Exploration of eBPF Technology](https://saxenasanket.medium.com/an-in-depth-exploration-of-ebpf-technology-65e9b30ab914)
+1. eBPF Summit 2024 Provides a Data-Driven Revolution
+2. State of eBPF 2024 - Linux Foundation
+3. eBPF and Kernel Extensions - Events
+4. eBPF use cases - Security Boulevard
+5. The eBPF Evolution and Future: From Linux Origins to Cross ...
+6. eBPF Security Power and Shortfalls - The New Stack
+7. eBPF at Prompt Security: The first no-code security offering for LLM ...
+8. How eBPF is shaping the future of Linux and platform engineering
+9. eBPF Track · Indico - Linux Plumbers Conference
+10. An In-Depth Exploration of eBPF Technology

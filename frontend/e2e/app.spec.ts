@@ -17,20 +17,17 @@ async function openCodexSession(page: Page) {
   await expect(page.getByText('I will add browser tests.')).toBeVisible();
 }
 
-test('anonymous entry offers both sign-in providers, language switching, and the recorded demo', async ({ page }) => {
+test('anonymous entry offers both sign-in providers and the recorded demo', async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 568 });
   await mockController(page);
-  await page.addInitScript(() => window.localStorage.setItem('aegis-locale', 'zh'));
   await page.goto('/');
 
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect(page.getByRole('heading', { name: '打开你的 Aegis 数据' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '使用 GitHub 继续' })).toBeVisible();
-  await expect(page.getByRole('button', { name: '使用 Google 继续' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Open your Aegis data' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continue with GitHub' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Continue with Google' })).toBeVisible();
   const dialog = page.getByRole('dialog');
   await expect(dialog).toBeInViewport({ ratio: 1 });
-  await dialog.getByRole('button', { name: 'EN', exact: true }).click();
-  await expect(dialog.getByRole('heading', { name: 'Open your Aegis data' })).toBeVisible();
   await dialog.getByRole('button', { name: 'Enter demo' }).click();
   await expect(page.getByText('Recorded demo').first()).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Agents on this machine' })).toBeVisible();
@@ -49,10 +46,6 @@ test('signed-in user opens a relay Node and sees machine value before session de
   await expect(page.getByRole('button', { name: /Online Lab workstation/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'All 3' }).click();
   await openLab(page);
-
-  await page.getByRole('button', { name: '中文' }).click();
-  await expect(page.getByRole('heading', { name: '当前机器上的 Agent' })).toBeVisible();
-  await page.getByRole('button', { name: 'EN', exact: true }).click();
 
   await expect(page.getByText('Running').first()).toBeVisible();
   await expect(page.getByText('2.4k').first()).toBeVisible();

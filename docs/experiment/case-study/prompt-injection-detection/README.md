@@ -211,6 +211,6 @@ This case study helps:
 
 ## Further Reading
 
-- [Aegis Paper](https://github.com/yunwei37/aegis)
-- [Prompt Injection Research](https://arxiv.org/abs/2403.02691)
-- [AI Security Best Practices](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+- Aegis Paper
+- Prompt Injection Research
+- AI Security Best Practices

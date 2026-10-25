@@ -1,7 +1,5 @@
 # Usage
 
-**English** | [中文](https://github.com/Bappaditya-kuilya/Aegis/blob/master/docs/usage.zh-CN.md)
-
 ## Building from Source
 
 ### 1. Clone the repository and initialize submodules
@@ -217,5 +215,3 @@ additionally requires FFmpeg. Repeated `-o` values reuse one session scan and la
 GIF/MP4 default to a 30-second compact replay whose frames are spaced uniformly
 by action index; use `--compact-rate full` for one media frame per action. HTML
 always keeps the full action timeline.
-See [the Chinese algorithm specification](repository-nebula.zh-CN.md) for the
-event boundary, force model, frame count, and export invariants.

@@ -6,8 +6,6 @@ over **OTLP/HTTP**. Because Aegis reconstructs the traffic from the kernel
 (eBPF) side, you get standards-compliant GenAI telemetry for **any agent** —
 including closed-source CLIs — with **zero in-process instrumentation**.
 
-Spec: <https://opentelemetry.io/docs/specs/semconv/gen-ai/>
-
 ## Quick start
 
 Point Aegis at a running collector with `--otel`:

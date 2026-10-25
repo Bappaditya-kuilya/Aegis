@@ -10,7 +10,6 @@ for a shareable skills pack, not Aegis runtime code.
 |-------|---------|
 | `agentpprof-flamegraph` | Generate semantic flamegraphs to visualize where token budget went |
 | `agent-interaction-insights` | Analyze transcripts to reduce corrections, improve trust, stop loops |
-| `evolve-agent-skills` | Turn repeated trajectory failures into evidence-gated skill improvements |
 | `aegis-system-friction` | Analyze Aegis system data for resource/retry/cleanup improvements |
 | `aegis-testing` | Validate Aegis changes with automated tests, TUI/UI checks, and real agent CLIs |
 

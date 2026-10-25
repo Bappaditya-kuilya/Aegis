@@ -1,10 +1,10 @@
 # LatestTopicResearch Crew
 
-Welcome to the LatestTopicResearch Crew project, powered by [crewAI](https://crewai.com). This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
+Welcome to the LatestTopicResearch Crew project, powered by crewAI. This template is designed to help you set up a multi-agent AI system with ease, leveraging the powerful and flexible framework provided by crewAI. Our goal is to enable your agents to collaborate effectively on complex tasks, maximizing their collective intelligence and capabilities.
 
 ## Installation
 
-Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses [Poetry](https://python-poetry.org/) for dependency management and package handling, offering a seamless setup and execution experience.
+Ensure you have Python >=3.10 <=3.13 installed on your system. This project uses Poetry for dependency management and package handling, offering a seamless setup and execution experience.
 
 First, if you haven't already, install Poetry:
 
@@ -46,9 +46,9 @@ The latest-ai-development Crew is composed of multiple AI agents, each with uniq
 ## Support
 
 For support, questions, or feedback regarding the LatestTopicResearch Crew or crewAI.
-- Visit our [documentation](https://docs.crewai.com)
-- Reach out to us through our [GitHub repository](https://github.com/joaomdmoura/crewai)
-- [Join our Discord](https://discord.com/invite/X4JWnZnxPb)
-- [Chat with our docs](https://chatg.pt/DWjSBZn)
+- Visit our documentation
+- Reach out to us through our GitHub repository
+- Join our Discord
+- Chat with our docs
 
 Let's create wonders together with the power and simplicity of crewAI.

@@ -18,12 +18,7 @@ interim planning notes used while developing the idea.
    Backend design: future backends as operation-tree rewrites, with the current
    implementation keeping the core fold algorithm small.
 
-3. [paper/evaluation-claims-setup.zh-CN.md](paper/evaluation-claims-setup.zh-CN.md)
-
-   Chinese write-up of the claims, terminology, experiment setup, oracles,
-   results, and evidence boundaries.
-
-4. [agent-observability-landscape.md](agent-observability-landscape.md)
+3. [agent-observability-landscape.md](agent-observability-landscape.md)
 
    Landscape note: how current observability, tracing, debugging, and profiling
    tools differ from semantic profiling.
@@ -37,9 +32,8 @@ Use this split:
 
 - model and paper framing: `semantic-operation-profiling.md`;
 - backend and algorithm architecture: `agentpprof-backend-architecture.md`;
-- experiments, claims, evidence gates: `paper/evaluation-claims-setup.zh-CN.md`;
 - related work and tool landscape: `agent-observability-landscape.md`;
-- user-facing CLI docs: `../../agentpprof.md` and `../../agentpprof-zh.md`.
+- user-facing CLI docs: `../../agentpprof.md`.
 
 Generated files under `docs/visexp/out/` are not committed to `main` here. They
 remain on the research branch as experiment artifacts.

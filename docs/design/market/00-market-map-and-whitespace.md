@@ -81,19 +81,15 @@ Evidence:
 - Langfuse describes its core as application tracing that captures prompt,
   model response, token usage, latency, and tools/retrieval steps between them.
   It also emphasizes LLM-specific features such as evals, prompt management,
-  experiments, and dashboards:
-  https://langfuse.com/docs/observability/overview
+  experiments, and dashboards
 - LangSmith structures data as projects, traces, runs, and threads. It supports
   integrations and manual instrumentation for LLM providers and agent
-  frameworks:
-  https://docs.langchain.com/langsmith/observability-concepts
+  frameworks
 - Phoenix describes traces as capturing model calls, retrieval, tool use, and
-  custom logic, with OpenTelemetry/OpenInference instrumentation:
-  https://arize.com/docs/phoenix
+  custom logic, with OpenTelemetry/OpenInference instrumentation
 - OpenTelemetry now has GenAI semantic conventions for inference and tool
   execution spans, including `execute_tool` spans and opt-in tool call
-  arguments/results:
-  https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/
+  arguments/results
 
 What this means for Aegis:
 
@@ -123,11 +119,9 @@ Common product shape:
 Evidence:
 
 - Helicone's gateway docs describe a unified entry point for provider traffic
-  with caching, monitoring, rate limiting, vaults, feedback, and more:
-  https://docs.helicone.ai/getting-started/integration-method/gateway
+  with caching, monitoring, rate limiting, vaults, feedback, and more
 - Helicone's AI Gateway positions itself as a unified API for many LLM
-  providers with routing, fallbacks, and observability:
-  https://docs.helicone.ai/gateway
+  providers with routing, fallbacks, and observability
 
 What this means for Aegis:
 
@@ -152,11 +146,9 @@ Common product shape:
 
 Evidence:
 
-- OpenTelemetry defines GenAI spans for inference and tool execution:
-  https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-spans/
+- OpenTelemetry defines GenAI spans for inference and tool execution
 - OpenTelemetry also defines MCP semantic conventions, including MCP tool call
-  spans compatible with GenAI execute-tool spans:
-  https://opentelemetry.io/docs/specs/semconv/gen-ai/mcp/
+  spans compatible with GenAI execute-tool spans
 
 What this means for Aegis:
 
@@ -184,15 +176,12 @@ Evidence:
 
 - Tribunal explicitly markets "One audit log. Every coding agent" and says it
   records prompts, tool calls, and dollars spent for Claude Code, Cursor,
-  Copilot CLI, and Codex CLI:
-  https://tribunal.dev/
+  Copilot CLI, and Codex CLI
 - Tribunal docs say each adapter normalizes native hooks into a v1 event schema,
-  and examples include Claude Code, Cursor, Copilot CLI, and Codex CLI adapters:
-  https://tribunal.dev/docs
+  and examples include Claude Code, Cursor, Copilot CLI, and Codex CLI adapters
 - Tribunal's policy examples include blocking writes to production terraform and
   enabling shipped packs such as `secrets-readonly`, `no-prod-writes`, and
-  `soc2-baseline`:
-  https://tribunal.dev/docs
+  `soc2-baseline`
 
 What this means for Aegis:
 
@@ -238,18 +227,14 @@ Common product shape:
 Evidence:
 
 - OWASP lists Prompt Injection as a top LLM application risk and notes that
-  impact depends heavily on the system's agency:
-  https://genai.owasp.org/llmrisk/llm01-prompt-injection/
+  impact depends heavily on the system's agency
 - OWASP's Excessive Agency risk discusses LLM systems granted tools/skills or
-  extensions that can perform damaging actions due to manipulated outputs:
-  https://genai.owasp.org/llmrisk/llm06-sensitive-information-disclosure/
+  extensions that can perform damaging actions due to manipulated outputs
 - MCP's official security best practices document identifies attack classes such
   as confused deputy, token passthrough, SSRF, session hijacking, local MCP
-  server compromise, and scope minimization:
-  https://modelcontextprotocol.io/specification/2025-06-18/basic/security_best_practices
+  server compromise, and scope minimization
 - MCP roots define filesystem boundaries and explicitly require clients to
-  validate roots, implement access controls, and monitor root accessibility:
-  https://modelcontextprotocol.io/docs/concepts/roots
+  validate roots, implement access controls, and monitor root accessibility
 
 What this means for Aegis:
 

@@ -1,6 +1,6 @@
 # Monitoring OpenClaw with Aegis
 
-[OpenClaw](https://github.com/openclaw/openclaw) is a self-hosted personal AI
+OpenClaw is a self-hosted personal AI
 assistant that runs in Docker. It is built on **Node.js**, which **statically
 links OpenSSL** into the `node` binary — there is no system `libssl.so` to hook,
 so Aegis must attach its SSL uprobe directly to the `node` executable.

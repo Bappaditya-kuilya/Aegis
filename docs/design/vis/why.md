@@ -4,7 +4,6 @@
 
 AI agents introduce novel observability challenges due to their emergent behaviors, autonomous decision-making, and dynamic execution, making traditional monitoring tools fall short. The primary challenge lies in achieving the right data collection granularity—capturing granular SSL/TLS traffic and process behaviors without overwhelming system resources (typically maintaining less than 3% CPU usage). The second critical challenge is framework-neutral system event correlation—achieving framework independence while correlating low-level system activities with high-level agent interactions like prompts and tool calls. Aegis proposes boundary tracing as the solution: a framework-agnostic approach that observes AI agents at the system boundary using eBPF technology. By operating at the kernel level, this approach provides critical insights into system events and enables the correlation of diverse data points, offering a robust foundation for understanding complex AI agent behavior across rapidly evolving frameworks.
 
-
 ## From Deterministic Code to Autonomous Agents
 
 The emergence of AI-powered agentic systems fundamentally reshapes modern software infrastructure. Frameworks like AutoGen, LangChain, and gemini-cli are increasingly used to orchestrate large language models (LLMs) for automating tasks in software engineering, data analysis, and multi-agent decision-making. Unlike traditional software components, which typically produce deterministic and easily observable behaviors, these AI-agent systems often generate open-ended, non-deterministic outputs. These outputs are frequently influenced by hidden internal states and complex interactions among multiple agents. This shift dramatically amplifies both the data collection granularity challenge and the framework-neutral correlation challenge.
@@ -14,7 +13,6 @@ The data collection challenge becomes acute because agents generate exponentiall
 Simultaneously, the framework-neutral correlation challenge emerges from the architectural complexity of modern agent systems. These systems operate across multiple abstraction layers: high-level framework orchestration, mid-level tool invocations, and low-level system interactions. Each framework implements its own abstractions and APIs, which change frequently as the field evolves rapidly. Yet understanding agent behavior requires correlating events across all these layers—connecting a high-level prompt with the system calls it triggers, or linking a tool invocation with the network traffic it generates. Building this correlation capability into each framework would require constant maintenance and limit portability across different agent implementations.
 
 This new paradigm necessitates a fundamental re-evaluation of our observability strategies. We are transitioning from monitoring predictable, stateless services to overseeing dynamic, stateful entities capable of learning, adapting, and evolving. The concept of 'failure' itself has broadened, now encompassing not only crashes and errors but also subtle semantic deviations such as factual inaccuracies, logical loops, or unintended emergent behaviors. These semantic failures often manifest through patterns that span multiple interactions and system boundaries, making them impossible to detect without comprehensive data collection and sophisticated correlation capabilities.
-
 
 ## The Problem: The Observability Gap in AI Agents
 
@@ -62,18 +60,18 @@ Below is a quick landscape scan of LLM / AI‑agent observability tooling as of 
 
 | #  | Tool / SDK (year first shipped)                     | Integration path                                                   | What it gives you                                                                          | License / model                | Notes                                                                                                         |
 | -- | --------------------------------------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| 1  | **LangSmith** (2023)                                | Add `import langsmith` to any LangChain / LangGraph app            | Request/response traces, prompt & token stats, built‑in evaluation jobs                    | SaaS, free tier                | Tightest integration with LangChain; OTel export in beta. ([LangSmith][1])                                    |
-| 2  | **Helicone** (2023)                                 | Drop‑in reverse‑proxy or Python/JS SDK                             | Logs every OpenAI‑style HTTP call; live cost & latency dashboards; "smart" model routing   | OSS core (MIT) + hosted        | Proxy model keeps app code unchanged. ([Helicone.ai][2], [Helicone.ai][3])                                    |
-| 3  | **Traceloop** (2024)                                | One‑line AI‑SDK import → OTel                                      | Full OTel spans for prompts, tools, sub‑calls; replay & A/B test flows                     | SaaS, generous free tier       | Uses standard OTel data; works with any backend. ([AI SDK][4], [traceloop.com][5])                            |
-| 4  | **Arize Phoenix** (2024)                            | `pip install arize-phoenix`; OpenInference tracer                  | Local UI + vector‑store for traces; automatic evals (toxicity, relevance) with another LLM | Apache‑2.0, self‑host or cloud | Ships its own open‑source UI; good for offline debugging. ([Phoenix][6], [GitHub][7])                         |
-| 5  | **Langfuse** (2024)                                 | Langfuse SDK *or* send raw OTel OTLP                               | Nested traces, cost metrics, prompt mgmt, evals; self‑host in Docker                       | OSS (MIT) + cloud              | Popular in RAG / multi‑agent projects; OTLP endpoint keeps you vendor‑neutral. ([Langfuse][8], [Langfuse][9]) |
-| 6  | **WhyLabs LangKit** (2023)                          | Wrapper that extracts text metrics                                 | Drift, toxicity, sentiment, PII flags; sends to WhyLabs platform                           | Apache‑2.0 core, paid cloud    | Adds HEAVY text‑quality metrics rather than request tracing. ([WhyLabs][10], [docs.whylabs.ai][11])           |
-| 7  | **PromptLayer** (2022)                              | Decorator / context‑manager or proxy                               | Timeline view of prompt chains; diff & replay; built on OTel spans                         | SaaS                           | Early mover; minimal code changes but not open source. ([PromptLayer][12], [PromptLayer][13])                 |
-| 8  | **Literal AI** (2024)                               | Python SDK + UI                                                    | RAG‑aware traces, eval experiments, datasets                                               | OSS core + SaaS                | Aimed at product teams shipping chatbots. ([literalai.com][14], [literalai.com][15])                          |
-| 9  | **W\&B Weave / Traces** (2024)                      | `import weave` or W\&B SDK                                         | Deep link into existing W\&B projects; captures code, inputs, outputs, user feedback       | SaaS                           | Nice if you already use W\&B for ML experiments. ([Weights & Biases][16])                                     |
-| 10 | **Honeycomb Gen‑AI views** (2024)                   | Send OTel spans; Honeycomb UI                                      | Heat‑map + BubbleUp on prompt spans, latency, errors                                       | SaaS                           | Built atop Honeycomb's mature trace store; no eval layer. ([Honeycomb][17])                                   |
-| 11 | **OpenTelemetry GenAI semantic‑conventions** (2024) | Spec + contrib Python lib (`opentelemetry-instrumentation-openai`) | Standard span/metric names for models, agents, prompts                                     | Apache‑2.0                     | Gives you a lingua‑franca; several tools above emit it. ([OpenTelemetry][18])                                 |
-| 12 | **OpenInference spec** (2023)                       | Tracer wrapper (supports LangChain, LlamaIndex, Autogen…)          | JSON schema for traces + plug‑ins; Phoenix uses it                                         | Apache‑2.0                     | Spec, not a hosted service; pairs well with any OTel backend. ([GitHub][19])                                  |
+| 1  | **LangSmith** (2023)                                | Add `import langsmith` to any LangChain / LangGraph app            | Request/response traces, prompt & token stats, built‑in evaluation jobs                    | SaaS, free tier                | Tightest integration with LangChain; OTel export in beta. (LangSmith)                                    |
+| 2  | **Helicone** (2023)                                 | Drop‑in reverse‑proxy or Python/JS SDK                             | Logs every OpenAI‑style HTTP call; live cost & latency dashboards; "smart" model routing   | OSS core (MIT) + hosted        | Proxy model keeps app code unchanged. (Helicone.ai)                                    |
+| 3  | **Traceloop** (2024)                                | One‑line AI‑SDK import → OTel                                      | Full OTel spans for prompts, tools, sub‑calls; replay & A/B test flows                     | SaaS, generous free tier       | Uses standard OTel data; works with any backend. (AI SDK, traceloop.com)                            |
+| 4  | **Arize Phoenix** (2024)                            | `pip install arize-phoenix`; OpenInference tracer                  | Local UI + vector‑store for traces; automatic evals (toxicity, relevance) with another LLM | Apache‑2.0, self‑host or cloud | Ships its own open‑source UI; good for offline debugging. (Phoenix, GitHub)                         |
+| 5  | **Langfuse** (2024)                                 | Langfuse SDK *or* send raw OTel OTLP                               | Nested traces, cost metrics, prompt mgmt, evals; self‑host in Docker                       | OSS (MIT) + cloud              | Popular in RAG / multi‑agent projects; OTLP endpoint keeps you vendor‑neutral. (Langfuse) |
+| 6  | **WhyLabs LangKit** (2023)                          | Wrapper that extracts text metrics                                 | Drift, toxicity, sentiment, PII flags; sends to WhyLabs platform                           | Apache‑2.0 core, paid cloud    | Adds HEAVY text‑quality metrics rather than request tracing. (WhyLabs, docs.whylabs.ai)           |
+| 7  | **PromptLayer** (2022)                              | Decorator / context‑manager or proxy                               | Timeline view of prompt chains; diff & replay; built on OTel spans                         | SaaS                           | Early mover; minimal code changes but not open source. (PromptLayer)                 |
+| 8  | **Literal AI** (2024)                               | Python SDK + UI                                                    | RAG‑aware traces, eval experiments, datasets                                               | OSS core + SaaS                | Aimed at product teams shipping chatbots. (literalai.com)                          |
+| 9  | **W\&B Weave / Traces** (2024)                      | `import weave` or W\&B SDK                                         | Deep link into existing W\&B projects; captures code, inputs, outputs, user feedback       | SaaS                           | Nice if you already use W\&B for ML experiments. (Weights & Biases)                                     |
+| 10 | **Honeycomb Gen‑AI views** (2024)                   | Send OTel spans; Honeycomb UI                                      | Heat‑map + BubbleUp on prompt spans, latency, errors                                       | SaaS                           | Built atop Honeycomb's mature trace store; no eval layer. (Honeycomb)                                   |
+| 11 | **OpenTelemetry GenAI semantic‑conventions** (2024) | Spec + contrib Python lib (`opentelemetry-instrumentation-openai`) | Standard span/metric names for models, agents, prompts                                     | Apache‑2.0                     | Gives you a lingua‑franca; several tools above emit it. (OpenTelemetry)                                 |
+| 12 | **OpenInference spec** (2023)                       | Tracer wrapper (supports LangChain, LlamaIndex, Autogen…)          | JSON schema for traces + plug‑ins; Phoenix uses it                                         | Apache‑2.0                     | Spec, not a hosted service; pairs well with any OTel backend. (GitHub)                                  |
 
 ### What We Still Can't See
 
@@ -228,23 +226,23 @@ The open-source Aegis implementation validates this approach in production envir
 
 ## References
 
-1. Meta AI prompt-exposure incident, January 2025. [Tom's Guide](https://www.tomsguide.com/computing/online-security/meta-ai-was-leaking-chatbot-prompts-and-answers-to-unauthorized-users)
-2. IBM. "Cost of a Data Breach Report 2024." [IBM](https://www.ibm.com/think/insights/cost-of-a-data-breach-2024-financial-industry)
-3. LangChain GitHub releases page, 2024. [GitHub](https://github.com/langchain-ai/langchain/releases)
-4. eBPF uprobe documentation. [kernel.org](https://www.kernel.org/doc/html/latest/trace/uprobetracer.html)
-5. Keploy. "eBPF for TLS Traffic Tracing: Secure & Efficient Observability," January 2025. [Keploy](https://keploy.io/blog/community/ebpf-for-tls-traffic-tracing-secure-efficient-observability)
-6. Pixie Labs. "eBPF TLS Tracing: Past, Present & Future," September 2024. [blog.px.dev](https://blog.px.dev/ebpf-tls-tracing-past-present-future/)
-7. Eunomia. "eBPF Practical Tutorial: Capturing SSL/TLS Plain Text Data," 2025. [aegis-oss.dev](https://aegis-oss.dev/en/tutorials/30-sslsniff/)
-8. OWASP GenAI Security Project. "LLM01:2025 Prompt Injection," 2025. [OWASP](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
-9. LangSmith Documentation. "Observability Quick Start." [LangSmith](https://docs.smith.langchain.com/observability)
-10. Helicone. "LLM-Observability for Developers." [Helicone](https://www.helicone.ai/)
-11. Traceloop. "LLM Reliability Platform." [Traceloop](https://www.traceloop.com/)
-12. Arize Phoenix. "AI Observability & Evaluation." [Phoenix](https://phoenix.arize.com/)
-13. Langfuse. "LLM Observability & Application Tracing." [Langfuse](https://langfuse.com/)
-14. WhyLabs. "Large Language Model Monitoring." [WhyLabs](https://whylabs.ai/langkit)
-15. PromptLayer. "Complete AI Observability." [PromptLayer](https://www.promptlayer.com/platform/observability)
-16. Literal AI. "RAG LLM observability and evaluation platform." [Literal AI](https://www.literalai.com/)
-17. Weights & Biases. "Enterprise-Level LLMOps: W&B Traces." [W&B](https://wandb.ai/site/traces/)
-18. Honeycomb. "Observability for AI & LLMs." [Honeycomb](https://www.honeycomb.io/ai-llm-observability)
-19. OpenTelemetry. "Semantic conventions for generative AI systems." [OpenTelemetry](https://opentelemetry.io/docs/specs/semconv/gen-ai/)
-20. OpenInference. "OpenTelemetry Instrumentation for LLMs." [GitHub](https://github.com/Arize-ai/openinference)
+1. Meta AI prompt-exposure incident, January 2025. Tom's Guide
+2. IBM. "Cost of a Data Breach Report 2024." IBM
+3. LangChain GitHub releases page, 2024. GitHub
+4. eBPF uprobe documentation. kernel.org
+5. Keploy. "eBPF for TLS Traffic Tracing: Secure & Efficient Observability," January 2025. Keploy
+6. Pixie Labs. "eBPF TLS Tracing: Past, Present & Future," September 2024. blog.px.dev
+7. Eunomia. "eBPF Practical Tutorial: Capturing SSL/TLS Plain Text Data," 2025. aegis-oss.dev
+8. OWASP GenAI Security Project. "LLM01:2025 Prompt Injection," 2025. OWASP
+9. LangSmith Documentation. "Observability Quick Start." LangSmith
+10. Helicone. "LLM-Observability for Developers." Helicone
+11. Traceloop. "LLM Reliability Platform." Traceloop
+12. Arize Phoenix. "AI Observability & Evaluation." Phoenix
+13. Langfuse. "LLM Observability & Application Tracing." Langfuse
+14. WhyLabs. "Large Language Model Monitoring." WhyLabs
+15. PromptLayer. "Complete AI Observability." PromptLayer
+16. Literal AI. "RAG LLM observability and evaluation platform." Literal AI
+17. Weights & Biases. "Enterprise-Level LLMOps: W&B Traces." W&B
+18. Honeycomb. "Observability for AI & LLMs." Honeycomb
+19. OpenTelemetry. "Semantic conventions for generative AI systems." OpenTelemetry
+20. OpenInference. "OpenTelemetry Instrumentation for LLMs." GitHub

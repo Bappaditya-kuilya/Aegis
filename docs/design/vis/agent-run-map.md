@@ -1,29 +1,29 @@
-# Agent Run Map: 一次 agent 工作过程的第一屏
+# Agent Run Map: the first screen of one agent run
 
-用户运行 agent，不是为了看一串 telemetry。他想知道：
+Users run an agent not to watch a string of telemetry. They want to know:
 
-> 这次 run 从我的目标开始，到底怎么走到了最后的结果？
+> Starting from my goal, how did this run actually get to the final result?
 
-Agent Run Map 是 Aegis 的总入口图。它不专注文件系统，也不专注 LLM trace。它把一次 run 分成几个可读的阶段：目标、计划、工具、系统动作、结果。
+The Agent Run Map is Aegis's top-level entry chart. It is not focused on the file system, nor on the LLM trace. It splits one run into readable phases: goal, plan, tools, system actions, result.
 
-## 适合什么场景
+## When it fits
 
-- agent run 结束后的第一屏 summary
-- 用户想快速判断“它是不是按我的目标在推进”
-- team lead 或 reviewer 想理解一次 AI-generated change 的来龙去脉
-- 另一个 agent 要接手继续修复时，需要先读懂上一轮做了什么
+- The first summary screen after an agent run ends
+- A user quickly judging "is it still making progress toward my goal?"
+- A team lead or reviewer wanting the story behind an AI-generated change
+- Another agent taking over the fix, needing to understand what the previous round did
 
-## 它回答的问题
+## Questions it answers
 
 ```text
-这次 run 的主要阶段是什么？
-每个阶段的语义目的是什么？
-每个目的触发了哪些命令、进程、文件、网络动作？
-哪些结果成功、失败、重试或没有实际发生？
-有没有系统动作无法归因到明确的 agent intent？
+What are the main phases of this run?
+What is the semantic purpose of each phase?
+Which commands, processes, file and network actions did each purpose trigger?
+Which results succeeded, failed, retried, or never actually happened?
+Are there system actions that cannot be attributed to a clear agent intent?
 ```
 
-## 视觉结构
+## Visual structure
 
 ```text
 User goal
@@ -64,33 +64,32 @@ Unattributed:
   background process touched ~/.config/tool/config.json
 ```
 
-## 必须跨层展示
+## It must show all layers
 
-Agent Run Map 的每个 phase 都至少包含：
+Every phase of the Agent Run Map contains at least:
 
-- `Semantic`: 这一阶段 agent 以为自己在做什么
-- `Tool`: agent 选择了什么工具或命令
-- `System`: 真实进程、文件、网络、资源动作
-- `Result`: 成功、失败、重试、输出、diff、测试结果
+- `Semantic`: what the agent thought it was doing in this phase
+- `Tool`: which tool or command the agent chose
+- `System`: real process, file, network, resource actions
+- `Result`: success, failure, retry, output, diff, test results
 
-如果某一栏缺失，它就退化成普通 trace 或普通系统 dashboard。
+If any column is missing, the view degrades into an ordinary trace or an ordinary system dashboard.
 
-## 视觉编码
+## Visual encoding
 
-- 阶段块按时间排序。
-- 左侧写语义目的，右侧写系统结果。
-- 线条连接 tool intent 和系统 effect。
-- 灰色块表示无法归因的活动。
-- 红色或高亮只用于“和用户目标明显不一致”的行为，不要把整张图做成安全告警面板。
+- Phase blocks are ordered by time.
+- Semantic purpose on the left, system result on the right.
+- Lines connect tool intent to system effect.
+- Gray blocks mark unattributed activity.
+- Red or highlighting is only for behavior that clearly diverges from the user's goal; do not turn the whole chart into a security alert panel.
 
-## 和其他图的关系
+## Relation to the other views
 
-Agent Run Map 是第一屏，不是细节页。
+The Agent Run Map is the first screen, not the detail page.
 
-用户从这里进入：
+From here users go to:
 
-- 想看哪一步最贵：打开 [Intent-to-Effect Flame Graph](intent-to-effect-flame-graph.md)
-- 想看时间顺序：打开 [Causal Timeline](causal-timeline.md)
-- 想看改动范围：打开 [Run Impact Map](run-impact-map.md)
-- 想看 repo 探索和 patch：打开 [Agent Workspace Map](agent-workspace-map.md)
-- 想看多个 agent：打开 [Multi-Agent Causal Map](multi-agent-causal-map.md)
+- See which step was most expensive: [Intent-to-Effect Flame Graph](intent-to-effect-flame-graph.md)
+- See the time order: [Causal Timeline](causal-timeline.md)
+- See the change blast radius: [Run Impact Map](run-impact-map.md)
+- See multiple agents: [Multi-Agent Causal Map](multi-agent-causal-map.md)

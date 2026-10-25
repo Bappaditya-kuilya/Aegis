@@ -1,7 +1,7 @@
 # aegis-capture-core
 
 `aegis-capture-core` is the native collection substrate behind the
-[`aegis`](https://crates.io/crates/aegis) command-line tool. It
+`aegis` command-line tool. It
 provides embedded eBPF probe runners, agent-native and `/proc` sources, and the
 normalized event stream boundary. Product analysis, views, and sinks live in
 `aegis-analysis`.

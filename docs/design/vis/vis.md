@@ -133,12 +133,12 @@ rendering layer that turns it into an Agent Footprint Map.
 
 ## References
 
-- Brendan Gregg, [Flame Graphs](https://www.brendangregg.com/flamegraphs.html) (2011)
-- Brendan Gregg, [AI Flame Graphs](https://www.brendangregg.com/blog/2024-10-29/ai-flame-graphs.html) (2024)
-- [AGDebugger: Interactive Debugging of Multi-Agent Systems](https://arxiv.org/abs/2503.02068) (CHI 2025)
-- [AgentStepper: Interactive Debugging of Software Development Agents](https://arxiv.org/abs/2602.06593) (2026)
-- [DiLLS: Interactive Diagnosis via Layered Summary](https://arxiv.org/abs/2602.05446) (2026)
-- [AgentTrace: Causal Graph Tracing for Root Cause Analysis](https://arxiv.org/abs/2603.14688) (2026)
-- [Aegis: System-Level Observability Using eBPF](https://arxiv.org/abs/2508.02736) (2025)
-- [CodeBurn](https://github.com/getagentseal/codeburn) — token cost TUI dashboard
-- [Agent Flow](https://github.com/patoles/agent-flow) — Claude Code node graph visualization
+- Brendan Gregg, Flame Graphs (2011)
+- Brendan Gregg, AI Flame Graphs (2024)
+- AGDebugger: Interactive Debugging of Multi-Agent Systems (CHI 2025)
+- AgentStepper: Interactive Debugging of Software Development Agents (2026)
+- DiLLS: Interactive Diagnosis via Layered Summary (2026)
+- AgentTrace: Causal Graph Tracing for Root Cause Analysis (2026)
+- Aegis: System-Level Observability Using eBPF (2025)
+- CodeBurn — token cost TUI dashboard
+- Agent Flow — Claude Code node graph visualization

@@ -23,7 +23,6 @@ prompt / model call / tool decision
 This document defines the desired command line and report experience. It complements:
 
 - `vis.md`: Agent Footprint Map, the agent equivalent of a flame graph.
-- `agent-workspace-map.md`: workspace/file behavior visualizations.
 - `why.md`: why boundary tracing/eBPF is needed.
 
 Current CLI note: the user-facing entrypoint is `aegis top` for live
@@ -537,8 +536,8 @@ High-risk paths:
   ~/.config/tool/config.json
 ```
 
-This is the command-line version of the AI PR Blast Radius View from
-`agent-workspace-map.md`.
+This is the command-line version of the AI PR Blast Radius View for
+workspace/file behavior.
 
 ### Intent -> Effect Chain
 
@@ -574,7 +573,7 @@ src/api/handler.ts
   attribution: observed tool payload + file write event
 ```
 
-This is the textual form of the provenance DAG from `agent-workspace-map.md`.
+This is the textual form of the provenance DAG of workspace/file behavior.
 
 ### Unattributed Activity
 
